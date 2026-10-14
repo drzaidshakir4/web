@@ -1,0 +1,2125 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#faf6f1" />
+  <meta name="description" content="الخدمات الطبية المتقدمة — عيادة الدكتور زيد شاكر للرعاية الطبية المتقدمة" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#faf6f1', sand: '#f3ebe1', mauve: '#6c5862',
+            'mauve-deep': '#4e3d47', 'mauve-ink': '#372931',
+            lilac: '#dcc9d3', gold: '#f4c871',
+            'gold-deep': '#cf9d45', 'gold-soft': '#fbeccb',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --cream: #faf6f1; --sand: #f3ebe1; --mauve: #6c5862;
+      --mauve-deep: #4e3d47; --mauve-ink: #372931; --lilac: #dcc9d3;
+      --gold: #f4c871; --gold-deep: #cf9d45; --gold-soft: #fbeccb;
+      --mouse-x: 50%; --mouse-y: 50%;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    html[dir="rtl"] body { font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif; }
+    html[dir="ltr"] body { font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif; }
+    body {
+      background-color: var(--cream); color: var(--mauve-deep);
+      overflow-x: clip; -webkit-font-smoothing: antialiased;
+      min-height: 100vh; line-height: 1.6; cursor: none;
+    }
+    @media (pointer: coarse) { body { cursor: auto; } }
+    ::selection { background: rgba(244, 200, 113, 0.55); color: #372931; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f3ebe1; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #cf9d45, #6c5862); border-radius: 99px; border: 2px solid #f3ebe1; }
+    ::-webkit-scrollbar-thumb:hover { background: #cf9d45; }
+    .glass {
+      background: linear-gradient(155deg, rgba(255,255,255,0.92), rgba(252,248,242,0.75));
+      -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+      border: 1px solid rgba(108,88,98,0.13);
+      box-shadow: 0 18px 44px -26px rgba(78,61,71,0.28);
+    }
+    .glass-strong {
+      background: linear-gradient(160deg, rgba(255,255,255,0.97), rgba(252,248,243,0.92));
+      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+      border: 1px solid rgba(108,88,98,0.14);
+      box-shadow: 0 24px 70px -30px rgba(55,41,49,0.35);
+    }
+    .text-gradient {
+      background: linear-gradient(100deg, #6c5862 8%, #bb8c45 55%, #dfa63e 95%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .text-gradient-gold {
+      background: linear-gradient(100deg, #f7d997, #f4c871 50%, #e8b44d);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .bg-grid {
+      background-image: linear-gradient(rgba(108,88,98,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(108,88,98,0.055) 1px, transparent 1px);
+      background-size: 54px 54px;
+    }
+    .bg-dots-gold {
+      background-image: radial-gradient(rgba(244,200,113,0.16) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+    .noise {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    }
+    .tilt-3d {
+      --tilt-rotate-x: 0deg; --tilt-rotate-y: 0deg;
+      --tilt-scale: 1; --tilt-lift: 0px;
+      --tilt-glow-x: 50%; --tilt-glow-y: 50%; --tilt-glow-opacity: 0;
+      transform: perspective(1200px) rotateX(var(--tilt-rotate-x)) rotateY(var(--tilt-rotate-y)) translateY(var(--tilt-lift)) scale(var(--tilt-scale));
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform; position: relative;
+    }
+    .tilt-3d.tilting { transition: transform 0.08s linear, box-shadow 0.5s ease; }
+    .tilt-3d::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(500px circle at var(--tilt-glow-x) var(--tilt-glow-y), rgba(244, 200, 113, 0.22), rgba(207, 157, 69, 0.08) 40%, transparent 65%);
+      opacity: var(--tilt-glow-opacity); transition: opacity 0.4s ease; pointer-events: none; z-index: 2;
+    }
+    .tilt-3d::after {
+      content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px;
+      background: radial-gradient(350px circle at var(--tilt-glow-x) var(--tilt-glow-y), rgba(207, 157, 69, 0.85), rgba(244, 200, 113, 0.3) 30%, transparent 50%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: var(--tilt-glow-opacity); transition: opacity 0.4s ease; pointer-events: none; z-index: 3;
+    }
+    .tilt-3d .tilt-inner { transform: translateZ(30px); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .tilt-3d .tilt-inner-deep { transform: translateZ(50px); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .tilt-3d .tilt-image { transform: translateZ(20px) scale(1.02); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .tilt-3d .tilt-float { transform: translateZ(70px); }
+    @media (pointer: coarse) { .tilt-3d { transform: none !important; } .tilt-3d::before, .tilt-3d::after { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .tilt-3d { transform: none !important; transition: none !important; } }
+    .spotlight { position: relative; overflow: hidden; }
+    .spotlight::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(244, 200, 113, 0.15), rgba(207, 157, 69, 0.05) 40%, transparent 60%);
+      opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 1;
+    }
+    .spotlight:hover::before { opacity: 1; }
+    .spotlight-border { position: relative; }
+    .spotlight-border::after {
+      content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
+      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(207, 157, 69, 0.8), transparent 40%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 2;
+    }
+    .spotlight-border:hover::after { opacity: 1; }
+    .cursor-dot {
+      position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+      background: linear-gradient(135deg, #cf9d45, #f4c871); border-radius: 50%;
+      pointer-events: none; z-index: 10000; transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
+      box-shadow: 0 0 12px rgba(207,157,69,0.8), 0 0 4px rgba(244,200,113,0.9);
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+      border: 1.5px solid rgba(207,157,69,0.6); border-radius: 50%;
+      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.22,1,0.36,1), height 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease, background 0.3s ease;
+    }
+    .cursor-ring.hover { width: 60px; height: 60px; background: rgba(244, 200, 113, 0.15); border-color: rgba(207,157,69,0.9); border-width: 2px; }
+    .cursor-ring.click { width: 30px; height: 30px; background: rgba(244, 200, 113, 0.35); border-color: #cf9d45; }
+    .cursor-dot.hover { width: 12px; height: 12px; background: linear-gradient(135deg, #6c5862, #cf9d45); }
+    .cursor-trail {
+      position: fixed; width: 6px; height: 6px;
+      background: radial-gradient(circle, rgba(244,200,113,0.9), rgba(207,157,69,0));
+      border-radius: 50%; pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%); animation: trailFade 0.7s ease-out forwards;
+    }
+    @keyframes trailFade { 0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); } }
+    .magnetic { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.7), rgba(255,255,255,0));
+      transform: translate(-50%, -50%) scale(0); animation: rippleAnim 0.7s ease-out forwards;
+      pointer-events: none; z-index: 3;
+    }
+    @keyframes rippleAnim { to { transform: translate(-50%, -50%) scale(4); opacity: 0; } }
+    .glow-btn { position: relative; isolation: isolate; }
+    .glow-btn::before {
+      content: ""; position: absolute; inset: -3px; border-radius: inherit;
+      background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(244, 200, 113, 0.8), rgba(207, 157, 69, 0.4) 40%, transparent 70%);
+      opacity: 0; transition: opacity 0.35s ease; z-index: -1; filter: blur(8px);
+    }
+    .glow-btn:hover::before { opacity: 1; }
+    .glow-btn::after {
+      content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(150px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.4), transparent 60%);
+      opacity: 0; transition: opacity 0.35s ease; pointer-events: none; z-index: 1;
+    }
+    .glow-btn:hover::after { opacity: 1; }
+    /* ============ NEW: WIGGLE ENTRANCE ANIMATION ============ */
+@keyframes wiggle-entrance {
+  0% { 
+    transform: rotate(0deg) scale(0.6); 
+    opacity: 0;
+  }
+  10% { 
+    transform: rotate(-18deg) scale(0.85); 
+    opacity: 1;
+  }
+  20% { transform: rotate(16deg) scale(1); }
+  30% { transform: rotate(-14deg) scale(1.05); }
+  40% { transform: rotate(12deg) scale(1.02); }
+  50% { transform: rotate(-10deg) scale(1.05); }
+  60% { transform: rotate(8deg) scale(1.01); }
+  70% { transform: rotate(-6deg) scale(1.03); }
+  80% { transform: rotate(4deg) scale(1); }
+  90% { transform: rotate(-2deg) scale(1.01); }
+  100% { 
+    transform: rotate(0deg) scale(1); 
+    opacity: 1;
+  }
+}
+
+/* التطبيق الأساسي - اهتزاز مرة واحدة عند الدخول */
+.animate-wiggle-entrance {
+  animation: wiggle-entrance 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  transform-origin: center center;
+}
+
+/* اهتزاز هادئ مستمر كل 8 ثواني (لفت الانتباه) */
+@keyframes wiggle-soft {
+  0%, 92%, 100% { transform: rotate(0deg); }
+  93% { transform: rotate(-8deg); }
+  94% { transform: rotate(8deg); }
+  95% { transform: rotate(-6deg); }
+  96% { transform: rotate(6deg); }
+  97% { transform: rotate(-3deg); }
+  98% { transform: rotate(3deg); }
+}
+
+.animate-wiggle-soft {
+  animation: wiggle-entrance 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both,
+             wiggle-soft 8s ease-in-out 3s infinite;
+  transform-origin: center center;
+}
+
+/* إيقاف التأثير إذا كان المستخدم يفضل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  .animate-wiggle-entrance,
+  .animate-wiggle-soft {
+    animation: none !important;
+  }
+}
+    @keyframes ping-dot { 0% { transform: scale(1); opacity: 0.9; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
+    .animate-ping-dot { animation: ping-dot 1.8s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes orb-drift { 0%, 100% { transform: translate(0,0) scale(1); } 33% { transform: translate(70px,-50px) scale(1.12); } 66% { transform: translate(-50px,60px) scale(0.94); } }
+    .animate-orb { animation: orb-drift 18s ease-in-out infinite; }
+    @keyframes shine-sweep { from { transform: translateX(-130%) skewX(-18deg); } to { transform: translateX(230%) skewX(-18deg); } }
+    .shine { position: relative; overflow: hidden; }
+    .shine::after {
+      content: ""; position: absolute; top: -30%; bottom: -30%; width: 34%; inset-inline-start: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: translateX(-130%) skewX(-18deg); pointer-events: none;
+    }
+    .shine:hover::after { animation: shine-sweep 0.9s ease forwards; }
+    @keyframes loading-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
+    @keyframes loading-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+    .anim-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
+    .anim-fade-up.visible { opacity: 1; transform: translateY(0); }
+    .anim-fade-in { opacity: 0; transition: opacity 0.8s ease; }
+    .anim-fade-in.visible { opacity: 1; }
+    .anim-scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+    .anim-scale-in.visible { opacity: 1; transform: scale(1); }
+    
+    /* ============ LOADING SCREEN (WIGGLE VERSION) ============ */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #faf6f1 0%, #f3ebe1 100%);
+  transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), visibility 0.9s ease;
+  overflow: hidden;
+}
+
+#loading-screen.hidden { 
+  opacity: 0; 
+  visibility: hidden; 
+  pointer-events: none; 
+}
+
+/* خلفية زخرفية */
+#loading-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(244,200,113,0.25), transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(108,88,98,0.12), transparent 50%);
+  pointer-events: none;
+  animation: loadingBgShift 6s ease-in-out infinite alternate;
+}
+
+@keyframes loadingBgShift {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.15) rotate(8deg); }
+}
+
+/* اللوقو الرئيسي - بحجم كبير */
+.loading-logo {
+  position: relative;
+  width: 130px; 
+  height: 130px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #6c5862, #4e3d47);
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  box-shadow: 
+    0 25px 70px -20px rgba(78,61,71,0.55),
+    0 0 0 8px rgba(244,200,113,0.15),
+    0 0 0 16px rgba(244,200,113,0.08);
+  animation: logoWiggle3s 3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  z-index: 2;
+}
+
+.loading-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* هالة متوهجة خلف اللوقو */
+.loading-logo::after {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,200,113,0.4), transparent 65%);
+  animation: haloPulse 1.5s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes haloPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.25); opacity: 0.9; }
+}
+
+/* الاهتزاز الرئيسي لمدة 3 ثواني */
+@keyframes logoWiggle3s {
+  0% { 
+    transform: rotate(0deg) scale(0.4); 
+    opacity: 0;
+  }
+  8% { 
+    transform: rotate(-22deg) scale(0.7); 
+    opacity: 1;
+  }
+  16% { transform: rotate(20deg) scale(1.05); }
+  24% { transform: rotate(-18deg) scale(1.1); }
+  32% { transform: rotate(16deg) scale(1.08); }
+  40% { transform: rotate(-14deg) scale(1.1); }
+  48% { transform: rotate(12deg) scale(1.06); }
+  56% { transform: rotate(-10deg) scale(1.08); }
+  64% { transform: rotate(8deg) scale(1.04); }
+  72% { transform: rotate(-6deg) scale(1.05); }
+  80% { transform: rotate(4deg) scale(1.02); }
+  88% { transform: rotate(-2deg) scale(1.02); }
+  94% { transform: rotate(1deg) scale(1); }
+  100% { 
+    transform: rotate(0deg) scale(1); 
+    opacity: 1;
+  }
+}
+
+/* النص تحت اللوقو */
+.loading-text {
+  margin-top: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #6c5862;
+  text-transform: uppercase;
+  animation: textFadeIn 0.8s ease 1.2s both;
+  z-index: 2;
+}
+
+@keyframes textFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* النقاط المتحركة تحت النص */
+.loading-dots {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+  animation: textFadeIn 0.8s ease 1.5s both;
+  z-index: 2;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f4c871, #cf9d45);
+  box-shadow: 0 0 12px rgba(244,200,113,0.7);
+  animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: 0s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotBounce {
+  0%, 60%, 100% { 
+    transform: translateY(0) scale(1); 
+    opacity: 0.5;
+  }
+  30% { 
+    transform: translateY(-10px) scale(1.3); 
+    opacity: 1;
+  }
+}
+
+/* شريط التقدم أسفل الشاشة */
+.loading-progress {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  height: 4px;
+  background: rgba(108,88,98,0.1);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.loading-progress-inner {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f4c871, #cf9d45, #f4c871);
+  background-size: 200% 100%;
+  border-radius: 0 99px 99px 0;
+  box-shadow: 0 0 20px rgba(244,200,113,0.8);
+  animation: progressFill3s 3s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+             progressShine 1.5s linear infinite;
+}
+
+@keyframes progressFill3s {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes progressShine {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+    #scroll-progress {
+      position: fixed; top: 0; inset-inline: 0; height: 3px; z-index: 90;
+      background: linear-gradient(90deg, #6c5862, #cf9d45, #f4c871);
+      box-shadow: 0 0 14px rgba(207,157,69,0.55);
+      transform-origin: 0% 50%; transform: scaleX(0); transition: transform 0.1s linear;
+    }
+    html[dir="rtl"] #scroll-progress { transform-origin: 100% 50%; }
+    #mobile-menu {
+      position: fixed; inset: 0; z-index: 80;
+      background: rgba(250,246,241,0.97);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      display: flex; flex-direction: column;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    #mobile-menu.open { opacity: 1; visibility: visible; }
+    .nav-pill { position: relative; }
+    .nav-pill .pill-bg {
+      position: absolute; inset: 0; border-radius: 9999px;
+      border: 1px solid rgba(207,157,69,0.45); background: rgba(244,200,113,0.3);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .nav-pill.active .pill-bg { opacity: 1; }
+    .click-particle {
+      position: fixed; width: 8px; height: 8px; border-radius: 50%;
+      pointer-events: none; z-index: 9997;
+      background: radial-gradient(circle, rgba(244,200,113,1), rgba(207,157,69,0.5));
+      box-shadow: 0 0 12px rgba(244,200,113,0.8);
+    }
+    .hover-label {
+      position: fixed; padding: 4px 10px; background: rgba(55,41,49,0.9);
+      color: #f4c871; font-size: 10px; font-weight: 700; border-radius: 6px;
+      pointer-events: none; z-index: 10001; opacity: 0;
+      transform: translate(-50%, -140%) scale(0.8);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap; backdrop-filter: blur(6px); letter-spacing: 0.05em;
+    }
+    .hover-label.active { opacity: 1; transform: translate(-50%, -140%) scale(1); }
+    .glow-orb {
+      position: fixed; width: 400px; height: 400px; border-radius: 50%;
+      pointer-events: none; z-index: 2;
+      background: radial-gradient(circle, rgba(244,200,113,0.18), rgba(244,200,113,0.06) 40%, transparent 70%);
+      mix-blend-mode: multiply; transform: translate(-50%, -50%);
+      filter: blur(20px); will-change: transform;
+    }
+    .fab {
+      position: fixed; bottom: 24px; inset-inline-end: 24px; z-index: 60;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, #f7d997, #f4c871, #cf9d45);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 34px -8px rgba(207,157,69,0.7), 0 0 0 0 rgba(244,200,113,0.5);
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+      animation: fabPulse 2.5s ease-in-out infinite;
+    }
+    .fab:hover { transform: scale(1.15); box-shadow: 0 16px 44px -8px rgba(207,157,69,0.9), 0 0 0 8px rgba(244,200,113,0.15); }
+    @keyframes fabPulse {
+      0%, 100% { box-shadow: 0 12px 34px -8px rgba(207,157,69,0.7), 0 0 0 0 rgba(244,200,113,0.5); }
+      50% { box-shadow: 0 12px 34px -8px rgba(207,157,69,0.7), 0 0 0 12px rgba(244,200,113,0); }
+    }
+    .service-category { position: relative; display: flex; flex-direction: column; height: 100%; }
+    .service-category .category-icon-wrap {
+      position: relative; width: 72px; height: 72px;
+      border-radius: 1.25rem; overflow: hidden; flex-shrink: 0;
+      background: linear-gradient(135deg, #fdf2da, #f9ecd2);
+      border: 1px solid rgba(207,157,69,0.3);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .service-category:hover .category-icon-wrap {
+      transform: scale(1.08) rotate(-3deg);
+      border-color: rgba(207,157,69,0.7);
+      box-shadow: 0 0 30px -5px rgba(207,157,69,0.5);
+    }
+    .service-category .category-icon-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+    .service-category:hover .category-icon-wrap img { transform: scale(1.15); }
+    .service-category .category-icon-wrap.image-error { background: linear-gradient(135deg, #6c5862, #4e3d47); }
+    .service-category .category-icon-wrap.image-error::after {
+      content: attr(data-category); position: absolute; color: #f4c871;
+      font-weight: 700; font-size: 10px; text-align: center; padding: 4px; line-height: 1.2;
+    }
+    .service-category .category-icon-wrap.image-error img { display: none; }
+    .procedure-item {
+      position: relative; display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.625rem 0.75rem; border-radius: 0.75rem;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      text-decoration: none; border: 1px solid transparent;
+    }
+    .procedure-item:hover { background: rgba(244, 200, 113, 0.1); border-color: rgba(207, 157, 69, 0.25); padding-inline-start: 1rem; }
+    .procedure-item .bullet {
+      width: 6px; height: 6px;
+      background: linear-gradient(135deg, #cf9d45, #f4c871);
+      border-radius: 50%; flex-shrink: 0; transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(207, 157, 69, 0.5);
+    }
+    .procedure-item:hover .bullet { transform: scale(1.6); box-shadow: 0 0 14px rgba(207, 157, 69, 0.9); }
+    .procedure-item .procedure-text { flex: 1; color: var(--mauve-deep); font-size: 0.875rem; font-weight: 500; transition: color 0.3s ease; }
+    .procedure-item:hover .procedure-text { color: var(--mauve-ink); font-weight: 600; }
+    .procedure-item .arrow-icon {
+      width: 18px; height: 18px; opacity: 0; transform: translateX(-8px);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1); color: #cf9d45; flex-shrink: 0;
+    }
+    .procedure-item:hover .arrow-icon { opacity: 1; transform: translateX(0); }
+    .search-container { position: relative; max-width: 600px; margin: 0 auto; width: 100%; }
+    .search-input {
+      width: 100%; padding: 1rem 3.5rem 1rem 1.5rem; border-radius: 1.25rem;
+      border: 1px solid rgba(108,88,98,0.15); background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 18px 44px -26px rgba(78,61,71,0.28);
+      font-size: 0.9375rem; color: #372931; font-family: inherit; outline: none;
+      transition: all 0.3s ease;
+    }
+    .search-input::placeholder { color: rgba(108,88,98,0.45); }
+    .search-input:focus {
+      border-color: #cf9d45; background: #fffdf8;
+      box-shadow: 0 0 0 4px rgba(244,200,113,0.28), 0 18px 44px -26px rgba(78,61,71,0.28);
+    }
+    .search-icon { position: absolute; inset-inline-end: 1.25rem; top: 50%; transform: translateY(-50%); color: #cf9d45; pointer-events: none; }
+    .filter-tab {
+      padding: 0.5rem 1.1rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700;
+      border: 1px solid rgba(108,88,98,0.15); background: rgba(255,255,255,0.7);
+      color: var(--mauve); cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap; font-family: inherit;
+    }
+    .filter-tab:hover { border-color: rgba(207,157,69,0.5); color: var(--gold-deep); transform: translateY(-2px); }
+    .filter-tab.active {
+      background: linear-gradient(115deg, #f7d997, #f4c871, #eeb44d);
+      color: #372931; border-color: transparent;
+      box-shadow: 0 8px 22px -6px rgba(207,157,69,0.6);
+    }
+    @media (max-width: 640px) {
+      .cursor-dot, .cursor-ring, .cursor-trail, .glow-orb, .hover-label { display: none !important; }
+      body { cursor: auto; }
+      .fab { bottom: 16px; inset-inline-end: 16px; width: 52px; height: 52px; }
+    }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #cf9d45; outline-offset: 2px; }
+    img { max-width: 100%; height: auto; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+    .hidden-item { display: none !important; }
+  </style>
+</head>
+<body>
+
+  
+ <!-- ============ LOADING SCREEN (WIGGLE VERSION) ============ -->
+<div id="loading-screen">
+  <div class="loading-logo">
+    <img src="logo.png" alt="Logo" />
+  </div>
+  <div class="loading-text">Dr. Zaid Shakir CARE</div>
+  <div class="loading-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="loading-progress">
+    <div class="loading-progress-inner"></div>
+  </div>
+</div>
+
+  <!-- ============ ADVANCED CURSOR SYSTEM ============ -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="glow-orb" id="glow-orb"></div>
+  <div class="hover-label" id="hover-label"></div>
+
+  <!-- ============ SCROLL PROGRESS ============ -->
+  <div id="scroll-progress"></div>
+
+  <!-- ============ BACKGROUND FX ============ -->
+  <div class="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 85% 60% at 50% -10%, #fdf8f1 0%, #faf6f1 60%);"></div>
+    <div class="animate-orb absolute -top-32 start-[-8%] size-[42rem] rounded-full" style="background: rgba(244,200,113,0.22); filter: blur(130px);"></div>
+    <div class="animate-orb absolute bottom-[-20%] end-[-10%] size-[38rem] rounded-full" style="background: rgba(108,88,98,0.1); filter: blur(140px); animation-delay: -8s;"></div>
+    <div class="absolute top-1/3 start-1/2 size-[26rem] rounded-full" style="background: rgba(244,200,113,0.12); filter: blur(120px);"></div>
+    <canvas id="bg-canvas" class="absolute inset-0"></canvas>
+    <div class="absolute inset-0 bg-grid opacity-70" style="mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent 80%);"></div>
+    <div class="noise absolute inset-0 opacity-[0.05]"></div>
+  </div>
+
+  <!-- ============ FLOATING ACTION BUTTON ============ -->
+  <button class="fab" id="fab-book" aria-label="احجز الآن" data-cursor-label="احجز">
+    <svg class="size-6 text-mauve-ink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+  </button>
+
+  <!-- ============ HEADER ============ -->
+  <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-500" style="transform: translateY(-80px); opacity: 0;">
+    <div id="header-inner" class="mx-auto flex items-center justify-between gap-4 px-5 transition-all duration-500 lg:px-10 max-w-7xl bg-transparent py-5">
+      <a href="index.html" class="group flex items-center gap-3 shrink-0 magnetic" aria-label="logo" data-cursor-label="الرئيسية">
+       <span class="animate-wiggle-soft relative flex size-11 items-center justify-center overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-110" style="background: linear-gradient(135deg, #6c5862, #4e3d47); box-shadow: 0 10px 24px -8px rgba(78,61,71,0.5);">
+  <img src="logo.png" alt="Logo" class="size-7 object-contain" />
+  <span class="absolute inset-0 rounded-xl border border-white/20"></span>
+</span>
+        <span class="leading-tight hidden sm:block">
+          <span id="brand-name" class="block text-[15px] font-bold text-mauve-ink">د. زيد شاكر</span>
+          <span id="brand-tag" class="block text-[9px] font-semibold tracking-[0.22em] text-gold-deep">ADVANCED CARE</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-1 lg:flex" aria-label="main">
+        <a href="index.html" class="nav-pill relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 text-mauve/75 hover:text-mauve-ink magnetic" data-cursor-label="الرئيسية">
+          <span class="pill-bg"></span>
+          <span class="relative" data-nav="home">الرئيسية</span>
+        </a>
+        <a href="about.html" class="nav-pill relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 text-mauve/75 hover:text-mauve-ink magnetic" data-cursor-label="من نحن">
+          <span class="pill-bg"></span>
+          <span class="relative" data-nav="about">من نحن</span>
+        </a>
+        <a href="#" class="nav-pill active relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 text-mauve-ink magnetic" data-cursor-label="الخدمات">
+          <span class="pill-bg"></span>
+          <span class="relative" data-nav="services">الخدمات</span>
+        </a>
+        <a href="contact.html" class="nav-pill relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 text-mauve/75 hover:text-mauve-ink magnetic" data-cursor-label="تواصل">
+          <span class="pill-bg"></span>
+          <span class="relative" data-nav="contact">تواصل معنا</span>
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div class="flex items-center rounded-full border border-mauve/15 bg-white/70 p-1 text-[11px] font-bold backdrop-blur-md sm:text-xs" data-cursor-label="اللغة">
+          <button id="lang-en" class="relative rounded-full px-2.5 py-1.5 transition-colors duration-300 text-mauve/60 hover:text-mauve-ink sm:px-3">EN</button>
+          <button id="lang-ar" class="relative rounded-full px-2.5 py-1.5 transition-colors duration-300 text-mauve-ink sm:px-3" style="background: linear-gradient(90deg, #f4c871, #eeb44d); box-shadow: 0 4px 14px -4px rgba(207,157,69,0.7);">عربي</button>
+        </div>
+
+        <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="glow-btn shine relative hidden md:inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-sm font-bold text-mauve-ink transition-all duration-300 hover:brightness-[1.05] active:scale-95 lg:px-6 magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 10px 28px -8px rgba(207,157,69,0.7);" data-cursor-label="احجز">
+          <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+          <span class="relative z-10">احجز موعدك</span>
+        </a>
+
+        <button id="mobile-menu-btn" class="glass flex size-10 items-center justify-center rounded-xl text-mauve-ink lg:hidden shrink-0" aria-label="القائمة">
+          <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div id="mobile-menu">
+    <div class="flex items-center justify-between px-5 py-5">
+      <div class="flex items-center gap-3">
+        <span class="flex size-10 items-center justify-center rounded-xl" style="background: linear-gradient(135deg, #6c5862, #4e3d47);">
+          <svg class="size-5 text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </span>
+        <span class="text-sm font-bold text-mauve-ink">د. زيد شاكر</span>
+      </div>
+      <button id="mobile-menu-close" class="glass flex size-10 items-center justify-center rounded-xl text-mauve-ink" aria-label="إغلاق">
+        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-1 flex-col items-start justify-center gap-2 px-8">
+      <a href="index.html" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
+        <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep">الرئيسية</span>
+        <span class="text-xs font-semibold tracking-widest text-gold-deep/60">01</span>
+      </a>
+      <a href="about.html" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
+        <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep">من نحن</span>
+        <span class="text-xs font-semibold tracking-widest text-gold-deep/60">02</span>
+      </a>
+      <a href="#" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
+        <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep">الخدمات</span>
+        <span class="text-xs font-semibold tracking-widest text-gold-deep/60">03</span>
+      </a>
+      <a href="contact.html" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
+        <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep">تواصل معنا</span>
+        <span class="text-xs font-semibold tracking-widest text-gold-deep/60">04</span>
+      </a>
+    </nav>
+    <div class="px-8 pb-10">
+      <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-base font-bold text-mauve-ink" style="background: linear-gradient(115deg, #f7d997, #f4c871, #eeb44d); box-shadow: 0 14px 34px -10px rgba(207,157,69,0.7);">
+        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+        احجز موعدك الآن
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="relative z-10">
+
+    <!-- ============ HERO / PAGE HEADER ============ -->
+    <section class="relative overflow-hidden pb-16 pt-32 sm:pt-36 lg:pb-20 lg:pt-40">
+      <div class="relative z-10 mx-auto max-w-7xl px-5 lg:px-10">
+        <div class="text-center">
+          <div class="anim-fade-up inline-flex items-center gap-2.5 rounded-full border border-gold-deep/35 bg-gold/[0.22] px-4 py-1.5 text-xs font-semibold tracking-wider text-mauve-deep mx-auto" data-delay="0">
+            <span class="relative flex size-2">
+              <span class="animate-ping-dot absolute inline-flex size-full rounded-full bg-gold-deep"></span>
+              <span class="relative inline-flex size-2 rounded-full bg-gold-deep"></span>
+            </span>
+            <span data-i18n="hero.badge">خدماتنا الطبية المتقدمة</span>
+          </div>
+
+          <h1 class="anim-fade-up mx-auto mt-6 max-w-4xl text-3xl font-bold leading-[1.2] text-mauve-ink sm:text-4xl lg:text-[3.5rem]" data-delay="0.1">
+            <span data-i18n="hero.title">الإجراءات التجميلية</span>
+            <span class="text-gradient" data-i18n="hero.titleAccent">المتقدمة</span>
+          </h1>
+
+          <p class="anim-fade-up mx-auto mt-6 max-w-2xl text-sm leading-[1.9] text-mauve/75 sm:text-base" data-delay="0.2" data-i18n="hero.sub">
+            نقدم مجموعة شاملة من الإجراءات التجميلية والجراحية بأحدث التقنيات العالمية، تحت إشراف نخبة من الاستشاريين المتخصصين.
+          </p>
+
+          <div class="anim-fade-up mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4" data-delay="0.3">
+            <div class="flex items-center gap-2 text-sm font-semibold text-mauve-deep">
+              <span class="relative flex size-2">
+                <span class="animate-ping-dot absolute inline-flex size-full rounded-full bg-gold-deep"></span>
+                <span class="relative inline-flex size-2 rounded-full bg-gold-deep"></span>
+              </span>
+              <span data-i18n="hero.stat1">8 تخصصات رئيسية</span>
+            </div>
+            <span class="hidden h-6 w-px bg-mauve/15 sm:block"></span>
+            <div class="flex items-center gap-2 text-sm font-semibold text-mauve-deep">
+              <svg class="size-4 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span data-i18n="hero.stat2">+40 إجراء متاح</span>
+            </div>
+            <span class="hidden h-6 w-px bg-mauve/15 sm:block"></span>
+            <div class="flex items-center gap-2 text-sm font-semibold text-mauve-deep">
+              <svg class="size-4 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              <span data-i18n="hero.stat3">بغداد — العراق</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="anim-fade-up mx-auto mt-14 max-w-2xl" data-delay="0.4">
+          <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن إجراء (مثال: شفط الدهون، شد الوجه، فيلر)" data-i18n-placeholder="search.placeholder" aria-label="البحث في الإجراءات">
+            <div class="search-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="anim-fade-up mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3" data-delay="0.5">
+          <button class="filter-tab active" data-filter="all" data-i18n="filter.all">الكل</button>
+          <button class="filter-tab" data-filter="breast" data-i18n="filter.breast">جراحة الثدي</button>
+          <button class="filter-tab" data-filter="body" data-i18n="filter.body">نحت الجسم</button>
+          <button class="filter-tab" data-filter="non-surgical" data-i18n="filter.nonSurgical">غير جراحي</button>
+          <button class="filter-tab" data-filter="facial" data-i18n="filter.facial">جراحة الوجه</button>
+          <button class="filter-tab" data-filter="laser" data-i18n="filter.laser">الليزر والطاقة</button>
+          <button class="filter-tab" data-filter="male" data-i18n="filter.male">خاص بالرجال</button>
+          <button class="filter-tab" data-filter="burn" data-i18n="filter.burn">الحروق</button>
+          <button class="filter-tab" data-filter="hand" data-i18n="filter.hand">جراحة اليد</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES GRID ============ -->
+    <section class="relative z-10 pb-20 sm:pb-28">
+      <div class="mx-auto max-w-7xl px-5 lg:px-10">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="proceduresContainer">
+
+          <!-- ============ BREAST SURGERY ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.1" data-category="breast">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="جراحة">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Breast">
+                    <img src="homo.png" alt="جراحة الثدي" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.breast.title">جراحة الثدي</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.breast.en">BREAST SURGERY</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/breastsurgery" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.breastReduction">تصغير الثدي</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/breasttaugmentation" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.mastopexy">رفع الثدي (Mastopexy)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/breastaugmentation" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.augmentation">تكبير الثدي (زراعة/دهون)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============ BODY CONTOURING ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.2" data-category="body">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="نحت">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Body">
+                    <img src="homo2.png" alt="نحت الجسم" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.body.title">نحت الجسم</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.body.en">BODY CONTOURING</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/tummy-tuck" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.abdominoplasty">شد البطن (Abdominoplasty)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/liposuction" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.liposuction">شفط الدهون ونقلها</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/arm-lift" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.brachioplasty">شد الذراعين (Brachioplasty)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/thigh-lift" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.thighLift">شد الفخذين والجسم السفلي</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/buttock-augmentation" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.bbl">رفع الأرداف البرازيلي (BBL)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/double-chin" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.doubleChin">إزالة الذقن المزدوج</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============ NON-SURGICAL ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.3" data-category="non-surgical">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="غير جراحي">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Non-Surgical">
+                    <img src="homo3.png" alt="علاجات غير جراحية" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.nonSurgical.title">علاجات غير جراحية</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.nonSurgical.en">NON-SURGICAL</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/filler" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.fillers">فيلر البشرة (Dermal Fillers)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/botox" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.botox">البوتوكس (Botox/Dysport)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/mesotherapy" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.mesotherapy">ميزوثيرابي ومحفزات البشرة</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/platelet-rich-plasma" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.prp">البلازما الغنية بالصفائح (PRP)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============ FACIAL SURGERY ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.4" data-category="facial">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="الوجه">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Facial">
+                    <img src="homo4.png" alt="جراحة الوجه" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.facial.title">جراحة الوجه</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.facial.en">FACIAL SURGERY</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/rhinoplasty" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.rhinoplasty">تجميل الأنف (Rhinoplasty)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/eyelid-lift-and-tightening" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.blepharoplasty">شد الجفون (Blepharoplasty)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/eyebrow-lift" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.browLift">رفع الحواجب بالمنظار</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/face-lift" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.faceLift">شد الوجه (Face Lift)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/neck-lift" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.neckLift">شد الرقبة (Neck Lift)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/neck-muscle-beautification" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.platysmaplasty">شد عضلات الرقبة (Platysmaplasty)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/lip-lift-and-flip" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.lipLift">رفع الشفاه (Lip Lift)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/autologous-fat-injection" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.fatInjection">حقن الدهون لاستعادة حجم الوجه</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/prominent-ear" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.otoplasty">تجميل الأذن (Otoplasty)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============ LASER & ENERGY ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.5" data-category="laser">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="ليزر">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Laser">
+                    <img src="homo5.png" alt="الليزر والطاقة" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.laser.title">الليزر والطاقة</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.laser.en">LASER & ENERGY</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/surgical-scars" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.scars">علاج الندبات الجراحية</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/laser-hair-removal" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.laserHair">إزالة الشعر بالليزر</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/skin-renewal" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.skinRenewal">تجديد البشرة بالليزر</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/acne-scars" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.acneScars">علاج آثار حب الشباب</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============ MALE PROCEDURES ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.6" data-category="male">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="رجالي">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Male">
+                    <img src="homo6.png" alt="خاص بالرجال" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.male.title">خاص بالرجال</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.male.en">MALE PROCEDURES</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/malebreast" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.gynecomastia">تصحيح تضخم الثدي (Gynecomastia)</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+                <div class="mt-auto pt-6">
+                  <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="glow-btn shine group/link relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full px-5 py-3 text-xs font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97]" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
+                    <svg class="size-4 relative z-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+                    <span class="relative z-10" data-i18n="cta.book">احجز استشارتك</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============ BURN SURGERY ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.7" data-category="burn">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="حروق">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Burn">
+                    <img src="homo7.png" alt="جراحة الحروق" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.burn.title">جراحة الحروق</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.burn.en">BURN SURGERY</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/severe-burns" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.acuteBurns">علاج الحروق الحادة</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/post-burn-sequelae" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.postBurn">مضاعفات ما بعد الحروق</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============ HAND SURGERY ============ -->
+          <div class="anim-fade-up service-item" data-delay="0.8" data-category="hand">
+            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="اليد">
+              <div class="relative z-[4] flex h-full flex-col">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="category-icon-wrap" data-category="Hand">
+                    <img src="homo8.png" alt="جراحة اليد" onerror="this.parentNode.classList.add('image-error')">
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold leading-tight text-mauve-ink" data-i18n="cat.hand.title">جراحة اليد</h3>
+                    <span class="mt-1 inline-block text-[10px] font-semibold tracking-wider text-gold-deep/70" data-i18n="cat.hand.en">HAND SURGERY</span>
+                  </div>
+                </div>
+                <div class="mb-4 h-px w-full bg-gradient-to-l from-transparent via-gold-deep/30 to-transparent"></div>
+                <div class="space-y-1 flex-1">
+                  <a href="https://drzaidshakir.com/hand-injuries" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.handInjuries">إصلاح إصابات اليد</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                  <a href="https://drzaidshakir.com/congenital-hand-deformities" class="procedure-item">
+                    <span class="bullet"></span>
+                    <span class="procedure-text" data-i18n="p.congenitalHand">تصحيح تشوهات اليد الخلقية</span>
+                    <svg class="arrow-icon rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        <!-- ============ NO RESULTS ============ -->
+        <div id="noResults" class="hidden-item mt-12 text-center">
+          <div class="glass mx-auto max-w-md rounded-3xl p-8">
+            <div class="mx-auto flex size-16 items-center justify-center rounded-2xl bg-gold/30 text-gold-deep">
+              <svg class="size-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3 class="mt-4 text-lg font-bold text-mauve-ink" data-i18n="noResults.title">لا توجد نتائج مطابقة</h3>
+            <p class="mt-2 text-sm text-mauve/65" data-i18n="noResults.sub">جرب البحث بكلمات مختلفة أو تصفح جميع الخدمات</p>
+            <button id="resetSearch" class="mt-5 inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold text-mauve-ink transition-all duration-300 hover:brightness-105 active:scale-95" style="background: linear-gradient(115deg, #f7d997, #f4c871, #eeb44d);">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              <span data-i18n="noResults.reset">إعادة التعيين</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA SECTION ============ -->
+    <section class="relative z-10 pb-20 sm:pb-28">
+      <div class="mx-auto max-w-7xl px-5 lg:px-10">
+        <div class="tilt-3d anim-fade-up relative overflow-hidden rounded-[2rem]" data-delay="0" data-cursor-label="احجز" style="background: linear-gradient(130deg, #544049, #372931); box-shadow: 0 50px 120px -40px rgba(55,41,49,0.7);">
+          <div class="absolute inset-0" style="background: linear-gradient(120deg, rgba(55,41,49,0.92) 10%, rgba(65,48,58,0.8) 50%, rgba(55,41,49,0.95) 90%);"></div>
+          <div class="bg-dots-gold absolute inset-0 opacity-70"></div>
+          <div class="absolute -start-20 -top-20 size-60 rounded-full" style="background: rgba(244,200,113,0.22); filter: blur(100px);"></div>
+          <div class="absolute -bottom-20 -end-20 size-60 rounded-full" style="background: rgba(244,200,113,0.14); filter: blur(100px);"></div>
+
+          <div class="relative px-6 py-12 text-center sm:px-12 sm:py-16 lg:py-20 z-[4]">
+            <div class="tilt-inner mx-auto inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/[0.14] px-4 py-1.5 text-[10px] font-bold tracking-wider text-gold">
+              <span class="relative flex size-2">
+                <span class="animate-ping-dot absolute inline-flex size-full rounded-full bg-gold"></span>
+                <span class="relative inline-flex size-2 rounded-full bg-gold"></span>
+              </span>
+              <span data-i18n="ctaSection.badge">استشارة مجانية</span>
+            </div>
+
+            <h2 class="tilt-inner mx-auto mt-5 max-w-3xl text-3xl font-bold leading-[1.3] text-white sm:text-4xl lg:text-[3rem]">
+              <span data-i18n="ctaSection.title">هل تحتاج مساعدة في اختيار</span>
+              <span class="text-gradient-gold" data-i18n="ctaSection.accent">الإجراء المناسب؟</span>
+            </h2>
+
+            <p class="tilt-inner mx-auto mt-5 max-w-xl text-sm leading-relaxed text-lilac/85 sm:text-base" data-i18n="ctaSection.sub">
+              فريقنا الطبي المتخصص جاهز لمساعدتك واختيار الإجراء الأفضل الذي يناسب احتياجاتك وأهدافك.
+            </p>
+
+            <div class="tilt-inner mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="glow-btn shine relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-8 py-3.5 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] sm:px-10 sm:py-4 sm:text-base magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
+                <svg class="size-5 relative z-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+                <span class="relative z-10" data-i18n="cta.bookFull">احجز استشارتك الآن</span>
+              </a>
+              <a href="https://drzaidshakir.com/contact" class="shine relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-white/25 bg-white/[0.08] px-6 py-3.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:border-gold/60 hover:text-gold sm:px-8 sm:py-4 sm:text-base magnetic" data-cursor-label="تواصل">
+                <svg class="size-5 text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                <span data-i18n="ctaSection.contact">تواصل معنا</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="relative z-10 overflow-hidden text-lilac" style="background: linear-gradient(180deg, #46343e, #372931);">
+    <span class="absolute inset-x-0 top-0 h-[2px]" style="background: linear-gradient(to left, transparent, #f4c871, transparent);"></span>
+    <div class="bg-dots-gold pointer-events-none absolute inset-0 opacity-40"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 lg:px-10 py-12">
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div>
+          <a href="index.html" class="flex items-center gap-3 magnetic" data-cursor-label="الرئيسية">
+            <span class="flex size-11 items-center justify-center rounded-xl bg-gold/[0.14] ring-1 ring-gold/35">
+              <svg class="size-5 text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </span>
+            <span class="leading-tight">
+              <span class="block text-sm font-bold text-white" data-i18n="brand.name">د. زيد شاكر</span>
+              <span class="block text-[8px] font-semibold tracking-[0.2em] text-gold/90">ADVANCED CARE</span>
+            </span>
+          </a>
+          <p class="mt-4 max-w-sm text-xs leading-[1.8] text-lilac/80" data-i18n="footer.about">
+            عيادة الدكتور زيد شاكر للإجراءات التجميلية المتقدمة والرعاية الطبية.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold tracking-wider text-white" data-i18n="footer.quickLinks">روابط سريعة</h4>
+          <ul class="mt-4 space-y-2.5">
+            <li><a href="index.html" class="group inline-flex items-center gap-2 text-xs text-lilac/75 transition-all duration-300 hover:text-gold"><svg class="size-3 text-gold/60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg><span data-i18n="nav.home">الرئيسية</span></a></li>
+            <li><a href="about.html" class="group inline-flex items-center gap-2 text-xs text-lilac/75 transition-all duration-300 hover:text-gold"><svg class="size-3 text-gold/60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg><span data-i18n="nav.about">من نحن</span></a></li>
+            <li><a href="services.html" class="group inline-flex items-center gap-2 text-xs text-lilac/75 transition-all duration-300 hover:text-gold"><svg class="size-3 text-gold/60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg><span data-i18n="nav.services">الخدمات</span></a></li>
+            <li><a href="contact.html" class="group inline-flex items-center gap-2 text-xs text-lilac/75 transition-all duration-300 hover:text-gold">
+<svg class="size-3 text-gold/60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg><span data-i18n="nav.contact">تواصل معنا</span></a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="flex items-center gap-2 text-xs font-bold tracking-wider text-white">
+            <svg class="size-3.5 text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span data-i18n="footer.hours">أوقات العمل</span>
+          </h4>
+          <ul class="mt-4 space-y-2.5 text-xs">
+            <li class="flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2.5">
+              <span class="text-lilac/85" data-i18n="footer.weekdays">السبت — الخميس</span>
+              <span class="font-bold text-gold" dir="ltr">10AM — 8PM</span>
+            </li>
+            <li class="flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2.5">
+              <span class="text-lilac/85" data-i18n="footer.friday">الجمعة</span>
+              <span class="font-bold text-rose-300/90" data-i18n="footer.off">10:00 AM — 9:00 PM</span>
+            </li>
+            <li class="flex items-center justify-between gap-2 rounded-xl border border-gold/30 bg-gold/[0.1] px-3 py-2.5">
+              <span class="text-white" data-i18n="footer.online">الحجز الإلكتروني</span>
+              <span class="font-bold text-gold">24/7</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold tracking-wider text-white" data-i18n="footer.contact">معلومات الاتصال</h4>
+          <ul class="mt-4 space-y-3 text-xs">
+            <li>
+              <a href="tel:+9647701234567" class="group flex items-center gap-3 magnetic" data-cursor-label="اتصل">
+                <span class="flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white/[0.06] text-gold transition-all duration-300 group-hover:border-gold/50 group-hover:bg-gold/[0.12]">
+                  <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </span>
+                <span dir="ltr" class="font-semibold text-lilac/85 transition-colors group-hover:text-white">+964 770 123 4567</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:care@drzaidshakir.com" class="group flex items-center gap-3 magnetic" data-cursor-label="إيميل">
+                <span class="flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white/[0.06] text-gold transition-all duration-300 group-hover:border-gold/50 group-hover:bg-gold/[0.12]">
+                  <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </span>
+                <span dir="ltr" class="font-semibold text-lilac/85 transition-colors group-hover:text-white">care@drzaidshakir.com</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-[10px] text-lilac/55">
+        <p data-i18n="footer.rights">جميع الحقوق محفوظة © 2026 عيادة الدكتور زيد شاكر.</p>
+        <div class="flex gap-5">
+          <a href="#" class="transition-colors hover:text-gold" data-i18n="footer.privacy">سياسة الخصوصية</a>
+          <a href="#" class="transition-colors hover:text-gold" data-i18n="footer.terms">الشروط والأحكام</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    (function() {
+      'use strict';
+
+      const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ============ LOADING SCREEN (3 SECONDS WIGGLE) ============
+window.addEventListener('load', function() {
+  // مدة الاهتزاز: 3 ثواني (ننتظر انتهاء الأنيميشن)
+  setTimeout(function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) loadingScreen.classList.add('hidden');
+    
+    var header = document.getElementById('main-header');
+    if (header) {
+      header.style.transition = 'transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.9s ease';
+      header.style.transform = 'translateY(0)';
+      header.style.opacity = '1';
+    }
+    
+    // إخفاء شاشة التحميل من DOM بعد انتهاء الانتقال
+    setTimeout(function() {
+      if (loadingScreen) loadingScreen.style.display = 'none';
+    }, 1000);
+    
+    setTimeout(triggerVisibleAnimations, 100);
+    updateLiveStatus();
+  }, 3000); // ← 3 ثواني (مدة الاهتزاز)
+});
+
+      // ============ UNIFIED 3D TILT CARD ENGINE ============
+      const tiltCards = [];
+      
+      function initTiltCards() {
+        document.querySelectorAll('.tilt-3d').forEach(function(card) {
+          if (card.dataset.tiltInit === 'true') return;
+          card.dataset.tiltInit = 'true';
+          
+          const state = {
+            el: card, rect: null,
+            targetRotX: 0, targetRotY: 0, currentRotX: 0, currentRotY: 0,
+            targetLift: 0, currentLift: 0, targetScale: 1, currentScale: 1,
+            targetGlow: 0, currentGlow: 0, glowX: 50, glowY: 50,
+            targetGlowX: 50, targetGlowY: 50, hovered: false, rafId: null
+          };
+          
+          tiltCards.push(state);
+          
+          card.addEventListener('mouseenter', function() {
+            state.hovered = true;
+            state.rect = card.getBoundingClientRect();
+            state.targetLift = -12;
+            state.targetScale = 1.03;
+            state.targetGlow = 1;
+            card.classList.add('tilting');
+            if (!state.rafId) animateCard(state);
+          });
+          
+          card.addEventListener('mousemove', function(e) {
+            if (!state.rect) state.rect = card.getBoundingClientRect();
+            const x = e.clientX - state.rect.left;
+            const y = e.clientY - state.rect.top;
+            const nx = (x / state.rect.width) - 0.5;
+            const ny = (y / state.rect.height) - 0.5;
+            state.targetRotY = nx * 16;
+            state.targetRotX = -ny * 16;
+            state.targetGlowX = (x / state.rect.width) * 100;
+            state.targetGlowY = (y / state.rect.height) * 100;
+          });
+          
+          card.addEventListener('mouseleave', function() {
+            state.hovered = false;
+            state.targetRotX = 0; state.targetRotY = 0;
+            state.targetLift = 0; state.targetScale = 1;
+            state.targetGlow = 0;
+            state.targetGlowX = 50; state.targetGlowY = 50;
+          });
+        });
+      }
+      
+      function animateCard(state) {
+        const lerp = 0.12, glowLerp = 0.15;
+        state.currentRotX += (state.targetRotX - state.currentRotX) * lerp;
+        state.currentRotY += (state.targetRotY - state.currentRotY) * lerp;
+        state.currentLift += (state.targetLift - state.currentLift) * lerp;
+        state.currentScale += (state.targetScale - state.currentScale) * lerp;
+        state.currentGlow += (state.targetGlow - state.currentGlow) * glowLerp;
+        state.glowX += (state.targetGlowX - state.glowX) * glowLerp;
+        state.glowY += (state.targetGlowY - state.glowY) * glowLerp;
+        
+        state.el.style.setProperty('--tilt-rotate-x', state.currentRotX.toFixed(2) + 'deg');
+        state.el.style.setProperty('--tilt-rotate-y', state.currentRotY.toFixed(2) + 'deg');
+        state.el.style.setProperty('--tilt-lift', state.currentLift.toFixed(2) + 'px');
+        state.el.style.setProperty('--tilt-scale', state.currentScale.toFixed(3));
+        state.el.style.setProperty('--tilt-glow-x', state.glowX.toFixed(1) + '%');
+        state.el.style.setProperty('--tilt-glow-y', state.glowY.toFixed(1) + '%');
+        state.el.style.setProperty('--tilt-glow-opacity', state.currentGlow.toFixed(2));
+        
+        const shadowX = -state.currentRotY * 1.5;
+        const shadowY = state.currentRotX * 1.5 + 20;
+        const blur = 30 + Math.abs(state.currentRotX) + Math.abs(state.currentRotY);
+        state.el.style.boxShadow = 
+          shadowX.toFixed(1) + 'px ' + shadowY.toFixed(1) + 'px ' + blur.toFixed(1) + 'px -20px rgba(78, 61, 71, ' + (0.3 + state.currentGlow * 0.15).toFixed(2) + '), ' +
+          '0 0 ' + (state.currentGlow * 40).toFixed(1) + 'px ' + (-10 + state.currentGlow * 5).toFixed(1) + 'px rgba(207, 157, 69, ' + (state.currentGlow * 0.3).toFixed(2) + ')';
+        
+        const done = 
+          Math.abs(state.targetRotX - state.currentRotX) < 0.1 &&
+          Math.abs(state.targetRotY - state.currentRotY) < 0.1 &&
+          Math.abs(state.targetLift - state.currentLift) < 0.1 &&
+          Math.abs(state.targetScale - state.currentScale) < 0.001 &&
+          Math.abs(state.targetGlow - state.currentGlow) < 0.01;
+        
+        if (state.hovered || !done) {
+          state.rafId = requestAnimationFrame(function() { animateCard(state); });
+        } else {
+          state.rafId = null;
+          state.el.classList.remove('tilting');
+          state.el.style.boxShadow = '';
+        }
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTiltCards);
+      } else {
+        initTiltCards();
+      }
+      setTimeout(initTiltCards, 500);
+      
+      document.addEventListener('mousemove', function(e) {
+        document.querySelectorAll('.glow-btn').forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+          el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+        });
+        document.querySelectorAll('.spotlight, .spotlight-border').forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          el.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+          el.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+        });
+      }, { passive: true });
+
+      // ============ ADVANCED CURSOR SYSTEM ============
+      if (isFinePointer && !prefersReducedMotion) {
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        const glowOrb = document.getElementById('glow-orb');
+        const hoverLabel = document.getElementById('hover-label');
+        
+        let mouseX = -100, mouseY = -100;
+        let dotX = -100, dotY = -100;
+        let ringX = -100, ringY = -100;
+        let orbX = -100, orbY = -100;
+        let lastTrailTime = 0;
+
+        document.addEventListener('pointermove', function(e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        }, { passive: true });
+
+        document.addEventListener('pointerleave', function() {
+          cursorDot.style.opacity = '0';
+          cursorRing.style.opacity = '0';
+          glowOrb.style.opacity = '0';
+        });
+
+        document.addEventListener('pointerenter', function() {
+          cursorDot.style.opacity = '1';
+          cursorRing.style.opacity = '1';
+          glowOrb.style.opacity = '1';
+        });
+
+        function animateCursor() {
+          dotX += (mouseX - dotX) * 0.5;
+          dotY += (mouseY - dotY) * 0.5;
+          ringX += (mouseX - ringX) * 0.18;
+          ringY += (mouseY - ringY) * 0.18;
+          orbX += (mouseX - orbX) * 0.08;
+          orbY += (mouseY - orbY) * 0.08;
+
+          cursorDot.style.left = dotX + 'px';
+          cursorDot.style.top = dotY + 'px';
+          cursorRing.style.left = ringX + 'px';
+          cursorRing.style.top = ringY + 'px';
+          glowOrb.style.left = orbX + 'px';
+          glowOrb.style.top = orbY + 'px';
+
+          document.documentElement.style.setProperty('--mouse-x', mouseX + 'px');
+          document.documentElement.style.setProperty('--mouse-y', mouseY + 'px');
+
+          const now = performance.now();
+          if (now - lastTrailTime > 45) {
+            lastTrailTime = now;
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = mouseX + 'px';
+            trail.style.top = mouseY + 'px';
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 800);
+          }
+
+          requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        const interactiveSelector = 'button, a, input, [data-cursor-label], .filter-tab, .magnetic, .procedure-item';
+        
+        document.addEventListener('mouseover', function(e) {
+          const target = e.target.closest(interactiveSelector);
+          if (target) {
+            cursorRing.classList.add('hover');
+            cursorDot.classList.add('hover');
+            const label = target.getAttribute('data-cursor-label');
+            if (label) {
+              hoverLabel.textContent = label;
+              hoverLabel.classList.add('active');
+            }
+          }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+          const target = e.target.closest(interactiveSelector);
+          if (target) {
+            cursorRing.classList.remove('hover');
+            cursorDot.classList.remove('hover');
+            hoverLabel.classList.remove('active');
+          }
+        });
+
+        document.addEventListener('click', function(e) {
+          cursorRing.classList.add('click');
+          setTimeout(() => cursorRing.classList.remove('click'), 200);
+
+          for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'click-particle';
+            const angle = (Math.PI * 2 * i) / 6 + Math.random() * 0.5;
+            const distance = 40 + Math.random() * 40;
+            const dx = Math.cos(angle) * distance;
+            const dy = Math.sin(angle) * distance;
+            
+            particle.style.left = e.clientX + 'px';
+            particle.style.top = e.clientY + 'px';
+            particle.style.opacity = '1';
+            particle.style.transition = 'transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.6s ease';
+            particle.style.transform = 'translate(-50%, -50%) scale(1)';
+            
+            document.body.appendChild(particle);
+            
+            requestAnimationFrame(() => {
+              particle.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0)`;
+              particle.style.opacity = '0';
+            });
+            
+            setTimeout(() => particle.remove(), 700);
+          }
+        });
+
+        document.addEventListener('click', function(e) {
+          const target = e.target.closest('button, .glow-btn');
+          if (!target) return;
+          
+          const rect = target.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - rect.left) + 'px';
+          ripple.style.top = (e.clientY - rect.top) + 'px';
+          
+          target.style.position = 'relative';
+          target.style.overflow = 'hidden';
+          target.appendChild(ripple);
+          
+          setTimeout(() => ripple.remove(), 700);
+        });
+      }
+
+      // ============ MAGNETIC BUTTONS ============
+      if (isFinePointer && !prefersReducedMotion) {
+        document.querySelectorAll('.magnetic').forEach(el => {
+          let rafId = null;
+          let targetX = 0, targetY = 0;
+          let currentX = 0, currentY = 0;
+          
+          el.addEventListener('mousemove', function(e) {
+            const rect = el.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            targetX = (e.clientX - centerX) * 0.25;
+            targetY = (e.clientY - centerY) * 0.25;
+            
+            if (!rafId) {
+              const animate = () => {
+                currentX += (targetX - currentX) * 0.2;
+                currentY += (targetY - currentY) * 0.2;
+                el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                if (Math.abs(currentX - targetX) > 0.1 || Math.abs(currentY - targetY) > 0.1) {
+                  rafId = requestAnimationFrame(animate);
+                } else {
+                  rafId = null;
+                }
+              };
+              rafId = requestAnimationFrame(animate);
+            }
+          });
+          
+          el.addEventListener('mouseleave', function() {
+            targetX = 0;
+            targetY = 0;
+            if (!rafId) {
+              const animate = () => {
+                currentX += (targetX - currentX) * 0.2;
+                currentY += (targetY - currentY) * 0.2;
+                el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                if (Math.abs(currentX) > 0.1 || Math.abs(currentY) > 0.1) {
+                  rafId = requestAnimationFrame(animate);
+                } else {
+                  el.style.transform = '';
+                  rafId = null;
+                }
+              };
+              rafId = requestAnimationFrame(animate);
+            }
+          });
+        });
+      }
+
+      // ============ SCROLL PROGRESS ============
+      var progressBar = document.getElementById('scroll-progress');
+      function updateProgress() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        progressBar.style.transform = 'scaleX(' + progress + ')';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+
+      // ============ HEADER SCROLL ============
+      var headerInner = document.getElementById('header-inner');
+      var isScrolled = false;
+      window.addEventListener('scroll', function() {
+        var shouldScroll = window.scrollY > 30;
+        if (shouldScroll !== isScrolled) {
+          isScrolled = shouldScroll;
+          if (isScrolled) {
+            headerInner.className = 'mx-auto flex items-center justify-between gap-4 px-5 transition-all duration-500 lg:px-10 glass-strong mt-2 max-w-6xl rounded-2xl py-2.5 lg:mt-3';
+          } else {
+            headerInner.className = 'mx-auto flex items-center justify-between gap-4 px-5 transition-all duration-500 lg:px-10 max-w-7xl bg-transparent py-5';
+          }
+        }
+      }, { passive: true });
+
+      // ============ MOBILE MENU ============
+      var mobileMenu = document.getElementById('mobile-menu');
+      document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        var links = mobileMenu.querySelectorAll('.mobile-nav-link');
+        links.forEach(function(link, i) {
+          setTimeout(function() {
+            link.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1)';
+            link.style.opacity = '1';
+            link.style.transform = 'translateX(0)';
+          }, 100 + i * 70);
+        });
+      });
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        var links = mobileMenu.querySelectorAll('.mobile-nav-link');
+        links.forEach(function(link) {
+          link.style.opacity = '0';
+          link.style.transform = 'translateX(40px)';
+        });
+      }
+      document.getElementById('mobile-menu-close').addEventListener('click', closeMobileMenu);
+      mobileMenu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      // ============ SCROLL ANIMATIONS ============
+      function triggerVisibleAnimations() {
+        var animElements = document.querySelectorAll('.anim-fade-up, .anim-fade-in, .anim-scale-in');
+        animElements.forEach(function(el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 70) {
+            var delay = parseFloat(el.dataset.delay || 0);
+            setTimeout(function() {
+              el.classList.add('visible');
+            }, delay * 1000);
+          }
+        });
+      }
+      var animObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var delay = parseFloat(entry.target.dataset.delay || 0);
+            setTimeout(function() {
+              entry.target.classList.add('visible');
+            }, delay * 1000);
+            animObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '-70px' });
+      document.querySelectorAll('.anim-fade-up, .anim-fade-in, .anim-scale-in').forEach(function(el) {
+        animObserver.observe(el);
+      });
+
+      // ============ BACKGROUND CANVAS ============
+      var canvas = document.getElementById('bg-canvas');
+      var ctx = canvas.getContext('2d');
+      var w = 0, h = 0, raf = 0;
+      var pts = [];
+      var mouse = { x: -9999, y: -9999 };
+      var LINK = 130;
+      var isCanvasVisible = true;
+      var canvasClicks = [];
+
+      function resizeCanvas() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var count = Math.min(80, Math.floor((w * h) / 22000));
+        pts = [];
+        for (var i = 0; i < count; i++) {
+          pts.push({
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+            r: Math.random() * 1.5 + 0.5
+          });
+        }
+      }
+
+      function tickCanvas() {
+        if (!isCanvasVisible) {
+          raf = requestAnimationFrame(tickCanvas);
+          return;
+        }
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < pts.length; i++) {
+          var p = pts[i];
+          var dxm = p.x - mouse.x;
+          var dym = p.y - mouse.y;
+          var dm = Math.sqrt(dxm * dxm + dym * dym);
+          if (dm < 150 && dm > 0.01) {
+            var f = ((150 - dm) / 150) * 0.35;
+            p.vx += (dxm / dm) * f * 0.06;
+            p.vy += (dym / dm) * f * 0.06;
+          }
+          p.x += p.vx; p.y += p.vy;
+          p.vx *= 0.995; p.vy *= 0.995;
+          if (Math.abs(p.vx) < 0.05) p.vx += (Math.random() - 0.5) * 0.02;
+          if (Math.abs(p.vy) < 0.05) p.vy += (Math.random() - 0.5) * 0.02;
+          if (p.x < -20) p.x = w + 20;
+          if (p.x > w + 20) p.x = -20;
+          if (p.y < -20) p.y = h + 20;
+          if (p.y > h + 20) p.y = -20;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(108, 88, 98, 0.26)';
+          ctx.fill();
+        }
+        for (var a = 0; a < pts.length; a++) {
+          for (var b = a + 1; b < pts.length; b++) {
+            var pa = pts[a], pb = pts[b];
+            var dx = pa.x - pb.x, dy = pa.y - pb.y;
+            var d2 = dx * dx + dy * dy;
+            if (d2 < LINK * LINK) {
+              var alpha = (1 - Math.sqrt(d2) / LINK) * 0.2;
+              ctx.beginPath();
+              ctx.moveTo(pa.x, pa.y);
+              ctx.lineTo(pb.x, pb.y);
+              ctx.strokeStyle = 'rgba(207, 157, 69, ' + alpha + ')';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+        for (var c = canvasClicks.length - 1; c >= 0; c--) {
+          var click = canvasClicks[c];
+          click.radius += 2;
+          click.alpha -= 0.02;
+          if (click.alpha <= 0) { canvasClicks.splice(c, 1); continue; }
+          ctx.beginPath();
+          ctx.arc(click.x, click.y, click.radius, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(207, 157, 69, ' + click.alpha + ')';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+        raf = requestAnimationFrame(tickCanvas);
+      }
+      
+      document.addEventListener('click', function(e) {
+        canvasClicks.push({ x: e.clientX, y: e.clientY, radius: 0, alpha: 0.8 });
+      });
+      
+      window.addEventListener('pointermove', function(e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      }, { passive: true });
+      window.addEventListener('pointerleave', function() {
+        mouse.x = -9999;
+        mouse.y = -9999;
+      });
+      window.addEventListener('resize', resizeCanvas);
+      document.addEventListener('visibilitychange', function() {
+        isCanvasVisible = !document.hidden;
+      });
+      resizeCanvas();
+      tickCanvas();
+
+      // ============ LANGUAGE SWITCH (FULL TRANSLATION) ============
+      var langEnBtn = document.getElementById('lang-en');
+      var langArBtn = document.getElementById('lang-ar');
+      var currentLang = 'ar';
+
+      var translations = {
+        ar: {
+          'brand.name': 'د. زيد شاكر',
+          'nav.home': 'الرئيسية',
+          'nav.about': 'من نحن',
+          'nav.services': 'الخدمات',
+          'nav.contact': 'تواصل معنا',
+          'nav.book': 'احجز موعدك',
+          'hero.badge': 'خدماتنا الطبية المتقدمة',
+          'hero.title': 'الإجراءات التجميلية',
+          'hero.titleAccent': 'المتقدمة',
+          'hero.sub': 'نقدم مجموعة شاملة من الإجراءات التجميلية والجراحية بأحدث التقنيات العالمية، تحت إشراف نخبة من الاستشاريين المتخصصين.',
+          'hero.stat1': '8 تخصصات رئيسية',
+          'hero.stat2': '+40 إجراء متاح',
+          'hero.stat3': 'بغداد — العراق',
+          'search.placeholder': 'ابحث عن إجراء (مثال: شفط الدهون، شد الوجه، فيلر)',
+          'filter.all': 'الكل',
+          'filter.breast': 'جراحة الثدي',
+          'filter.body': 'نحت الجسم',
+          'filter.nonSurgical': 'غير جراحي',
+          'filter.facial': 'جراحة الوجه',
+          'filter.laser': 'الليزر والطاقة',
+          'filter.male': 'خاص بالرجال',
+          'filter.burn': 'الحروق',
+          'filter.hand': 'جراحة اليد',
+          'cat.breast.title': 'جراحة الثدي', 'cat.breast.en': 'BREAST SURGERY',
+          'cat.body.title': 'نحت الجسم', 'cat.body.en': 'BODY CONTOURING',
+          'cat.nonSurgical.title': 'علاجات غير جراحية', 'cat.nonSurgical.en': 'NON-SURGICAL',
+          'cat.facial.title': 'جراحة الوجه', 'cat.facial.en': 'FACIAL SURGERY',
+          'cat.laser.title': 'الليزر والطاقة', 'cat.laser.en': 'LASER & ENERGY',
+          'cat.male.title': 'خاص بالرجال', 'cat.male.en': 'MALE PROCEDURES',
+          'cat.burn.title': 'جراحة الحروق', 'cat.burn.en': 'BURN SURGERY',
+          'cat.hand.title': 'جراحة اليد', 'cat.hand.en': 'HAND SURGERY',
+          'p.breastReduction': 'تصغير الثدي',
+          'p.mastopexy': 'رفع الثدي (Mastopexy)',
+          'p.augmentation': 'تكبير الثدي (زراعة/دهون)',
+          'p.abdominoplasty': 'شد البطن (Abdominoplasty)',
+          'p.liposuction': 'شفط الدهون ونقلها',
+          'p.brachioplasty': 'شد الذراعين (Brachioplasty)',
+          'p.thighLift': 'شد الفخذين والجسم السفلي',
+          'p.bbl': 'رفع الأرداف البرازيلي (BBL)',
+          'p.doubleChin': 'إزالة الذقن المزدوج',
+          'p.fillers': 'فيلر البشرة (Dermal Fillers)',
+          'p.botox': 'البوتوكس (Botox/Dysport)',
+          'p.mesotherapy': 'ميزوثيرابي ومحفزات البشرة',
+          'p.prp': 'البلازما الغنية بالصفائح (PRP)',
+          'p.rhinoplasty': 'تجميل الأنف (Rhinoplasty)',
+          'p.blepharoplasty': 'شد الجفون (Blepharoplasty)',
+          'p.browLift': 'رفع الحواجب بالمنظار',
+          'p.faceLift': 'شد الوجه (Face Lift)',
+          'p.neckLift': 'شد الرقبة (Neck Lift)',
+          'p.platysmaplasty': 'شد عضلات الرقبة (Platysmaplasty)',
+          'p.lipLift': 'رفع الشفاه (Lip Lift)',
+          'p.fatInjection': 'حقن الدهون لاستعادة حجم الوجه',
+          'p.otoplasty': 'تجميل الأذن (Otoplasty)',
+          'p.scars': 'علاج الندبات الجراحية',
+          'p.laserHair': 'إزالة الشعر بالليزر',
+          'p.skinRenewal': 'تجديد البشرة بالليزر',
+          'p.acneScars': 'علاج آثار حب الشباب',
+          'p.gynecomastia': 'تصحيح تضخم الثدي (Gynecomastia)',
+          'p.acuteBurns': 'علاج الحروق الحادة',
+          'p.postBurn': 'مضاعفات ما بعد الحروق',
+          'p.handInjuries': 'إصلاح إصابات اليد',
+          'p.congenitalHand': 'تصحيح تشوهات اليد الخلقية',
+          'cta.book': 'احجز استشارتك',
+          'cta.bookFull': 'احجز استشارتك الآن',
+          'noResults.title': 'لا توجد نتائج مطابقة',
+          'noResults.sub': 'جرب البحث بكلمات مختلفة أو تصفح جميع الخدمات',
+          'noResults.reset': 'إعادة التعيين',
+          'ctaSection.badge': 'استشارة مجانية',
+          'ctaSection.title': 'هل تحتاج مساعدة في اختيار',
+          'ctaSection.accent': 'الإجراء المناسب؟',
+          'ctaSection.sub': 'فريقنا الطبي المتخصص جاهز لمساعدتك واختيار الإجراء الأفضل الذي يناسب احتياجاتك وأهدافك.',
+          'ctaSection.contact': 'تواصل معنا',
+          'footer.about': 'عيادة الدكتور زيد شاكر للإجراءات التجميلية المتقدمة والرعاية الطبية.',
+          'footer.quickLinks': 'روابط سريعة',
+          'footer.hours': 'أوقات العمل',
+          'footer.contact': 'معلومات الاتصال',
+          'footer.weekdays': 'السبت — الخميس',
+          'footer.friday': 'الجمعة',
+          'footer.off': '10:00 AM — 9:00 PM',
+          'footer.online': 'الحجز الإلكتروني',
+          'footer.rights': 'جميع الحقوق محفوظة © 2026 عيادة الدكتور زيد شاكر.',
+          'footer.privacy': 'سياسة الخصوصية',
+          'footer.terms': 'الشروط والأحكام',
+          'page.title': 'الخدمات الطبية | عيادة د. زيد شاكر'
+        },
+        en: {
+          'brand.name': 'Dr. Zaid Shakir',
+          'nav.home': 'Home',
+          'nav.about': 'About Us',
+          'nav.services': 'Services',
+          'nav.contact': 'Contact Us',
+          'nav.book': 'Book Appointment',
+          'hero.badge': 'Our Advanced Medical Services',
+          'hero.title': 'Advanced Cosmetic',
+          'hero.titleAccent': 'Procedures',
+          'hero.sub': 'We offer a comprehensive range of cosmetic and surgical procedures using the latest global technologies, supervised by a select group of specialized consultants.',
+          'hero.stat1': '8 Major Specialties',
+          'hero.stat2': '40+ Procedures Available',
+          'hero.stat3': 'Baghdad — Iraq',
+          'search.placeholder': 'Search procedures (e.g. liposuction, facelift, filler)',
+          'filter.all': 'All',
+          'filter.breast': 'Breast Surgery',
+          'filter.body': 'Body Contouring',
+          'filter.nonSurgical': 'Non-Surgical',
+          'filter.facial': 'Facial Surgery',
+          'filter.laser': 'Laser & Energy',
+          'filter.male': 'Male',
+          'filter.burn': 'Burn Surgery',
+          'filter.hand': 'Hand Surgery',
+          'cat.breast.title': 'Breast Surgery', 'cat.breast.en': 'BREAST SURGERY',
+          'cat.body.title': 'Body Contouring', 'cat.body.en': 'BODY CONTOURING',
+          'cat.nonSurgical.title': 'Non-Surgical Treatments', 'cat.nonSurgical.en': 'NON-SURGICAL',
+          'cat.facial.title': 'Facial Surgery', 'cat.facial.en': 'FACIAL SURGERY',
+          'cat.laser.title': 'Laser & Energy', 'cat.laser.en': 'LASER & ENERGY',
+          'cat.male.title': 'Male Procedures', 'cat.male.en': 'MALE PROCEDURES',
+          'cat.burn.title': 'Burn Surgery', 'cat.burn.en': 'BURN SURGERY',
+          'cat.hand.title': 'Hand Surgery', 'cat.hand.en': 'HAND SURGERY',
+          'p.breastReduction': 'Breast Reduction',
+          'p.mastopexy': 'Mastopexy (Lift)',
+          'p.augmentation': 'Augmentation (Implants/Fat Transfer)',
+          'p.abdominoplasty': 'Abdominoplasty (Tummy Tuck)',
+          'p.liposuction': 'Liposuction & Fat Transfer',
+          'p.brachioplasty': 'Brachioplasty (Arm Lift)',
+          'p.thighLift': 'Thigh & Lower Body Lift',
+          'p.bbl': 'Brazilian Butt Lift (BBL)',
+          'p.doubleChin': 'Double Chin Removal',
+          'p.fillers': 'Dermal Fillers',
+          'p.botox': 'Neurotoxins (Botox/Dysport)',
+          'p.mesotherapy': 'Mesotherapy & Skin Boosters',
+          'p.prp': 'Platelet-rich Plasma (PRP)',
+          'p.rhinoplasty': 'Rhinoplasty (Nose Reshaping)',
+          'p.blepharoplasty': 'Blepharoplasty (Eyelid Lift)',
+          'p.browLift': 'Endoscopic Brow Lift',
+          'p.faceLift': 'Face Lift',
+          'p.neckLift': 'Neck Lift',
+          'p.platysmaplasty': 'Platysmaplasty (Neck Muscle Tightening)',
+          'p.lipLift': 'Lip Lift',
+          'p.fatInjection': 'Fat Injections for Facial Volume',
+          'p.otoplasty': 'Otoplasty (Ear Reshaping)',
+          'p.scars': 'Surgical Scar Treatment',
+          'p.laserHair': 'Laser Hair Removal',
+          'p.skinRenewal': 'Laser Skin Rejuvenation',
+          'p.acneScars': 'Acne Scar Treatment',
+          'p.gynecomastia': 'Gynecomastia Correction',
+          'p.acuteBurns': 'Acute Burns Treatment',
+          'p.postBurn': 'Post-Burn Sequelae',
+          'p.handInjuries': 'Hand Injury Repair',
+          'p.congenitalHand': 'Congenital Hand Deformities Correction',
+          'cta.book': 'Book Consultation',
+          'cta.bookFull': 'Book Your Consultation Now',
+          'noResults.title': 'No Matching Results',
+          'noResults.sub': 'Try searching with different keywords or browse all services',
+          'noResults.reset': 'Reset',
+          'ctaSection.badge': 'Free Consultation',
+          'ctaSection.title': 'Need help choosing',
+          'ctaSection.accent': 'the right procedure?',
+          'ctaSection.sub': 'Our specialized medical team is ready to help you choose the best procedure that suits your needs and goals.',
+          'ctaSection.contact': 'Contact Us',
+          'footer.about': 'Dr. Zaid Shakir Clinic for advanced cosmetic procedures and medical care.',
+          'footer.quickLinks': 'Quick Links',
+          'footer.hours': 'Working Hours',
+          'footer.contact': 'Contact Info',
+          'footer.weekdays': 'Sat — Thu',
+          'footer.friday': 'Friday',
+          'footer.off': 'Closed',
+          'footer.online': 'Online Booking',
+          'footer.rights': 'All rights reserved © 2026 Dr. Zaid Shakir Clinic.',
+          'footer.privacy': 'Privacy Policy',
+          'footer.terms': 'Terms & Conditions',
+          'page.title': 'Services | Dr. Zaid Shakir Clinic'
+        }
+      };
+
+      // ============ SIMPLE TRANSLATION USING data-i18n ============
+      function applyTranslation(lang) {
+        currentLang = lang;
+        var t = translations[lang];
+
+        // Document setup
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.title = t['page.title'];
+
+        // Translate all elements with data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (t[key]) el.textContent = t[key];
+        });
+
+        // Translate all placeholders with data-i18n-placeholder
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n-placeholder');
+          if (t[key]) el.placeholder = t[key];
+        });
+
+        // Nav links (using data-nav attribute)
+        var navMap = { home: t['nav.home'], about: t['nav.about'], services: t['nav.services'], contact: t['nav.contact'] };
+        document.querySelectorAll('[data-nav]').forEach(function(el) {
+          var key = el.dataset.nav;
+          if (navMap[key]) el.textContent = navMap[key];
+        });
+
+        // Header Book button
+        var headerBook = document.querySelector('#header-inner a.glow-btn span.relative.z-10');
+        if (headerBook) headerBook.textContent = t['nav.book'];
+
+        // Mobile menu brand
+        var mobBrand = document.querySelector('#mobile-menu .text-sm.font-bold');
+        if (mobBrand) mobBrand.textContent = t['brand.name'];
+
+        // Mobile book button text (last anchor in mobile menu)
+        var mobBook = document.querySelector('#mobile-menu > div:last-child a');
+        if (mobBook) {
+          var lastNode = null;
+          mobBook.childNodes.forEach(function(n) {
+            if (n.nodeType === 3 && n.textContent.trim().length > 2) lastNode = n;
+          });
+          if (lastNode) lastNode.textContent = '\n        ' + t['nav.book'] + '\n      ';
+        }
+
+        // Mobile nav links
+        var mobLinks = document.querySelectorAll('#mobile-menu nav a');
+        var mobLabels = [t['nav.home'], t['nav.about'], t['nav.services'], t['nav.contact']];
+        mobLinks.forEach(function(a, i) {
+          var span = a.querySelector('span:first-child');
+          if (span && mobLabels[i]) span.textContent = mobLabels[i];
+        });
+
+        // Brand name in header
+        var brandName = document.getElementById('brand-name');
+        if (brandName) brandName.textContent = t['brand.name'];
+
+        // Language button styles
+        if (lang === 'ar') {
+          langArBtn.style.background = 'linear-gradient(90deg, #f4c871, #eeb44d)';
+          langArBtn.style.boxShadow = '0 4px 14px -4px rgba(207,157,69,0.7)';
+          langArBtn.classList.add('text-mauve-ink');
+          langArBtn.classList.remove('text-mauve/60');
+          langEnBtn.style.background = 'transparent';
+          langEnBtn.style.boxShadow = 'none';
+          langEnBtn.classList.remove('text-mauve-ink');
+          langEnBtn.classList.add('text-mauve/60');
+        } else {
+          langEnBtn.style.background = 'linear-gradient(90deg, #f4c871, #eeb44d)';
+          langEnBtn.style.boxShadow = '0 4px 14px -4px rgba(207,157,69,0.7)';
+          langEnBtn.classList.add('text-mauve-ink');
+          langEnBtn.classList.remove('text-mauve/60');
+          langArBtn.style.background = 'transparent';
+          langArBtn.style.boxShadow = 'none';
+          langArBtn.classList.remove('text-mauve-ink');
+          langArBtn.classList.add('text-mauve/60');
+        }
+      }
+
+      langEnBtn.addEventListener('click', function() { applyTranslation('en'); });
+      langArBtn.addEventListener('click', function() { applyTranslation('ar'); });
+
+      // ============ SEARCH FUNCTIONALITY ============
+      var searchInput = document.getElementById('searchInput');
+      var noResults = document.getElementById('noResults');
+      var serviceItems = document.querySelectorAll('.service-item');
+      var resetSearch = document.getElementById('resetSearch');
+      
+      function performSearch() {
+        var term = searchInput.value.trim().toLowerCase();
+        var visibleCount = 0;
+        
+        if (term.length === 0) {
+          serviceItems.forEach(function(item) { item.classList.remove('hidden-item'); });
+          noResults.classList.add('hidden-item');
+          return;
+        }
+        
+        serviceItems.forEach(function(category) {
+          var procedures = category.querySelectorAll('.procedure-item');
+          var hasVisible = false;
+          
+          procedures.forEach(function(p) {
+            var text = (p.querySelector('.procedure-text')?.textContent || '').toLowerCase();
+            if (text.includes(term)) {
+              p.style.display = '';
+              hasVisible = true;
+            } else {
+              p.style.display = 'none';
+            }
+          });
+          
+          if (hasVisible) {
+            category.classList.remove('hidden-item');
+            visibleCount++;
+          } else {
+            category.classList.add('hidden-item');
+          }
+        });
+        
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden-item');
+        } else {
+          noResults.classList.add('hidden-item');
+        }
+      }
+      
+      if (searchInput) searchInput.addEventListener('input', performSearch);
+      
+      if (resetSearch) {
+        resetSearch.addEventListener('click', function() {
+          searchInput.value = '';
+          serviceItems.forEach(function(item) {
+            item.classList.remove('hidden-item');
+            item.querySelectorAll('.procedure-item').forEach(function(p) { p.style.display = ''; });
+          });
+          noResults.classList.add('hidden-item');
+        });
+      }
+
+      // ============ FILTER TABS ============
+      var filterTabs = document.querySelectorAll('.filter-tab');
+      filterTabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var filter = tab.dataset.filter;
+          filterTabs.forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          
+          serviceItems.forEach(function(item) {
+            if (filter === 'all' || item.dataset.category === filter) {
+              item.classList.remove('hidden-item');
+            } else {
+              item.classList.add('hidden-item');
+            }
+          });
+          
+          if (searchInput) searchInput.value = '';
+          noResults.classList.add('hidden-item');
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

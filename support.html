@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#faf6f1" />
+  <title>الأسئلة الشائعة والدعم | عيادة الدكتور زيد شاكر</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#faf6f1', sand: '#f3ebe1', mauve: '#6c5862',
+            'mauve-deep': '#4e3d47', 'mauve-ink': '#372931',
+            lilac: '#dcc9d3', gold: '#f4c871',
+            'gold-deep': '#cf9d45', 'gold-soft': '#fbeccb',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --cream: #faf6f1;
+      --mauve: #6c5862;
+      --mauve-deep: #4e3d47;
+      --mauve-ink: #372931;
+      --gold: #f4c871;
+      --gold-deep: #cf9d45;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    html[dir="rtl"] body { font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif; }
+    html[dir="ltr"] body { font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--mauve-deep);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: clip;
+      transition: direction 0.3s ease;
+    }
+
+    ::selection { background: rgba(244, 200, 113, 0.55); color: #372931; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f3ebe1; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #cf9d45, #6c5862);
+      border-radius: 99px;
+      border: 2px solid #f3ebe1;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: #cf9d45; }
+
+    /* ============ GRADIENTS ============ */
+    .text-gradient {
+      background: linear-gradient(100deg, #6c5862 8%, #bb8c45 55%, #dfa63e 95%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ============ BACKGROUNDS ============ */
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(108,88,98,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,88,98,0.055) 1px, transparent 1px);
+      background-size: 54px 54px;
+    }
+    .noise {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes ping-dot {
+      0% { transform: scale(1); opacity: 0.9; }
+      80%, 100% { transform: scale(2.6); opacity: 0; }
+    }
+    .animate-ping-dot { animation: ping-dot 1.8s cubic-bezier(0,0,0.2,1) infinite; }
+
+    @keyframes orb-drift {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(70px,-50px) scale(1.12); }
+      66% { transform: translate(-50px,60px) scale(0.94); }
+    }
+    .animate-orb { animation: orb-drift 18s ease-in-out infinite; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .anim-fade-up {
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+
+    /* ============ LANGUAGE SWITCHER ============ */
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 99px;
+      border: 1px solid rgba(108,88,98,0.15);
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 6px 18px -8px rgba(78,61,71,0.2);
+    }
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 99px;
+      border: none;
+      background: transparent;
+      color: rgba(108,88,98,0.6);
+      font-size: 12px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+      white-space: nowrap;
+    }
+    .lang-btn:hover {
+      color: var(--mauve-ink);
+    }
+    .lang-btn.active {
+      background: linear-gradient(90deg, #f4c871, #eeb44d);
+      color: #372931;
+      box-shadow: 0 4px 14px -4px rgba(207,157,69,0.7);
+    }
+
+    /* ============ FAQ ACCORDION ============ */
+    .faq-item {
+      border: 1px solid rgba(108,88,98,0.12);
+      border-radius: 18px;
+      background: linear-gradient(155deg, rgba(255,255,255,0.95), rgba(252,248,242,0.8));
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 10px 30px -22px rgba(78,61,71,0.3);
+    }
+    .faq-item:hover {
+      border-color: rgba(207,157,69,0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px -20px rgba(207,157,69,0.4);
+    }
+    .faq-item.open {
+      border-color: rgba(207,157,69,0.6);
+      box-shadow: 0 20px 50px -20px rgba(207,157,69,0.5);
+      background: linear-gradient(155deg, #fffdf9, #fdf6e7);
+    }
+
+    .faq-toggle {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 18px 20px;
+      background: transparent;
+      border: none;
+      text-align: start;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--mauve-ink);
+      font-size: 15px;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+    .faq-toggle:hover { color: var(--gold-deep); }
+
+    .faq-num {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(244,200,113,0.35), rgba(207,157,69,0.25));
+      color: var(--gold-deep);
+      font-size: 12px;
+      font-weight: 800;
+      transition: all 0.4s ease;
+    }
+    .faq-item.open .faq-num {
+      background: linear-gradient(135deg, #f4c871, #cf9d45);
+      color: #372931;
+      transform: rotate(-8deg) scale(1.05);
+    }
+
+    .faq-text { flex: 1; line-height: 1.5; }
+
+    .faq-chev {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(108,88,98,0.06);
+      color: var(--gold-deep);
+      transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .faq-item.open .faq-chev {
+      background: linear-gradient(135deg, #f4c871, #cf9d45);
+      color: #372931;
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.22,1,0.36,1), padding 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 600px;
+      padding-bottom: 20px;
+      opacity: 1;
+    }
+    .faq-answer-inner {
+      padding: 0 20px 0 70px;
+      font-size: 13.5px;
+      line-height: 1.9;
+      color: rgba(78,61,47,0.8);
+      white-space: pre-line;
+    }
+    html[dir="ltr"] .faq-answer-inner {
+      padding: 0 70px 0 20px;
+    }
+
+    /* ============ CONTACT CARDS ============ */
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 18px;
+      transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+      text-decoration: none;
+    }
+    .contact-card:hover { transform: translateY(-4px); }
+
+    /* ============ HERO ============ */
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 40px 20px 50px;
+      text-align: center;
+    }
+
+    /* ============ SCROLL TO TOP ============ */
+    .scroll-top {
+      position: fixed;
+      bottom: 24px;
+      inset-inline-end: 24px;
+      z-index: 50;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6c5862, #4e3d47);
+      color: #f4c871;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px -8px rgba(78,61,71,0.6);
+      cursor: pointer;
+      border: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .scroll-top:hover {
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 18px 40px -8px rgba(78,61,71,0.8);
+    }
+
+    /* ============ BACK HOME BUTTON ============ */
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 99px;
+      background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d);
+      color: #372931;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);
+      transition: all 0.3s ease;
+    }
+    .back-home-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 18px 44px -10px rgba(207,157,69,0.8);
+    }
+    html[dir="rtl"] .back-home-btn svg { transform: scaleX(-1); }
+
+    /* ============ HEADER BAR ============ */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      padding: 14px 20px;
+      background: rgba(250,246,241,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(108,88,98,0.1);
+    }
+    .top-bar-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand-mini {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--mauve-ink);
+    }
+    .brand-mini-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6c5862, #4e3d47);
+      color: #f4c871;
+      font-weight: 800;
+      font-size: 12px;
+      box-shadow: 0 8px 20px -6px rgba(78,61,71,0.4);
+    }
+
+    @media (max-width: 640px) {
+      .faq-answer-inner { padding: 0 16px 0 16px !important; }
+      .faq-toggle { padding: 16px; font-size: 14px; gap: 10px; }
+      .faq-num { width: 32px; height: 32px; font-size: 11px; }
+      .faq-chev { width: 28px; height: 28px; }
+      .top-bar { padding: 12px 14px; }
+      .brand-mini span:not(.brand-mini-badge) { display: none; }
+      .lang-btn { padding: 6px 12px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ BACKGROUND FX ============ -->
+<div class="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse 85% 60% at 50% -10%, #fdf8f1 0%, #faf6f1 60%);"></div>
+  <div class="animate-orb absolute -top-32 start-[-8%] size-[42rem] rounded-full" style="background: rgba(244,200,113,0.22); filter: blur(130px);"></div>
+  <div class="animate-orb absolute bottom-[-20%] end-[-10%] size-[38rem] rounded-full" style="background: rgba(108,88,98,0.1); filter: blur(140px); animation-delay: -8s;"></div>
+  <div class="absolute top-1/3 start-1/2 size-[26rem] rounded-full" style="background: rgba(244,200,113,0.12); filter: blur(120px);"></div>
+  <div class="absolute inset-0 bg-grid opacity-70" style="mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent 80%);"></div>
+  <div class="noise absolute inset-0 opacity-[0.05]"></div>
+</div>
+
+<!-- ============ TOP BAR WITH LANGUAGE SWITCHER ============ -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    
+    <!-- Brand -->
+    <a href="index.html" class="brand-mini">
+      <span class="brand-mini-badge">د.ز</span>
+      <span style="font-weight:700; font-size:13px;" data-i18n="brand.name">د. زيد شاكر</span>
+    </a>
+
+    <!-- Language Switcher -->
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button id="lang-ar" type="button" class="lang-btn active">عربي</button>
+      <button id="lang-en" type="button" class="lang-btn">EN</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ MAIN ============ -->
+<main class="relative z-10">
+
+  <!-- ============ HERO ============ -->
+  <section class="page-hero">
+
+    <div class="anim-fade-up inline-flex items-center gap-2.5 rounded-full border border-gold-deep/35 bg-gold/[0.22] px-4 py-1.5 text-xs font-semibold tracking-wider text-mauve-deep" style="animation-delay: 0.1s">
+      <span class="relative flex size-2">
+        <span class="animate-ping-dot absolute inline-flex size-full rounded-full bg-gold-deep"></span>
+        <span class="relative inline-flex size-2 rounded-full bg-gold-deep"></span>
+      </span>
+      <span data-i18n="hero.badge">الأسئلة الشائعة والدعم</span>
+    </div>
+
+    <h1 class="anim-fade-up mt-5 text-3xl font-bold leading-[1.3] text-mauve-ink sm:text-4xl lg:text-[2.8rem]" style="animation-delay: 0.2s">
+      <span data-i18n="hero.title1">كل ما تريد </span>
+      <span class="text-gradient" data-i18n="hero.title2">معرفته</span>
+    </h1>
+
+    <p class="anim-fade-up mt-4 mx-auto max-w-xl text-sm leading-relaxed text-mauve/70 sm:text-base" style="animation-delay: 0.3s" data-i18n="hero.desc">
+      نجيب على أكثر الأسئلة شيوعاً حول خدماتنا وإجراءاتنا. إذا لم تجد ما تبحث عنه، تواصل معنا مباشرة.
+    </p>
+
+    <div class="anim-fade-up mt-7 flex flex-wrap items-center justify-center gap-3" style="animation-delay: 0.4s">
+      <a href="#faq-section" class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-95" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span data-i18n="hero.browse">تصفح الأسئلة</span>
+      </a>
+      <a href="index.html" class="inline-flex items-center gap-2 rounded-full border border-mauve/20 bg-white/80 px-6 py-3 text-sm font-bold text-mauve-deep backdrop-blur-md transition-all duration-300 hover:border-gold-deep/60 hover:text-gold-deep active:scale-95">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-i18n="hero.back">العودة للرئيسية</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ FAQ SECTION ============ -->
+  <section id="faq-section" class="relative py-10 sm:py-16 px-5 lg:px-10">
+    <div class="mx-auto max-w-3xl">
+
+      <!-- Section label -->
+      <div class="anim-fade-up text-center mb-8" style="animation-delay: 0.1s">
+        <div class="inline-flex items-center gap-2 rounded-full border border-gold-deep/35 bg-gold/[0.18] px-4 py-1.5 text-xs font-semibold tracking-wider text-mauve-deep">
+          <span class="relative flex size-2">
+            <span class="animate-ping-dot absolute inline-flex size-full rounded-full bg-gold-deep"></span>
+            <span class="relative inline-flex size-2 rounded-full bg-gold-deep"></span>
+          </span>
+          <span data-i18n="faq.count">9 أسئلة شائعة</span>
+        </div>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="space-y-3" id="faq-container">
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.15s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">01</span>
+            <span class="faq-text" data-i18n="faq.q1">ما الخدمات التي تقدمها العيادة؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a1">نقدم مجموعة متنوعة من الإجراءات التجميلية الجراحية وغير الجراحية، بما في ذلك:
+
+الإجراءات الجراحية: شد الوجه، شفط الدهون، تجميل الأنف، شد الجفون، تكبير وتصغير الثدي، ونحت القوام.
+
+التجميل غير الجراحي: حقن الفيلر والبوتوكس، تجميل الأنف غير الجراحي، إزالة الشعر بالليزر، علاجات البشرة، شد الوجه بالخيوط، والهايفو.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.2s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">02</span>
+            <span class="faq-text" data-i18n="faq.q2">كم تستغرق مدة الإجراء؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a2">الإجراءات الجراحية: تستغرق بين 1 إلى 5 ساعات حسب نوع العملية.
+
+الإجراءات غير الجراحية: تتراوح مدتها بين 15 إلى 60 دقيقة حسب الإجراء.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.25s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">03</span>
+            <span class="faq-text" data-i18n="faq.q3">متى تظهر نتائج العلاج؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a3">تختلف النتائج حسب الإجراء، فالبوتوكس والفيلر يظهران بعد أيام قليلة، بينما العلاجات الجلدية قد تتطلب عدة جلسات لرؤية التحسن الكامل.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.3s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">04</span>
+            <span class="faq-text" data-i18n="faq.q4">هل هناك فترة نقاهة بعد العلاج؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a4">الإجراءات الجراحية: تتطلب فترة نقاهة تتراوح بين أيام إلى عدة أسابيع، حسب نوع الجراحة.
+
+الإجراءات غير الجراحية: لا تحتاج معظمها إلى فترة نقاهة، ويمكن العودة إلى الأنشطة اليومية مباشرة أو بعد يوم إلى يومين.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.35s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">05</span>
+            <span class="faq-text" data-i18n="faq.q5">هل العلاجات مؤلمة؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a5">الإجراءات الجراحية: تتم تحت التخدير العام أو الموضعي، لذا لن تشعر بأي ألم أثناء العملية، لكن قد يكون هناك بعض الانزعاج خلال فترة التعافي.
+
+الإجراءات غير الجراحية: معظمها غير مؤلم أو يسبب إحساسًا طفيفًا بعدم الراحة، ويمكن استخدام التخدير الموضعي عند الحاجة.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.4s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">06</span>
+            <span class="faq-text" data-i18n="faq.q6">هل هناك آثار جانبية للعلاجات؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a6">الإجراءات الجراحية: قد تشمل التورم، الكدمات، الألم المؤقت، أو الندوب الخفيفة التي تتحسن مع الوقت.
+
+الإجراءات غير الجراحية: قد تحدث بعض الآثار الجانبية البسيطة مثل احمرار أو تورم طفيف، لكنها تختفي سريعًا.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.45s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">07</span>
+            <span class="faq-text" data-i18n="faq.q7">كم تدوم نتائج العلاج؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a7">الإجراءات الجراحية: تدوم لفترات طويلة، وأحيانًا دائمة، مع الحفاظ على نمط حياة صحي.
+
+الإجراءات غير الجراحية: تختلف حسب العلاج، فالبوتوكس يدوم 3-6 أشهر، بينما الفيلر يمكن أن يدوم من 6 أشهر إلى أكثر من سنة.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.5s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">08</span>
+            <span class="faq-text" data-i18n="faq.q8">هل المواد المستخدمة آمنة؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a8">نستخدم مواد معتمدة طبيًا وآمنة تمامًا، ونعتمد على أحدث التقنيات لضمان أفضل النتائج وأقصى درجات الأمان.</div>
+          </div>
+        </div>
+
+        <div class="faq-item anim-fade-up" style="animation-delay: 0.55s">
+          <button type="button" class="faq-toggle">
+            <span class="faq-num">09</span>
+            <span class="faq-text" data-i18n="faq.q9">كيف يمكنني حجز موعد؟</span>
+            <span class="faq-chev">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner" data-i18n="faq.a9">يمكنك حجز موعد عبر:
+📞 الاتصال بنا مباشرة على الرقم: +964 780 000 6964
+🌍 عبر موقعنا الإلكتروني
+📱 الواتساب: اضغط هنا للتواصل المباشر</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============ CONTACT CARDS ============ -->
+      <div class="anim-fade-up mt-12" style="animation-delay: 0.6s">
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center gap-2 rounded-full border border-gold-deep/35 bg-gold/[0.18] px-4 py-1.5 text-xs font-semibold tracking-wider text-mauve-deep">
+            <span class="relative flex size-2">
+              <span class="animate-ping-dot absolute inline-flex size-full rounded-full bg-gold-deep"></span>
+              <span class="relative inline-flex size-2 rounded-full bg-gold-deep"></span>
+            </span>
+            <span data-i18n="contact.badge">تواصل معنا</span>
+          </div>
+          <h3 class="mt-4 text-xl font-bold text-mauve-ink sm:text-2xl" data-i18n="contact.title">لم تجد ما تبحث عنه؟</h3>
+          <p class="mt-2 text-xs text-mauve/65 sm:text-sm" data-i18n="contact.desc">فريقنا جاهز للإجابة على جميع استفساراتك</p>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-3">
+          <a href="https://wa.me/9647800006964" target="_blank" rel="noopener" class="contact-card" style="background: linear-gradient(155deg, rgba(37,211,102,0.08), rgba(37,211,102,0.04)); border: 1px solid rgba(37,211,102,0.25);">
+            <span class="flex size-11 shrink-0 items-center justify-center rounded-xl text-white" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+              <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </span>
+            <span>
+              <span class="block text-xs font-bold" style="color: #15803d;" data-i18n="contact.whatsapp">واتساب</span>
+              <span class="block text-[10px] text-mauve/60" data-i18n="contact.whatsappDesc">رد فوري خلال دقائق</span>
+            </span>
+          </a>
+
+          <a href="tel:+9647800006964" class="contact-card" style="background: linear-gradient(155deg, rgba(244,200,113,0.15), rgba(244,200,113,0.05)); border: 1px solid rgba(207,157,69,0.3);">
+            <span class="flex size-11 shrink-0 items-center justify-center rounded-xl text-mauve-ink" style="background: linear-gradient(135deg, #f4c871, #cf9d45);">
+              <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span>
+              <span class="block text-xs font-bold text-mauve-ink" data-i18n="contact.call">اتصل بنا</span>
+              <span class="block text-[10px] text-mauve/60" data-i18n="contact.callDesc">4 مساءً — 9 مساءً</span>
+            </span>
+          </a>
+
+          <a href="mailto:info@drzaidshakir.com" class="contact-card" style="background: linear-gradient(155deg, rgba(108,88,98,0.08), rgba(108,88,98,0.03)); border: 1px solid rgba(108,88,98,0.2);">
+            <span class="flex size-11 shrink-0 items-center justify-center rounded-xl text-gold" style="background: linear-gradient(135deg, #6c5862, #4e3d47);">
+              <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </span>
+            <span>
+              <span class="block text-xs font-bold text-mauve-ink" data-i18n="contact.email">إيميل</span>
+              <span class="block text-[10px] text-mauve/60" data-i18n="contact.emailDesc">خلال 24 ساعة</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ============ BACK HOME BUTTON ============ -->
+      <div class="anim-fade-up mt-12 flex justify-center" style="animation-delay: 0.7s">
+        <a href="index.html" class="back-home-btn">
+          <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <span data-i18n="back.home">العودة إلى الصفحة الرئيسية</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ SCROLL TO TOP ============ -->
+<button id="scroll-top" class="scroll-top" aria-label="Scroll to top">
+  <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative z-10 mt-16 py-8 text-center text-[11px] text-mauve/60" style="border-top: 1px solid rgba(108,88,98,0.12);">
+  <p data-i18n="footer.rights">جميع الحقوق محفوظة © 2025 عيادة الدكتور زيد شاكر.</p>
+</footer>
+
+<script>
+  // ============================================================
+  // ============ TRANSLATIONS (AR / EN) =======================
+  // ============================================================
+  var translations = {
+    ar: {
+      'brand.name': 'د. زيد شاكر',
+      'hero.badge': 'الأسئلة الشائعة والدعم',
+      'hero.title1': 'كل ما تريد ',
+      'hero.title2': 'معرفته',
+      'hero.desc': 'نجيب على أكثر الأسئلة شيوعاً حول خدماتنا وإجراءاتنا. إذا لم تجد ما تبحث عنه، تواصل معنا مباشرة.',
+      'hero.browse': 'تصفح الأسئلة',
+      'hero.back': 'العودة للرئيسية',
+      'faq.count': '9 أسئلة شائعة',
+      'faq.q1': 'ما الخدمات التي تقدمها العيادة؟',
+      'faq.a1': 'نقدم مجموعة متنوعة من الإجراءات التجميلية الجراحية وغير الجراحية، بما في ذلك:\n\nالإجراءات الجراحية: شد الوجه، شفط الدهون، تجميل الأنف، شد الجفون، تكبير وتصغير الثدي، ونحت القوام.\n\nالتجميل غير الجراحي: حقن الفيلر والبوتوكس، تجميل الأنف غير الجراحي، إزالة الشعر بالليزر، علاجات البشرة، شد الوجه بالخيوط، والهايفو.',
+      'faq.q2': 'كم تستغرق مدة الإجراء؟',
+      'faq.a2': 'الإجراءات الجراحية: تستغرق بين 1 إلى 5 ساعات حسب نوع العملية.\n\nالإجراءات غير الجراحية: تتراوح مدتها بين 15 إلى 60 دقيقة حسب الإجراء.',
+      'faq.q3': 'متى تظهر نتائج العلاج؟',
+      'faq.a3': 'تختلف النتائج حسب الإجراء، فالبوتوكس والفيلر يظهران بعد أيام قليلة، بينما العلاجات الجلدية قد تتطلب عدة جلسات لرؤية التحسن الكامل.',
+      'faq.q4': 'هل هناك فترة نقاهة بعد العلاج؟',
+      'faq.a4': 'الإجراءات الجراحية: تتطلب فترة نقاهة تتراوح بين أيام إلى عدة أسابيع، حسب نوع الجراحة.\n\nالإجراءات غير الجراحية: لا تحتاج معظمها إلى فترة نقاهة، ويمكن العودة إلى الأنشطة اليومية مباشرة أو بعد يوم إلى يومين.',
+      'faq.q5': 'هل العلاجات مؤلمة؟',
+      'faq.a5': 'الإجراءات الجراحية: تتم تحت التخدير العام أو الموضعي، لذا لن تشعر بأي ألم أثناء العملية، لكن قد يكون هناك بعض الانزعاج خلال فترة التعافي.\n\nالإجراءات غير الجراحية: معظمها غير مؤلم أو يسبب إحساسًا طفيفًا بعدم الراحة، ويمكن استخدام التخدير الموضعي عند الحاجة.',
+      'faq.q6': 'هل هناك آثار جانبية للعلاجات؟',
+      'faq.a6': 'الإجراءات الجراحية: قد تشمل التورم، الكدمات، الألم المؤقت، أو الندوب الخفيفة التي تتحسن مع الوقت.\n\nالإجراءات غير الجراحية: قد تحدث بعض الآثار الجانبية البسيطة مثل احمرار أو تورم طفيف، لكنها تختفي سريعًا.',
+      'faq.q7': 'كم تدوم نتائج العلاج؟',
+      'faq.a7': 'الإجراءات الجراحية: تدوم لفترات طويلة، وأحيانًا دائمة، مع الحفاظ على نمط حياة صحي.\n\nالإجراءات غير الجراحية: تختلف حسب العلاج، فالبوتوكس يدوم 3-6 أشهر، بينما الفيلر يمكن أن يدوم من 6 أشهر إلى أكثر من سنة.',
+      'faq.q8': 'هل المواد المستخدمة آمنة؟',
+      'faq.a8': 'نستخدم مواد معتمدة طبيًا وآمنة تمامًا، ونعتمد على أحدث التقنيات لضمان أفضل النتائج وأقصى درجات الأمان.',
+      'faq.q9': 'كيف يمكنني حجز موعد؟',
+      'faq.a9': 'يمكنك حجز موعد عبر:\n📞 الاتصال بنا مباشرة على الرقم: +964 780 000 6964\n🌍 عبر موقعنا الإلكتروني\n📱 الواتساب: اضغط هنا للتواصل المباشر',
+      'contact.badge': 'تواصل معنا',
+      'contact.title': 'لم تجد ما تبحث عنه؟',
+      'contact.desc': 'فريقنا جاهز للإجابة على جميع استفساراتك',
+      'contact.whatsapp': 'واتساب',
+      'contact.whatsappDesc': 'رد فوري خلال دقائق',
+      'contact.call': 'اتصل بنا',
+      'contact.callDesc': '4 مساءً — 9 مساءً',
+      'contact.email': 'إيميل',
+      'contact.emailDesc': 'خلال 24 ساعة',
+      'back.home': 'العودة إلى الصفحة الرئيسية',
+      'footer.rights': 'جميع الحقوق محفوظة © 2025 عيادة الدكتور زيد شاكر.',
+      'page.title': 'الأسئلة الشائعة والدعم | عيادة الدكتور زيد شاكر'
+    },
+    en: {
+      'brand.name': 'Dr. Zaid Shakir',
+      'hero.badge': 'FAQ & Support',
+      'hero.title1': 'Everything You Want ',
+      'hero.title2': 'to Know',
+      'hero.desc': 'We answer the most common questions about our services and procedures. If you don\'t find what you\'re looking for, contact us directly.',
+      'hero.browse': 'Browse Questions',
+      'hero.back': 'Back to Home',
+      'faq.count': '9 Common Questions',
+      'faq.q1': 'What services does the clinic offer?',
+      'faq.a1': 'We offer a variety of surgical and non-surgical cosmetic procedures, including:\n\nSurgical procedures: Facelift, liposuction, rhinoplasty, eyelid surgery, breast augmentation and reduction, and body contouring.\n\nNon-surgical cosmetics: Filler and Botox injections, non-surgical rhinoplasty, laser hair removal, skin treatments, thread lift, and HIFU.',
+      'faq.q2': 'How long does the procedure take?',
+      'faq.a2': 'Surgical procedures: Take between 1 to 5 hours depending on the type of operation.\n\nNon-surgical procedures: Range from 15 to 60 minutes depending on the procedure.',
+      'faq.q3': 'When do treatment results appear?',
+      'faq.a3': 'Results vary by procedure. Botox and fillers appear within a few days, while skin treatments may require several sessions to see full improvement.',
+      'faq.q4': 'Is there a recovery period after treatment?',
+      'faq.a4': 'Surgical procedures: Require a recovery period ranging from days to several weeks, depending on the type of surgery.\n\nNon-surgical procedures: Most don\'t require a recovery period, and you can return to daily activities immediately or after a day or two.',
+      'faq.q5': 'Are the treatments painful?',
+      'faq.a5': 'Surgical procedures: Performed under general or local anesthesia, so you won\'t feel any pain during the operation, but there may be some discomfort during recovery.\n\nNon-surgical procedures: Most are painless or cause mild discomfort, and local anesthesia can be used if needed.',
+      'faq.q6': 'Are there side effects to the treatments?',
+      'faq.a6': 'Surgical procedures: May include swelling, bruising, temporary pain, or mild scars that improve over time.\n\nNon-surgical procedures: Some minor side effects such as redness or mild swelling may occur, but they disappear quickly.',
+      'faq.q7': 'How long do treatment results last?',
+      'faq.a7': 'Surgical procedures: Last for long periods, sometimes permanently, with maintaining a healthy lifestyle.\n\nNon-surgical procedures: Vary by treatment. Botox lasts 3-6 months, while fillers can last from 6 months to over a year.',
+      'faq.q8': 'Are the materials used safe?',
+      'faq.a8': 'We use medically approved and completely safe materials, relying on the latest technologies to ensure the best results and maximum safety.',
+      'faq.q9': 'How can I book an appointment?',
+      'faq.a9': 'You can book an appointment through:\n📞 Calling us directly at: +964 780 000 6964\n🌍 Through our website\n📱 WhatsApp: Click here to contact us directly',
+      'contact.badge': 'Contact Us',
+      'contact.title': 'Didn\'t Find What You\'re Looking For?',
+      'contact.desc': 'Our team is ready to answer all your inquiries',
+      'contact.whatsapp': 'WhatsApp',
+      'contact.whatsappDesc': 'Instant reply within minutes',
+      'contact.call': 'Call Us',
+      'contact.callDesc': '4 PM — 9 PM',
+      'contact.email': 'Email',
+      'contact.emailDesc': 'Within 24 hours',
+      'back.home': 'Back to Home Page',
+      'footer.rights': 'All Rights Reserved © 2025 Dr. Zaid Shakir Clinic.',
+      'page.title': 'FAQ & Support | Dr. Zaid Shakir Clinic'
+    }
+  };
+
+  // ============================================================
+  // ============ LANGUAGE SWITCH LOGIC ========================
+  // ============================================================
+  function applyLanguage(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    if (translations[lang]['page.title']) {
+      document.title = translations[lang]['page.title'];
+    }
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      var text = translations[lang][key];
+      if (text !== undefined) {
+        el.textContent = text;
+      }
+    });
+
+    var arBtn = document.getElementById('lang-ar');
+    var enBtn = document.getElementById('lang-en');
+    if (lang === 'ar') {
+      arBtn.classList.add('active');
+      enBtn.classList.remove('active');
+    } else {
+      enBtn.classList.add('active');
+      arBtn.classList.remove('active');
+    }
+
+    try { localStorage.setItem('preferredLang', lang); } catch (e) {}
+
+    // تحديث لغة Tawk.to إن وُجد
+    if (window.Tawk_API && window.Tawk_API.setAttributes) {
+      window.Tawk_API.setAttributes({ 'language': lang });
+    }
+  }
+
+  document.getElementById('lang-ar').addEventListener('click', function() {
+    applyLanguage('ar');
+  });
+  document.getElementById('lang-en').addEventListener('click', function() {
+    applyLanguage('en');
+  });
+
+  (function initLanguage() {
+    var saved = null;
+    try { saved = localStorage.getItem('preferredLang'); } catch (e) {}
+    if (saved === 'en' || saved === 'ar') {
+      applyLanguage(saved);
+    } else {
+      applyLanguage('ar');
+    }
+  })();
+
+  // ============================================================
+  // ============ FAQ ACCORDION ================================
+  // ============================================================
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      
+      document.querySelectorAll('.faq-item').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      
+      if (!wasOpen) {
+        item.classList.add('open');
+      }
+    });
+  });
+
+  // ============================================================
+  // ============ SCROLL TO TOP ================================
+  // ============================================================
+  var scrollTopBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.add('show');
+    } else {
+      scrollTopBtn.classList.remove('show');
+    }
+  }, { passive: true });
+
+  scrollTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+<!-- ============================================================ -->
+<!-- ============ TAWK.TO LIVE CHAT ============================= -->
+<!-- ============================================================ -->
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+  (function(){
+    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/67becd262da7081909f2b80d/1il0lcvbt';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script>
+<!-- ============ END TAWK.TO ================================== -->
+
+</body>
+</html>
