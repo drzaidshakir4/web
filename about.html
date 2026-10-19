@@ -795,6 +795,31 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+/* حل شامل لجميع مشاكل الجوال */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+    
+    /* إجبار الشبكات على أن تكون عمودية */
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* إصلاح أي عنصر يخرج عن الشاشة */
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* إخفاء العناصر الزخرفية التي قد تسبب مشاكل */
+    .animate-orb, .glow-orb {
+        display: none !important;
+    }
+}
+    
   </style>
 </head>
 <body>
