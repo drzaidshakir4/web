@@ -1174,6 +1174,52 @@
       margin-top: 20px;
     }
 
+/* منع التمرير الأفقي (Horizontal Scroll) */
+body, html {
+    overflow-x: hidden !important;
+    width: 100%;
+}
+
+/* التأكد من أن الأزرار لا تخرج عن الشاشة */
+@media (max-width: 640px) {
+  .flex-wrap {
+    flex-wrap: wrap !important;
+  }
+  
+  /* تصغير حجم البطاقات قليلاً على الجوال */
+  .service-item article {
+    padding: 1rem !important;
+  }
+  
+  /* إصلاح النصوص الطويلة */
+  .procedure-text {
+    font-size: 0.8rem !important;
+    line-height: 1.4;
+  }
+}
+
+/* حل مشكلة تمدد الصورة على الجوال */
+@media (max-width: 768px) {
+  /* استهداف حاوية الصورة الرئيسية (تحتاج تعديل الكلاس ليتطابق مع اسم الكلاس عندك) */
+  .hero-image-container, 
+  .doctor-image {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+
+  /* إصلاح الحاويات التي تسبب التمدد الأفقي */
+  .container, .max-w-7xl, .mx-auto {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
     /* ============ RESPONSIVE ============ */
     @media (max-width: 640px) {
       .rail-divider > * + * { border-inline-start: none; }
