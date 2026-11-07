@@ -894,7 +894,7 @@
                   </p>
 
                   <!-- Form -->
-                  <form id="contactForm" https://formspree.io/f/moeezwqv method="POST" novalidate>
+                  <form id="contactForm" action="https://formspree.io/f/moeezwqv" method="POST" novalidate>
                     <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" />
 
                     <div class="grid gap-4 sm:grid-cols-2">
@@ -1840,12 +1840,17 @@ window.addEventListener('load', function() {
           return;
         }
 
-        if (form._gotcha && form._gotcha.value) {
+        // فحص حقل المصيدة (honeypot) بالطريقة الصحيحة
+        var gotcha = form.querySelector('input[name="_gotcha"]');
+        if (gotcha && gotcha.value) {
           form.reset();
           return;
         }
 
-        var endpointConfigured = !form.action.includes('YOUR_FORM_ID');
+        // تحديد ما إذا كان الرابط مُهيأً فعلاً
+        var endpointConfigured = form.action && 
+                                  form.action.indexOf('YOUR_FORM_ID') === -1 &&
+                                  form.action.indexOf('formspree.io') !== -1;
 
         submitBtn.disabled = true;
         if (spinner) spinner.classList.remove('hidden');
@@ -1858,10 +1863,17 @@ window.addEventListener('load', function() {
               body: new FormData(form),
               headers: { Accept: 'application/json' }
             });
-            if (!response.ok) throw new Error('Request failed');
+            if (!response.ok) {
+              var errData = await response.json().catch(function(){ return {}; });
+              console.error('Formspree error:', response.status, errData);
+              throw new Error('Request failed');
+            }
           } else {
-            await new Promise(function(resolve) { setTimeout(resolve, 700); });
+            // رابط غير مُهيأ — لا نرسل، ونظهر خطأ واضحًا
+            console.warn('Form endpoint not configured. Current action:', form.action);
+            throw new Error('Endpoint not configured');
           }
+
           showToast(t['toast.success'], false);
           form.reset();
           fields.forEach(function(el) {
@@ -1870,6 +1882,7 @@ window.addEventListener('load', function() {
             if (errorEl) errorEl.classList.remove('show');
           });
         } catch (err) {
+          console.error('Form submit failed:', err);
           showToast(t['toast.error'], true);
         } finally {
           submitBtn.disabled = false;
