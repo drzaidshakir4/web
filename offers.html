@@ -5,20 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#faf6f1" />
   <meta name="description" content="تحديثات الجمال اليومية — عيادة الدكتور زيد شاكر لجراحة التجميل والترميم" />
-  
-  <!-- Fonts -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Font Awesome -->
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
-  <!-- Favicon -->
+
   <link rel="icon" type="image/png" href="logo.png" />
-<link rel="apple-touch-icon" href="logo.png" />
-  
-  <!-- Tailwind CSS -->
+  <link rel="apple-touch-icon" href="logo.png" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -176,60 +172,40 @@
       opacity: 0; transition: opacity 0.35s ease; pointer-events: none; z-index: 1;
     }
     .glow-btn:hover::after { opacity: 1; }
-    /* ============ NEW: WIGGLE ENTRANCE ANIMATION ============ */
-@keyframes wiggle-entrance {
-  0% { 
-    transform: rotate(0deg) scale(0.6); 
-    opacity: 0;
-  }
-  10% { 
-    transform: rotate(-18deg) scale(0.85); 
-    opacity: 1;
-  }
-  20% { transform: rotate(16deg) scale(1); }
-  30% { transform: rotate(-14deg) scale(1.05); }
-  40% { transform: rotate(12deg) scale(1.02); }
-  50% { transform: rotate(-10deg) scale(1.05); }
-  60% { transform: rotate(8deg) scale(1.01); }
-  70% { transform: rotate(-6deg) scale(1.03); }
-  80% { transform: rotate(4deg) scale(1); }
-  90% { transform: rotate(-2deg) scale(1.01); }
-  100% { 
-    transform: rotate(0deg) scale(1); 
-    opacity: 1;
-  }
-}
-
-/* التطبيق الأساسي - اهتزاز مرة واحدة عند الدخول */
-.animate-wiggle-entrance {
-  animation: wiggle-entrance 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
-  transform-origin: center center;
-}
-
-/* اهتزاز هادئ مستمر كل 8 ثواني (لفت الانتباه) */
-@keyframes wiggle-soft {
-  0%, 92%, 100% { transform: rotate(0deg); }
-  93% { transform: rotate(-8deg); }
-  94% { transform: rotate(8deg); }
-  95% { transform: rotate(-6deg); }
-  96% { transform: rotate(6deg); }
-  97% { transform: rotate(-3deg); }
-  98% { transform: rotate(3deg); }
-}
-
-.animate-wiggle-soft {
-  animation: wiggle-entrance 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both,
-             wiggle-soft 8s ease-in-out 3s infinite;
-  transform-origin: center center;
-}
-
-/* إيقاف التأثير إذا كان المستخدم يفضل تقليل الحركة */
-@media (prefers-reduced-motion: reduce) {
-  .animate-wiggle-entrance,
-  .animate-wiggle-soft {
-    animation: none !important;
-  }
-}
+    @keyframes wiggle-entrance {
+      0% { transform: rotate(0deg) scale(0.6); opacity: 0; }
+      10% { transform: rotate(-18deg) scale(0.85); opacity: 1; }
+      20% { transform: rotate(16deg) scale(1); }
+      30% { transform: rotate(-14deg) scale(1.05); }
+      40% { transform: rotate(12deg) scale(1.02); }
+      50% { transform: rotate(-10deg) scale(1.05); }
+      60% { transform: rotate(8deg) scale(1.01); }
+      70% { transform: rotate(-6deg) scale(1.03); }
+      80% { transform: rotate(4deg) scale(1); }
+      90% { transform: rotate(-2deg) scale(1.01); }
+      100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    .animate-wiggle-entrance {
+      animation: wiggle-entrance 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+      transform-origin: center center;
+    }
+    @keyframes wiggle-soft {
+      0%, 92%, 100% { transform: rotate(0deg); }
+      93% { transform: rotate(-8deg); }
+      94% { transform: rotate(8deg); }
+      95% { transform: rotate(-6deg); }
+      96% { transform: rotate(6deg); }
+      97% { transform: rotate(-3deg); }
+      98% { transform: rotate(3deg); }
+    }
+    .animate-wiggle-soft {
+      animation: wiggle-entrance 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both,
+                 wiggle-soft 8s ease-in-out 3s infinite;
+      transform-origin: center center;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-wiggle-entrance, .animate-wiggle-soft { animation: none !important; }
+    }
     @keyframes ping-dot { 0% { transform: scale(1); opacity: 0.9; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
     .animate-ping-dot { animation: ping-dot 1.8s cubic-bezier(0,0,0.2,1) infinite; }
     @keyframes orb-drift { 0%, 100% { transform: translate(0,0) scale(1); } 33% { transform: translate(70px,-50px) scale(1.12); } 66% { transform: translate(-50px,60px) scale(0.94); } }
@@ -242,200 +218,120 @@
       transform: translateX(-130%) skewX(-18deg); pointer-events: none;
     }
     .shine:hover::after { animation: shine-sweep 0.9s ease forwards; }
-    @keyframes loading-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
-    @keyframes loading-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
     .anim-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
     .anim-fade-up.visible { opacity: 1; transform: translateY(0); }
     .anim-fade-in { opacity: 0; transition: opacity 0.8s ease; }
     .anim-fade-in.visible { opacity: 1; }
     .anim-scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1); }
     .anim-scale-in.visible { opacity: 1; transform: scale(1); }
-  /* ============ LOADING SCREEN (WIGGLE VERSION) ============ */
-#loading-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(160deg, #faf6f1 0%, #f3ebe1 100%);
-  transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), visibility 0.9s ease;
-  overflow: hidden;
-}
 
-#loading-screen.hidden { 
-  opacity: 0; 
-  visibility: hidden; 
-  pointer-events: none; 
-}
-
-/* خلفية زخرفية */
-#loading-screen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 30% 30%, rgba(244,200,113,0.25), transparent 50%),
-    radial-gradient(circle at 70% 70%, rgba(108,88,98,0.12), transparent 50%);
-  pointer-events: none;
-  animation: loadingBgShift 6s ease-in-out infinite alternate;
-}
-
-@keyframes loadingBgShift {
-  0% { transform: scale(1) rotate(0deg); }
-  100% { transform: scale(1.15) rotate(8deg); }
-}
-
-/* اللوقو الرئيسي - بحجم كبير */
-.loading-logo {
-  position: relative;
-  width: 130px; 
-  height: 130px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, #6c5862, #4e3d47);
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  box-shadow: 
-    0 25px 70px -20px rgba(78,61,71,0.55),
-    0 0 0 8px rgba(244,200,113,0.15),
-    0 0 0 16px rgba(244,200,113,0.08);
-  animation: logoWiggle3s 3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  z-index: 2;
-}
-
-.loading-logo img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-}
-
-/* هالة متوهجة خلف اللوقو */
-.loading-logo::after {
-  content: "";
-  position: absolute;
-  inset: -30px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(244,200,113,0.4), transparent 65%);
-  animation: haloPulse 1.5s ease-in-out infinite;
-  z-index: -1;
-  pointer-events: none;
-}
-
-@keyframes haloPulse {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.25); opacity: 0.9; }
-}
-
-/* الاهتزاز الرئيسي لمدة 3 ثواني */
-@keyframes logoWiggle3s {
-  0% { 
-    transform: rotate(0deg) scale(0.4); 
-    opacity: 0;
-  }
-  8% { 
-    transform: rotate(-22deg) scale(0.7); 
-    opacity: 1;
-  }
-  16% { transform: rotate(20deg) scale(1.05); }
-  24% { transform: rotate(-18deg) scale(1.1); }
-  32% { transform: rotate(16deg) scale(1.08); }
-  40% { transform: rotate(-14deg) scale(1.1); }
-  48% { transform: rotate(12deg) scale(1.06); }
-  56% { transform: rotate(-10deg) scale(1.08); }
-  64% { transform: rotate(8deg) scale(1.04); }
-  72% { transform: rotate(-6deg) scale(1.05); }
-  80% { transform: rotate(4deg) scale(1.02); }
-  88% { transform: rotate(-2deg) scale(1.02); }
-  94% { transform: rotate(1deg) scale(1); }
-  100% { 
-    transform: rotate(0deg) scale(1); 
-    opacity: 1;
-  }
-}
-
-/* النص تحت اللوقو */
-.loading-text {
-  margin-top: 40px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: #6c5862;
-  text-transform: uppercase;
-  animation: textFadeIn 0.8s ease 1.2s both;
-  z-index: 2;
-}
-
-@keyframes textFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* النقاط المتحركة تحت النص */
-.loading-dots {
-  margin-top: 20px;
-  display: flex;
-  gap: 8px;
-  animation: textFadeIn 0.8s ease 1.5s both;
-  z-index: 2;
-}
-
-.loading-dots span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f4c871, #cf9d45);
-  box-shadow: 0 0 12px rgba(244,200,113,0.7);
-  animation: dotBounce 1.4s ease-in-out infinite;
-}
-
-.loading-dots span:nth-child(1) { animation-delay: 0s; }
-.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes dotBounce {
-  0%, 60%, 100% { 
-    transform: translateY(0) scale(1); 
-    opacity: 0.5;
-  }
-  30% { 
-    transform: translateY(-10px) scale(1.3); 
-    opacity: 1;
-  }
-}
-
-/* شريط التقدم أسفل الشاشة */
-.loading-progress {
-  position: absolute;
-  bottom: 0;
-  inset-inline: 0;
-  height: 4px;
-  background: rgba(108,88,98,0.1);
-  overflow: hidden;
-  z-index: 2;
-}
-
-.loading-progress-inner {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #f4c871, #cf9d45, #f4c871);
-  background-size: 200% 100%;
-  border-radius: 0 99px 99px 0;
-  box-shadow: 0 0 20px rgba(244,200,113,0.8);
-  animation: progressFill3s 3s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-             progressShine 1.5s linear infinite;
-}
-
-@keyframes progressFill3s {
-  from { width: 0%; }
-  to { width: 100%; }
-}
-
-@keyframes progressShine {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
+    #loading-screen {
+      position: fixed; inset: 0; z-index: 99999;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #faf6f1 0%, #f3ebe1 100%);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), visibility 0.9s ease;
+      overflow: hidden;
+    }
+    #loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #loading-screen::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(244,200,113,0.25), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(108,88,98,0.12), transparent 50%);
+      pointer-events: none;
+      animation: loadingBgShift 6s ease-in-out infinite alternate;
+    }
+    @keyframes loadingBgShift {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.15) rotate(8deg); }
+    }
+    .loading-logo {
+      position: relative; width: 130px; height: 130px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #6c5862, #4e3d47);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow:
+        0 25px 70px -20px rgba(78,61,71,0.55),
+        0 0 0 8px rgba(244,200,113,0.15),
+        0 0 0 16px rgba(244,200,113,0.08);
+      animation: logoWiggle3s 3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      z-index: 2;
+    }
+    .loading-logo img { width: 80px; height: 80px; object-fit: contain; }
+    .loading-logo::after {
+      content: ""; position: absolute; inset: -30px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,200,113,0.4), transparent 65%);
+      animation: haloPulse 1.5s ease-in-out infinite;
+      z-index: -1; pointer-events: none;
+    }
+    @keyframes haloPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.25); opacity: 0.9; }
+    }
+    @keyframes logoWiggle3s {
+      0% { transform: rotate(0deg) scale(0.4); opacity: 0; }
+      8% { transform: rotate(-22deg) scale(0.7); opacity: 1; }
+      16% { transform: rotate(20deg) scale(1.05); }
+      24% { transform: rotate(-18deg) scale(1.1); }
+      32% { transform: rotate(16deg) scale(1.08); }
+      40% { transform: rotate(-14deg) scale(1.1); }
+      48% { transform: rotate(12deg) scale(1.06); }
+      56% { transform: rotate(-10deg) scale(1.08); }
+      64% { transform: rotate(8deg) scale(1.04); }
+      72% { transform: rotate(-6deg) scale(1.05); }
+      80% { transform: rotate(4deg) scale(1.02); }
+      88% { transform: rotate(-2deg) scale(1.02); }
+      94% { transform: rotate(1deg) scale(1); }
+      100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    .loading-text {
+      margin-top: 40px; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.35em; color: #6c5862;
+      text-transform: uppercase;
+      animation: textFadeIn 0.8s ease 1.2s both;
+      z-index: 2;
+    }
+    @keyframes textFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .loading-dots {
+      margin-top: 20px; display: flex; gap: 8px;
+      animation: textFadeIn 0.8s ease 1.5s both;
+      z-index: 2;
+    }
+    .loading-dots span {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: linear-gradient(135deg, #f4c871, #cf9d45);
+      box-shadow: 0 0 12px rgba(244,200,113,0.7);
+      animation: dotBounce 1.4s ease-in-out infinite;
+    }
+    .loading-dots span:nth-child(1) { animation-delay: 0s; }
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dotBounce {
+      0%, 60%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+      30% { transform: translateY(-10px) scale(1.3); opacity: 1; }
+    }
+    .loading-progress {
+      position: absolute; bottom: 0; inset-inline: 0; height: 4px;
+      background: rgba(108,88,98,0.1); overflow: hidden; z-index: 2;
+    }
+    .loading-progress-inner {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #f4c871, #cf9d45, #f4c871);
+      background-size: 200% 100%;
+      border-radius: 0 99px 99px 0;
+      box-shadow: 0 0 20px rgba(244,200,113,0.8);
+      animation: progressFill3s 3s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+                 progressShine 1.5s linear infinite;
+    }
+    @keyframes progressFill3s { from { width: 0%; } to { width: 100%; } }
+    @keyframes progressShine {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
     #scroll-progress {
       position: fixed; top: 0; inset-inline: 0; height: 3px; z-index: 90;
       background: linear-gradient(90deg, #6c5862, #cf9d45, #f4c871);
@@ -495,7 +391,6 @@
       0%, 100% { box-shadow: 0 12px 34px -8px rgba(207,157,69,0.7), 0 0 0 0 rgba(244,200,113,0.5); }
       50% { box-shadow: 0 12px 34px -8px rgba(207,157,69,0.7), 0 0 0 12px rgba(244,200,113,0); }
     }
-    /* ===== Offer Badge ===== */
     .offer-badge {
       position: absolute;
       top: 15px;
@@ -509,12 +404,12 @@
       letter-spacing: 0.5px;
       box-shadow: 0 8px 20px -6px rgba(207,157,69,0.7);
       z-index: 3;
+      transition: background 0.4s ease, color 0.4s ease;
     }
     .offer-badge.expired {
       background: linear-gradient(115deg, #f4a4a4, #e08585, #d36a6a);
       color: #ffffff;
     }
-    /* ===== Social Icons ===== */
     .social-icon {
       display: flex; align-items: center; justify-content: center;
       width: 40px; height: 40px; border-radius: 50%;
@@ -526,7 +421,6 @@
     .social-icon.instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
     .social-icon.twitter { background: #1da1f2; }
     .social-icon:hover { transform: translateY(-3px) scale(1.1); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-    /* ===== Newsletter Form ===== */
     .input-field {
       width: 100%;
       padding: 0.875rem 1.25rem;
@@ -547,7 +441,6 @@
       background: #fffdf8;
       box-shadow: 0 0 0 4px rgba(244,200,113,0.28);
     }
-    /* ===== Last Updated Badge ===== */
     #last-updated-date {
       display: inline-block;
       transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
@@ -556,8 +449,8 @@
       animation: flashUpdate 1.8s ease-out;
     }
     @keyframes flashUpdate {
-      0% { 
-        background: rgba(244, 200, 113, 0.7); 
+      0% {
+        background: rgba(244, 200, 113, 0.7);
         transform: scale(1.08);
         border-radius: 6px;
         padding: 0 6px;
@@ -568,28 +461,24 @@
         transform: scale(1.02);
         padding: 0 4px;
       }
-      100% { 
-        background: transparent; 
+      100% {
+        background: transparent;
         transform: scale(1);
         padding: 0;
       }
     }
     @keyframes slideUpToast {
-      from {
-        opacity: 0;
-        transform: translate(-50%, 30px) scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(1);
-      }
+      from { opacity: 0; transform: translate(-50%, 30px) scale(0.9); }
+      to { opacity: 1; transform: translate(-50%, 0) scale(1); }
     }
-    /* ===== Expired Validity ===== */
     .expired-validity {
       color: #d36a6a !important;
       font-weight: 700 !important;
     }
-    /* ===== Responsive ===== */
+    .offer-active .category-active-badge {
+      background: linear-gradient(115deg, #86efac, #22c55e, #16a34a);
+      color: white;
+    }
     @media (max-width: 640px) {
       .cursor-dot, .cursor-ring, .cursor-trail, .glow-orb, .hover-label { display: none !important; }
       body { cursor: auto; }
@@ -604,12 +493,11 @@
 </head>
 <body>
 
-<!-- ============ LOADING SCREEN (WIGGLE VERSION) ============ -->
 <div id="loading-screen">
   <div class="loading-logo">
     <img src="logo.png" alt="Logo" />
   </div>
-  <div class="loading-text">Dr. Zaid Shakir CARE</div>
+  <div class="loading-text">Dr. Zaid Shakir clinic</div>
   <div class="loading-dots">
     <span></span>
     <span></span>
@@ -620,16 +508,13 @@
   </div>
 </div>
 
-  <!-- ============ ADVANCED CURSOR SYSTEM ============ -->
   <div class="cursor-dot" id="cursor-dot"></div>
   <div class="cursor-ring" id="cursor-ring"></div>
   <div class="glow-orb" id="glow-orb"></div>
   <div class="hover-label" id="hover-label"></div>
 
-  <!-- ============ SCROLL PROGRESS ============ -->
   <div id="scroll-progress"></div>
 
-  <!-- ============ BACKGROUND FX ============ -->
   <div class="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
     <div class="absolute inset-0" style="background: radial-gradient(ellipse 85% 60% at 50% -10%, #fdf8f1 0%, #faf6f1 60%);"></div>
     <div class="animate-orb absolute -top-32 start-[-8%] size-[42rem] rounded-full" style="background: rgba(244,200,113,0.22); filter: blur(130px);"></div>
@@ -640,12 +525,10 @@
     <div class="noise absolute inset-0 opacity-[0.05]"></div>
   </div>
 
-  <!-- ============ FLOATING ACTION BUTTON ============ -->
   <button class="fab" id="fab-book" aria-label="احجز الآن" data-cursor-label="احجز">
     <svg class="size-6 text-mauve-ink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
   </button>
 
-  <!-- ============ HEADER ============ -->
   <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-500" style="transform: translateY(-80px); opacity: 0;">
     <div id="header-inner" class="mx-auto flex items-center justify-between gap-4 px-5 transition-all duration-500 lg:px-10 max-w-7xl bg-transparent py-5">
       <a href="index.html" class="group flex items-center gap-3 shrink-0 magnetic" aria-label="logo" data-cursor-label="الرئيسية">
@@ -688,7 +571,7 @@
           <button id="lang-ar" class="relative rounded-full px-2.5 py-1.5 transition-colors duration-300 text-mauve-ink sm:px-3" style="background: linear-gradient(90deg, #f4c871, #eeb44d); box-shadow: 0 4px 14px -4px rgba(207,157,69,0.7);">عربي</button>
         </div>
 
-        <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="glow-btn shine relative hidden md:inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-sm font-bold text-mauve-ink transition-all duration-300 hover:brightness-[1.05] active:scale-95 lg:px-6 magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 10px 28px -8px rgba(207,157,69,0.7);" data-cursor-label="احجز">
+        <a href="https://drzaidshakir.com/booking" class="glow-btn shine relative hidden md:inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-sm font-bold text-mauve-ink transition-all duration-300 hover:brightness-[1.05] active:scale-95 lg:px-6 magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 10px 28px -8px rgba(207,157,69,0.7);" data-cursor-label="احجز">
           <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
           <span class="relative z-10" data-i18n="nav.book">احجز موعدك</span>
         </a>
@@ -700,7 +583,6 @@
     </div>
   </header>
 
-  <!-- ============ MOBILE MENU ============ -->
   <div id="mobile-menu">
     <div class="flex items-center justify-between px-5 py-5">
       <div class="flex items-center gap-3">
@@ -718,12 +600,12 @@
         <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep" data-i18n="nav.home">الرئيسية</span>
         <span class="text-xs font-semibold tracking-widest text-gold-deep/60">01</span>
       </a>
-      <a href="about.html" class="mobile-nav-link group flex w-full items-ccenter justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
+      <a href="about.html" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
         <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep" data-i18n="nav.about">من نحن</span>
         <span class="text-xs font-semibold tracking-widest text-gold-deep/60">02</span>
       </a>
-     <a href="services.html" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
-  <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep" data-i18n="nav.services">الخدمات</span>
+      <a href="services.html" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
+        <span class="text-2xl font-bold text-mauve-deep transition-colors group-hover:text-gold-deep" data-i18n="nav.services">الخدمات</span>
         <span class="text-xs font-semibold tracking-widest text-gold-deep/60">03</span>
       </a>
       <a href="#" class="mobile-nav-link group flex w-full items-center justify-between border-b border-mauve/10 py-4" style="opacity:0; transform: translateX(40px);">
@@ -736,17 +618,15 @@
       </a>
     </nav>
     <div class="px-8 pb-10">
-      <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-base font-bold text-mauve-ink" style="background: linear-gradient(115deg, #f7d997, #f4c871, #eeb44d); box-shadow: 0 14px 34px -10px rgba(207,157,69,0.7);">
+      <a href="https://drzaidshakir.com/booking" class="flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-base font-bold text-mauve-ink" style="background: linear-gradient(115deg, #f7d997, #f4c871, #eeb44d); box-shadow: 0 14px 34px -10px rgba(207,157,69,0.7);">
         <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
         <span data-i18n="nav.book">احجز موعدك الآن</span>
       </a>
     </div>
   </div>
 
-  <!-- ============ MAIN CONTENT ============ -->
   <main class="relative z-10">
 
-    <!-- ============ HERO ============ -->
     <section class="relative overflow-hidden pb-12 pt-32 sm:pt-36 lg:pb-16 lg:pt-40">
       <div class="relative z-10 mx-auto max-w-7xl px-5 lg:px-10">
         <div class="text-center">
@@ -770,12 +650,12 @@
           <div class="anim-fade-up mt-8 inline-flex items-center gap-2 rounded-full border border-mauve/15 bg-white/70 px-4 py-1.5 text-xs font-semibold text-mauve/70 backdrop-blur-md" data-delay="0.3">
             <svg class="size-3.5 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span data-i18n="hero.updated">آخر تحديث:</span>
-            <span id="last-updated-date">جاري التحميل...</span>
+            <span id="last-updated-date">8 نوفمبر 2025</span>
           </div>
         </div>
       </div>
     </section>
-        <!-- ============ OFFERS SECTION ============ -->
+
     <section id="offers-section" class="relative z-10 pb-16 sm:pb-20">
       <div class="mx-auto max-w-7xl px-5 lg:px-10">
         <div class="anim-fade-up mb-8 text-center" data-delay="0">
@@ -798,13 +678,14 @@
 
           <!-- Offer 1 -->
           <div class="anim-fade-up" data-delay="0.1">
-            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="عرض">
+            <article class="offer-card tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]"
+                     data-offer-id="offer1" data-offer-date="2027-06-30" data-cursor-label="عرض">
               <div class="relative z-[4] flex h-full flex-col">
-                <div class="relative -mx-6 -mt-6 mb-5 h-40 overflow-hidden rounded-t-[1.5rem]" style="background: linear-gradient(135deg, #fdf2da, #f9ecd2, #fbeccb);">
+                <div class="relative -mx-6 -mt-6 mb-5 h-40 overflow-hidden rounded-t-[1.5rem]" style="background: linear-gradient(135deg, #fdf2da, #f9ecd2, #fbeccb);" data-offer-image>
                   <div class="absolute inset-0 flex items-center justify-center">
                     <svg class="size-16 text-gold-deep/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                   </div>
-                  <span class="offer-badge" data-offer-badge>21% <span data-i18n="offers.off">خصم</span></span>
+                  <span class="offer-badge" data-offer-badge>20% <span data-i18n="offers.off">خصم</span></span>
                 </div>
 
                 <h3 class="text-lg font-bold leading-snug text-mauve-ink" data-i18n="offer1.title">علاج البوتوكس المميز</h3>
@@ -819,13 +700,13 @@
                   جدّدي مظهرك مع علاج البوتوكس المميز من عيادتنا، وتمتعي ببشرة ناعمة وخالية من التجاعيد.
                 </p>
 
-                <div class="mt-4 flex items-center gap-2 text-xs font-semibold text-mauve/60">
+                <div class="mt-4 flex items-center gap-2 text-xs font-semibold text-mauve/60" data-validity>
                   <svg class="size-3.5 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                   <span data-i18n="offers.valid">صالح حتى:</span>
-                  <span data-i18n="offer1.validity">20 أبريل 2025</span>
+                  <span data-i18n="offer1.validity">30 يونيو 2027</span>
                 </div>
 
-                <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="glow-btn shine relative mt-5 inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
+                <a href="https://drzaidshakir.com/booking" class="glow-btn shine relative mt-5 inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
                   <svg class="size-4 relative z-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
                   <span class="relative z-10" data-i18n="offers.bookNow">احجز الآن</span>
                 </a>
@@ -835,13 +716,14 @@
 
           <!-- Offer 2 -->
           <div class="anim-fade-up" data-delay="0.2">
-            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="عرض">
+            <article class="offer-card tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]"
+                     data-offer-id="offer2" data-offer-date="2027-05-31" data-cursor-label="عرض">
               <div class="relative z-[4] flex h-full flex-col">
-                <div class="relative -mx-6 -mt-6 mb-5 h-40 overflow-hidden rounded-t-[1.5rem]" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0, #fdf2da);">
+                <div class="relative -mx-6 -mt-6 mb-5 h-40 overflow-hidden rounded-t-[1.5rem]" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0, #fdf2da);" data-offer-image>
                   <div class="absolute inset-0 flex items-center justify-center">
                     <svg class="size-16 text-gold-deep/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10"/><path d="M12 21v-4"/><path d="M19 8v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8"/><path d="M12 3a9 9 0 0 1 9 9v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a9 9 0 0 1 9-9Z"/></svg>
                   </div>
-                  <span class="offer-badge" data-offer-badge>22% <span data-i18n="offers.off">خصم</span></span>
+                  <span class="offer-badge" data-offer-badge>20% <span data-i18n="offers.off">خصم</span></span>
                 </div>
 
                 <h3 class="text-lg font-bold leading-snug text-mauve-ink" data-i18n="offer2.title">باقة الهيدرافيشل</h3>
@@ -856,13 +738,13 @@
                   استمتعي بتأثيرات التنظيف العميق والتجديد لبشرة وجهك مع علاج الهيدرافيشل المميز.
                 </p>
 
-                <div class="mt-4 flex items-center gap-2 text-xs font-semibold text-mauve/60">
+                <div class="mt-4 flex items-center gap-2 text-xs font-semibold text-mauve/60" data-validity>
                   <svg class="size-3.5 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                   <span data-i18n="offers.valid">صالح حتى:</span>
-                  <span data-i18n="offer2.validity">18 أبريل 2025</span>
+                  <span data-i18n="offer2.validity">31 مايو 2027</span>
                 </div>
 
-                <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="glow-btn shine relative mt-5 inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
+                <a href="https://drzaidshakir.com/booking" class="glow-btn shine relative mt-5 inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
                   <svg class="size-4 relative z-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
                   <span class="relative z-10" data-i18n="offers.bookNow">احجز الآن</span>
                 </a>
@@ -872,13 +754,14 @@
 
           <!-- Offer 3 -->
           <div class="anim-fade-up" data-delay="0.3">
-            <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="عرض">
+            <article class="offer-card tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]"
+                     data-offer-id="offer3" data-offer-date="2027-04-30" data-cursor-label="عرض">
               <div class="relative z-[4] flex h-full flex-col">
-                <div class="relative -mx-6 -mt-6 mb-5 h-40 overflow-hidden rounded-t-[1.5rem]" style="background: linear-gradient(135deg, #e8d5f2, #d4b8e8, #fdf2da);">
+                <div class="relative -mx-6 -mt-6 mb-5 h-40 overflow-hidden rounded-t-[1.5rem]" style="background: linear-gradient(135deg, #e8d5f2, #d4b8e8, #fdf2da);" data-offer-image>
                   <div class="absolute inset-0 flex items-center justify-center">
                     <svg class="size-16 text-gold-deep/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                   </div>
-                  <span class="offer-badge" data-offer-badge>22% <span data-i18n="offers.off">خصم</span></span>
+                  <span class="offer-badge" data-offer-badge>20% <span data-i18n="offers.off">خصم</span></span>
                 </div>
 
                 <h3 class="text-lg font-bold leading-snug text-mauve-ink" data-i18n="offer3.title">إزالة الشعر بالليزر</h3>
@@ -893,13 +776,13 @@
                   إزالة شعر الساقين الكامل بأحدث التقنيات المتقدمة للحصول على نتائج تدوم طويلاً.
                 </p>
 
-                <div class="mt-4 flex items-center gap-2 text-xs font-semibold text-mauve/60">
+                <div class="mt-4 flex items-center gap-2 text-xs font-semibold text-mauve/60" data-validity>
                   <svg class="size-3.5 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                   <span data-i18n="offers.valid">صالح حتى:</span>
-                  <span data-i18n="offer3.validity">12 أبريل 2025</span>
+                  <span data-i18n="offer3.validity">30 أبريل 2027</span>
                 </div>
 
-                <a href="https://drzaidshakir3.github.io/drzaidshakir/" class="glow-btn shine relative mt-5 inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
+                <a href="https://drzaidshakir.com/booking" class="glow-btn shine relative mt-5 inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 12px 36px -10px rgba(207,157,69,0.65);" data-cursor-label="احجز">
                   <svg class="size-4 relative z-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
                   <span class="relative z-10" data-i18n="offers.bookNow">احجز الآن</span>
                 </a>
@@ -907,18 +790,8 @@
             </article>
           </div>
         </div>
-
-        <div class="anim-fade-up mt-10 flex justify-center" data-delay="0.4">
-          <a href="#" class="glow-btn shine group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-gold-deep/40 bg-white/80 px-8 py-4 text-sm font-bold text-mauve-deep backdrop-blur-md transition-all duration-300 hover:border-gold-deep/80 hover:bg-gold/15 hover:text-gold-deep sm:text-base magnetic" data-cursor-label="الكل">
-            <svg class="size-5 text-gold-deep transition-transform duration-500 group-hover:rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-            <span class="relative z-10" data-i18n="offers.viewAll">عرض جميع العروض</span>
-            <svg class="size-4 relative z-10 transition-transform duration-300 rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
     </section>
 
-    <!-- ============ ARTICLE SECTION ============ -->
     <section id="article-section" class="relative z-10 pb-16 sm:pb-20">
       <div class="absolute start-1/2 top-24 size-[28rem] -translate-x-1/2 rounded-full" style="background: rgba(244,200,113,0.14); filter: blur(120px);" aria-hidden="true"></div>
 
@@ -947,7 +820,7 @@
                 <div class="flex items-center gap-3 text-xs font-semibold text-mauve/60">
                   <span class="flex items-center gap-1.5">
                     <svg class="size-3.5 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                    <span data-i18n="article.date">11 أبريل 2025</span>
+                    <span data-i18n="article.date">8 نوفمبر 2025</span>
                   </span>
                 </div>
               </div>
@@ -976,33 +849,25 @@
 
               <div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-mauve/10 pt-5">
                 <div class="flex items-center gap-2">
-                  <a href="https://www.facebook.com/dr.zaidclinicadr.zaidclinica?locale=ar_AR" target="_blank" rel="noopener" class="social-icon facebook magnetic" data-cursor-label="فيسبوك">
-                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  <a href="https://www.facebook.com/dr.zaidclinicadr.zaidclinica" target="_blank" rel="noopener" aria-label="Facebook" class="flex size-9 items-center justify-center rounded-full border border-mauve/15 bg-white/[0.06] text-mauve-deep transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="فيسبوك">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                   </a>
-                  <a href="https://www.instagram.com/dr.zaidclinica/dr.zaidclinica/" target="_blank" rel="noopener" class="social-icon instagram magnetic" data-cursor-label="انستغرام">
+                  <a href="https://www.instagram.com/dr.zaidclinica/dr.zaidclinica/" target="_blank" rel="noopener" aria-label="Instagram" class="flex size-9 items-center justify-center rounded-full border border-mauve/15 bg-white/[0.06] text-mauve-deep transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="انستغرام">
                     <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                   </a>
+                  <a href="https://wa.me/9647800006964" target="_blank" rel="noopener" aria-label="WhatsApp" class="flex size-9 items-center justify-center rounded-full border border-mauve/15 bg-white/[0.06] text-mauve-deep transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="واتساب">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  </a>
+                  <a href="https://www.youtube.com/@DrZaidShakir" target="_blank" rel="noopener" aria-label="YouTube" class="flex size-9 items-center justify-center rounded-full border border-mauve/15 bg-white/[0.06] text-mauve-deep transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="يوتيوب">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  </a>
+                  <a href="https://www.tiktok.com/@dr.zaidclinica" target="_blank" rel="noopener" aria-label="TikTok" class="flex size-9 items-center justify-center rounded-full border border-mauve/15 bg-white/[0.06] text-mauve-deep transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="تيك توك">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                  </a>
                 </div>
-                <a href="#" class="glow-btn shine relative inline-flex items-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-bold text-mauve-ink transition-all duration-300 active:scale-[0.97] magnetic" style="background: linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d); box-shadow: 0 10px 28px -8px rgba(207,157,69,0.65);" data-cursor-label="اقرأ">
-                  <span class="relative z-10" data-i18n="article.readMore">اقرأ المزيد</span>
-                  <svg class="size-3.5 relative z-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div class="anim-fade-up mt-8 flex justify-center" data-delay="0.3">
-          <a href="#" class="glow-btn shine group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-gold-deep/40 bg-white/80 px-8 py-4 text-sm font-bold text-mauve-deep backdrop-blur-md transition-all duration-300 hover:border-gold-deep/80 hover:bg-gold/15 hover:text-gold-deep sm:text-base magnetic" data-cursor-label="مقالات">
-            <svg class="size-5 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
-            <span class="relative z-10" data-i18n="article.viewAll">قراءة المزيد من المقالات</span>
-            <svg class="size-4 relative z-10 transition-transform duration-300 rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
+            
     </section>
 
-    <!-- ============ TIP SECTION ============ -->
     <section id="tip-section" class="relative z-10 pb-16 sm:pb-20">
       <div class="mx-auto max-w-5xl px-5 lg:px-10">
         <div class="anim-fade-up mb-8 text-center" data-delay="0">
@@ -1027,14 +892,18 @@
                 </div>
 
                 <div class="flex-1 text-center sm:text-start">
-                  <h3 class="text-xl font-bold leading-snug text-mauve-ink sm:text-2xl" data-i18n="tip.title">
+                  <div class="inline-flex items-center gap-2 rounded-full border border-gold-deep/30 bg-gold/20 px-3 py-1 text-[10px] font-bold text-mauve-deep mb-3">
+                    <svg class="size-3 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                    <span id="tip-counter">1 / 20</span>
+                  </div>
+                  <h3 id="tip-title" class="text-xl font-bold leading-snug text-mauve-ink sm:text-2xl" data-tip-title>
                     واقي الشمس بعد العلاج ضروري
                   </h3>
-                  <p class="mt-4 text-sm leading-[1.9] text-mauve/75 sm:text-base" data-i18n="tip.text">
-                    بعد أي علاج أو إجراء للوجه، تصبح بشرتك أكثر حساسية لأضرار الأشعة فوق البنفسجية. احرصي دائماً على تطبيق واقي شمس واسع الطيف بعامل حماية SPF 50 قبل مغادرة العيادة، وأعيدي التطبيق كل ساعتين في الهواء الطلق، حتى في الأيام الغائمة. هذه العادة البسيطة لا تحمي بشرتك فحسب، بل تمدد أيضاً فوائد العلاج. ابحثي عن تركيبات معدنية بأكسيد الزنك أو ثاني أكسيد التيتانيوم لحماية لطيفة وفعالة.
+                  <p id="tip-text" class="mt-4 text-sm leading-[1.9] text-mauve/75 sm:text-base" data-tip-text>
+                    بعد أي علاج أو إجراء للوجه، تصبح بشرتك أكثر حساسية لأضرار الأشعة فوق البنفسجية...
                   </p>
                   <p class="mt-4 text-xs font-semibold italic text-mauve/55" data-i18n="tip.published">
-                    نُشر في: 11 أبريل 2025
+                    نُشر في: 8 نوفمبر 2025
                   </p>
                 </div>
               </div>
@@ -1042,17 +911,9 @@
           </article>
         </div>
 
-        <div class="anim-fade-up mt-8 flex justify-center" data-delay="0.3">
-          <a href="#" class="glow-btn shine group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-gold-deep/40 bg-white/80 px-8 py-4 text-sm font-bold text-mauve-deep backdrop-blur-md transition-all duration-300 hover:border-gold-deep/80 hover:bg-gold/15 hover:text-gold-deep sm:text-base magnetic" data-cursor-label="نصائح">
-            <svg class="size-5 text-gold-deep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-            <span class="relative z-10" data-i18n="tip.viewAll">عرض جميع النصائح</span>
-            <svg class="size-4 relative z-10 transition-transform duration-300 rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
+      
     </section>
 
-    <!-- ============ NEWSLETTER SECTION ============ -->
     <section class="relative z-10 pb-20 sm:pb-28">
       <div class="mx-auto max-w-7xl px-5 lg:px-10">
         <div class="tilt-3d anim-fade-up relative overflow-hidden rounded-[2rem]" data-delay="0" data-cursor-label="اشترك" style="background: linear-gradient(130deg, #544049, #372931); box-shadow: 0 50px 120px -40px rgba(55,41,49,0.7);">
@@ -1081,7 +942,7 @@
 
             <form class="tilt-inner mx-auto mt-8 flex w-full max-w-lg flex-col gap-3 sm:flex-row" action="https://formsubmit.co/drzaidshakir@gmail.com" method="POST">
               <input type="email" name="email" placeholder="أدخل بريدك الإلكتروني" class="input-field flex-1" required data-i18n-placeholder="newsletter.placeholder" />
-              <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+              <input type="hidden" name="_next" value="https://drzaidshakir.com/thank-you.html">
               <input type="hidden" name="_subject" value="New Newsletter Subscriber">
               <input type="hidden" name="_template" value="table">
               <input type="text" name="_honey" style="display:none">
@@ -1096,7 +957,6 @@
     </section>
   </main>
 
-  <!-- ============ FOOTER ============ -->
   <footer class="relative z-10 overflow-hidden text-lilac" style="background: linear-gradient(180deg, #46343e, #372931);">
     <span class="absolute inset-x-0 top-0 h-[2px]" style="background: linear-gradient(to left, transparent, #f4c871, transparent);"></span>
     <div class="bg-dots-gold pointer-events-none absolute inset-0 opacity-40"></div>
@@ -1183,7 +1043,6 @@
     </div>
   </footer>
 
-  <!-- ============ JAVASCRIPT ============ -->
   <script>
     (function() {
       'use strict';
@@ -1191,38 +1050,48 @@
       const isFinePointer = window.matchMedia('(pointer: fine)').matches;
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ============ LOADING SCREEN (3 SECONDS WIGGLE) ============
-window.addEventListener('load', function() {
-  // مدة الاهتزاز: 3 ثواني (ننتظر انتهاء الأنيميشن)
-  setTimeout(function() {
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) loadingScreen.classList.add('hidden');
-    
-    var header = document.getElementById('main-header');
-    if (header) {
-      header.style.transition = 'transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.9s ease';
-      header.style.transform = 'translateY(0)';
-      header.style.opacity = '1';
-    }
-    
-    // إخفاء شاشة التحميل من DOM بعد انتهاء الانتقال
-    setTimeout(function() {
-      if (loadingScreen) loadingScreen.style.display = 'none';
-    }, 1000);
-    
-    setTimeout(triggerVisibleAnimations, 100);
-    updateLiveStatus();
-  }, 3000); // ← 3 ثواني (مدة الاهتزاز)
-});
+      function updateLiveStatus() {
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+        let isOpen = false;
+        if (day !== 5) {
+          isOpen = hour >= 9 && hour < 20;
+        }
+        document.querySelectorAll('[data-live-status]').forEach(function(el) {
+          el.textContent = isOpen ? 'مفتوح الآن' : 'مغلق';
+          el.style.color = isOpen ? '#10b981' : '#fca5a5';
+        });
+      }
 
-      // ============ UNIFIED 3D TILT CARD ENGINE ============
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) loadingScreen.classList.add('hidden');
+
+          var header = document.getElementById('main-header');
+          if (header) {
+            header.style.transition = 'transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.9s ease';
+            header.style.transform = 'translateY(0)';
+            header.style.opacity = '1';
+          }
+
+          setTimeout(function() {
+            if (loadingScreen) loadingScreen.style.display = 'none';
+          }, 1000);
+
+          setTimeout(triggerVisibleAnimations, 100);
+          updateLiveStatus();
+        }, 3000);
+      });
+
       const tiltCards = [];
-      
+
       function initTiltCards() {
         document.querySelectorAll('.tilt-3d').forEach(function(card) {
           if (card.dataset.tiltInit === 'true') return;
           card.dataset.tiltInit = 'true';
-          
+
           const state = {
             el: card, rect: null,
             targetRotX: 0, targetRotY: 0, currentRotX: 0, currentRotY: 0,
@@ -1230,9 +1099,9 @@ window.addEventListener('load', function() {
             targetGlow: 0, currentGlow: 0, glowX: 50, glowY: 50,
             targetGlowX: 50, targetGlowY: 50, hovered: false, rafId: null
           };
-          
+
           tiltCards.push(state);
-          
+
           card.addEventListener('mouseenter', function() {
             state.hovered = true;
             state.rect = card.getBoundingClientRect();
@@ -1242,7 +1111,7 @@ window.addEventListener('load', function() {
             card.classList.add('tilting');
             if (!state.rafId) animateCard(state);
           });
-          
+
           card.addEventListener('mousemove', function(e) {
             if (!state.rect) state.rect = card.getBoundingClientRect();
             const x = e.clientX - state.rect.left;
@@ -1254,7 +1123,7 @@ window.addEventListener('load', function() {
             state.targetGlowX = (x / state.rect.width) * 100;
             state.targetGlowY = (y / state.rect.height) * 100;
           });
-          
+
           card.addEventListener('mouseleave', function() {
             state.hovered = false;
             state.targetRotX = 0; state.targetRotY = 0;
@@ -1264,7 +1133,7 @@ window.addEventListener('load', function() {
           });
         });
       }
-      
+
       function animateCard(state) {
         const lerp = 0.12, glowLerp = 0.15;
         state.currentRotX += (state.targetRotX - state.currentRotX) * lerp;
@@ -1274,7 +1143,7 @@ window.addEventListener('load', function() {
         state.currentGlow += (state.targetGlow - state.currentGlow) * glowLerp;
         state.glowX += (state.targetGlowX - state.glowX) * glowLerp;
         state.glowY += (state.targetGlowY - state.glowY) * glowLerp;
-        
+
         state.el.style.setProperty('--tilt-rotate-x', state.currentRotX.toFixed(2) + 'deg');
         state.el.style.setProperty('--tilt-rotate-y', state.currentRotY.toFixed(2) + 'deg');
         state.el.style.setProperty('--tilt-lift', state.currentLift.toFixed(2) + 'px');
@@ -1282,21 +1151,21 @@ window.addEventListener('load', function() {
         state.el.style.setProperty('--tilt-glow-x', state.glowX.toFixed(1) + '%');
         state.el.style.setProperty('--tilt-glow-y', state.glowY.toFixed(1) + '%');
         state.el.style.setProperty('--tilt-glow-opacity', state.currentGlow.toFixed(2));
-        
+
         const shadowX = -state.currentRotY * 1.5;
         const shadowY = state.currentRotX * 1.5 + 20;
         const blur = 30 + Math.abs(state.currentRotX) + Math.abs(state.currentRotY);
-        state.el.style.boxShadow = 
+        state.el.style.boxShadow =
           shadowX.toFixed(1) + 'px ' + shadowY.toFixed(1) + 'px ' + blur.toFixed(1) + 'px -20px rgba(78, 61, 71, ' + (0.3 + state.currentGlow * 0.15).toFixed(2) + '), ' +
           '0 0 ' + (state.currentGlow * 40).toFixed(1) + 'px ' + (-10 + state.currentGlow * 5).toFixed(1) + 'px rgba(207, 157, 69, ' + (state.currentGlow * 0.3).toFixed(2) + ')';
-        
-        const done = 
+
+        const done =
           Math.abs(state.targetRotX - state.currentRotX) < 0.1 &&
           Math.abs(state.targetRotY - state.currentRotY) < 0.1 &&
           Math.abs(state.targetLift - state.currentLift) < 0.1 &&
           Math.abs(state.targetScale - state.currentScale) < 0.001 &&
           Math.abs(state.targetGlow - state.currentGlow) < 0.01;
-        
+
         if (state.hovered || !done) {
           state.rafId = requestAnimationFrame(function() { animateCard(state); });
         } else {
@@ -1305,14 +1174,14 @@ window.addEventListener('load', function() {
           state.el.style.boxShadow = '';
         }
       }
-      
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initTiltCards);
       } else {
         initTiltCards();
       }
       setTimeout(initTiltCards, 500);
-      
+
       document.addEventListener('mousemove', function(e) {
         document.querySelectorAll('.glow-btn').forEach(function(el) {
           const rect = el.getBoundingClientRect();
@@ -1326,13 +1195,12 @@ window.addEventListener('load', function() {
         });
       }, { passive: true });
 
-      // ============ ADVANCED CURSOR SYSTEM ============
       if (isFinePointer && !prefersReducedMotion) {
         const cursorDot = document.getElementById('cursor-dot');
         const cursorRing = document.getElementById('cursor-ring');
         const glowOrb = document.getElementById('glow-orb');
         const hoverLabel = document.getElementById('hover-label');
-        
+
         let mouseX = -100, mouseY = -100;
         let dotX = -100, dotY = -100;
         let ringX = -100, ringY = -100;
@@ -1389,7 +1257,7 @@ window.addEventListener('load', function() {
         animateCursor();
 
         const interactiveSelector = 'button, a, input, [data-cursor-label], .magnetic, .social-icon';
-        
+
         document.addEventListener('mouseover', function(e) {
           const target = e.target.closest(interactiveSelector);
           if (target) {
@@ -1423,20 +1291,20 @@ window.addEventListener('load', function() {
             const distance = 40 + Math.random() * 40;
             const dx = Math.cos(angle) * distance;
             const dy = Math.sin(angle) * distance;
-            
+
             particle.style.left = e.clientX + 'px';
             particle.style.top = e.clientY + 'px';
             particle.style.opacity = '1';
             particle.style.transition = 'transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.6s ease';
             particle.style.transform = 'translate(-50%, -50%) scale(1)';
-            
+
             document.body.appendChild(particle);
-            
+
             requestAnimationFrame(() => {
               particle.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0)`;
               particle.style.opacity = '0';
             });
-            
+
             setTimeout(() => particle.remove(), 700);
           }
         });
@@ -1444,7 +1312,7 @@ window.addEventListener('load', function() {
         document.addEventListener('click', function(e) {
           const target = e.target.closest('button, .glow-btn');
           if (!target) return;
-          
+
           const rect = target.getBoundingClientRect();
           const ripple = document.createElement('span');
           ripple.className = 'ripple';
@@ -1452,29 +1320,28 @@ window.addEventListener('load', function() {
           ripple.style.width = ripple.style.height = size + 'px';
           ripple.style.left = (e.clientX - rect.left) + 'px';
           ripple.style.top = (e.clientY - rect.top) + 'px';
-          
+
           target.style.position = 'relative';
           target.style.overflow = 'hidden';
           target.appendChild(ripple);
-          
+
           setTimeout(() => ripple.remove(), 700);
         });
       }
 
-      // ============ MAGNETIC BUTTONS ============
       if (isFinePointer && !prefersReducedMotion) {
         document.querySelectorAll('.magnetic').forEach(el => {
           let rafId = null;
           let targetX = 0, targetY = 0;
           let currentX = 0, currentY = 0;
-          
+
           el.addEventListener('mousemove', function(e) {
             const rect = el.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
             targetX = (e.clientX - centerX) * 0.25;
             targetY = (e.clientY - centerY) * 0.25;
-            
+
             if (!rafId) {
               const animate = () => {
                 currentX += (targetX - currentX) * 0.2;
@@ -1489,7 +1356,7 @@ window.addEventListener('load', function() {
               rafId = requestAnimationFrame(animate);
             }
           });
-          
+
           el.addEventListener('mouseleave', function() {
             targetX = 0; targetY = 0;
             if (!rafId) {
@@ -1510,7 +1377,6 @@ window.addEventListener('load', function() {
         });
       }
 
-      // ============ SCROLL PROGRESS ============
       var progressBar = document.getElementById('scroll-progress');
       function updateProgress() {
         var scrollTop = window.scrollY;
@@ -1520,7 +1386,6 @@ window.addEventListener('load', function() {
       }
       window.addEventListener('scroll', updateProgress, { passive: true });
 
-      // ============ HEADER SCROLL ============
       var headerInner = document.getElementById('header-inner');
       var isScrolled = false;
       window.addEventListener('scroll', function() {
@@ -1535,7 +1400,6 @@ window.addEventListener('load', function() {
         }
       }, { passive: true });
 
-      // ============ MOBILE MENU ============
       var mobileMenu = document.getElementById('mobile-menu');
       document.getElementById('mobile-menu-btn').addEventListener('click', function() {
         mobileMenu.classList.add('open');
@@ -1563,7 +1427,6 @@ window.addEventListener('load', function() {
         a.addEventListener('click', closeMobileMenu);
       });
 
-      // ============ SCROLL ANIMATIONS ============
       function triggerVisibleAnimations() {
         var animElements = document.querySelectorAll('.anim-fade-up, .anim-fade-in, .anim-scale-in');
         animElements.forEach(function(el) {
@@ -1591,7 +1454,6 @@ window.addEventListener('load', function() {
         animObserver.observe(el);
       });
 
-      // ============ BACKGROUND CANVAS ============
       var canvas = document.getElementById('bg-canvas');
       var ctx = canvas.getContext('2d');
       var w = 0, h = 0, raf = 0;
@@ -1668,11 +1530,11 @@ window.addEventListener('load', function() {
         }
         raf = requestAnimationFrame(tickCanvas);
       }
-      
+
       document.addEventListener('click', function(e) {
         canvasClicks.push({ x: e.clientX, y: e.clientY, radius: 0, alpha: 0.8 });
       });
-      
+
       window.addEventListener('pointermove', function(e) {
         mouse.x = e.clientX; mouse.y = e.clientY;
       }, { passive: true });
@@ -1686,7 +1548,127 @@ window.addEventListener('load', function() {
       resizeCanvas();
       tickCanvas();
 
-      // ============ LANGUAGE SWITCH ============
+      // ============ BEAUTY TIPS DATA (20 TIPS) ============
+      var beautyTips = {
+        ar: [
+          { title: 'واقي الشمس بعد العلاج ضروري', text: 'بعد أي علاج أو إجراء للوجه، تصبح بشرتك أكثر حساسية لأضرار الأشعة فوق البنفسجية. احرصي دائماً على تطبيق واقي شمس واسع الطيف بعامل حماية SPF 50 قبل مغادرة العيادة، وأعيدي التطبيق كل ساعتين في الهواء الطلق، حتى في الأيام الغائمة. هذه العادة البسيطة لا تحمي بشرتك فحسب، بل تمدد أيضاً فوائد العلاج.' },
+          { title: 'الترطيب العميق قبل النوم', text: 'بشرتك تتجدد ليلاً أكثر من النهار، لذا استفيدي من هذه الفترة الذهبية بتطبيق مرطب غني بالسيراميد أو حمض الهيالورونيك قبل النوم بنصف ساعة. هذا يساعد على إصلاح الحاجز الواقي للبشرة، ويمنحك مظهراً أكثر نعومة وإشراقاً في الصباح. لا تنسي ترطيب الرقبة واليدين أيضاً.' },
+          { title: 'تقشير لطيف مرة أسبوعياً', text: 'التقشير المنتظم يزيل الخلايا الميتة ويساعد على تجديد البشرة. استخدمي مقشراً لطيفاً بمكونات طبيعية مثل إنزيم البابايا أو حمض اللاكتيك مرة واحدة أسبوعياً، وتجنبي المقشرات الخشنة التي قد تجرح بشرتك. بعد التقشير، رطبي بشرتك جيداً واستخدمي واقي الشمس في الصباح.' },
+          { title: 'شرب الماء للبشرة الناعمة', text: 'البشرة الناعمة تبدأ من الداخل. اشربي من 8 إلى 10 أكواب من الماء يومياً لتحافظي على ترطيب بشرتك من الداخل، مما يقلل من ظهور الخطوط الدقيقة ويحسن مرونة الجلد. أضيفي شرائح الليمون أو الخيار لتحسين الطعم، وتجنبي المشروبات الغازية والكافيين المفرط.' },
+          { title: 'تنظيف البشرة مرتين يومياً', text: 'غسول لطيف مرتين يومياً — صباحاً ومساءً — أساسي للحفاظ على بشرة صحية. استخدمي ماءً فاتراً (لا ساخناً) وغسولاً مناسباً لنوع بشرتك، وتجنبي فرك الوجه بقوة. في المساء، احرصي على إزالة المكياج جيداً قبل النوم لتفادي انسداد المسام.' },
+          { title: 'فيتامين C لبشرة مشرقة', text: 'سيروم فيتامين C صباحاً يعد من أفضل استثمارات البشرة. يحمي من الجذور الحرة، يحفز إنتاج الكولاجين، ويوحّد لون البشرة. استخدمي سيروماً بتركيز 10-15%، وضعيه قبل المرطب والواقي الشمسي. النتائج تظهر بوضوح بعد 4-6 أسابيع من الاستخدام المنتظم.' },
+          { title: 'النوم الكافي أفضل علاج', text: 'الحصول على 7-8 ساعات نوم يومياً هو أفضل علاج تجميلي مجاني. أثناء النوم، يفرز الجسم هرمون النمو الذي يجدد خلايا البشرة. قلة النوم تسبب الهالات السوداء، شحوب البشرة، وزيادة ظهور التجاعيد. حاولي النوم على ظهرك لتجنبي تجاعيد الوسادة.' },
+          { title: 'تجنبي السكر المكرر', text: 'السكر المكرر يسبب الجلوكوز — عملية ترتبط بالسكر وتؤدي إلى تصلب الكولاجين وظهور التجاعيد المبكرة. قللي من الحلويات والمشروبات السكرية واستبدليها بالفواكه الطبيعية. الإكثار من السكر أيضاً يفاقم مشاكل حب الشباب والالتهابات الجلدية.' },
+          { title: 'ماسك طبيعي أسبوعياً', text: 'خصصي وقتاً أسبوعياً لماسك طبيعي يناسب نوع بشرتك. للبشرة الجافة: عسل + زبادي. للبشرة الدهنية: طين أخضر + ماء ورد. للبشرة الحساسة: شوفان + حليب. اتركيه 15 دقيقة ثم اغسلي بماء فاتر. الماسكات الطبيعية تغذي البشرة دون مواد كيميائية قاسية.' },
+          { title: 'الابتعاد عن التوتر', text: 'التوتر المزمن يرفع هرمون الكورتيزول، الذي يسبب زيادة إفراز الزيوت، حب الشباب، ويسرع شيخوخة البشرة. مارسي التأمل أو اليوغا أو المشي يومياً 20 دقيقة، وتنفسي بعمق. بشرتك مرآة صحتك النفسية — الاعتناء بعقلك يعكس إشراقة على وجهك.' },
+          { title: 'استخدمي واقي شمس حتى داخل المنزل', text: 'الأشعة فوق البنفسجية تخترق زجاج النوافذ، لذا حتى الجلوس بجانب نافذة مشمسة قد يضر بشرتك. ضعي واقي الشمس كخطوة أخيرة في روتينك الصباحي، حتى لو كنت في المنزل. اختر SPF 30 على الأقل، وأعيدي التطبيق عند الخروج.' },
+          { title: 'تجنبي الماء الساخن للوجه', text: 'الماء الساخن يزيل الزيوت الطبيعية من بشرتك ويسبب جفافاً وتقشراً. استخدمي ماءً فاتراً لغسل وجهك، وحاولي تقليل مدة الاستحمام الساخن. بعد الغسل، جففي بشرتك بالتربيت اللطيف بمنشفة ناعمة — لا تفركي.' },
+          { title: 'سيروم النياسيناميد لتوحيد اللون', text: 'النياسيناميد (فيتامين B3) مكوّن رائع لتوحيد لون البشرة، تقليل الاحمرار، وتقليص المسام. استخدميه بتركيز 5-10% صباحاً أو مساءً. يمكن دمجه مع فيتامين C أو الهيالورونيك بحرية، لكن تجنبي دمجه مع الأحماض القوية في نفس الروتين.' },
+          { title: 'ترطيب الشفاه يومياً', text: 'الشفاه لا تحتوي على غدد دهنية، لذا تجف بسرعة. استخدمي بلسم شفاه مرطباً يومياً، خصوصاً قبل النوم. تجنبي لعق شفاهك — فهذا يزيد الجفاف. ابحثي عن مكونات مثل زبدة الشيا، فيتامين E، أو الجليسرين في مكونات البلسم.' },
+          { title: 'تجفيف الوجه بالتربيت', text: 'بعد غسل الوجه، لا تفركي بشرتك بالمنشفة. بدلاً من ذلك، تربتي بلطف حتى تجف. الفرك القوي يسبب تمدد الجلد مع الوقت وظهور تجاعيد دقيقة. هذه العادة البسيطة تحدث فرقاً كبيراً على المدى الطويل.' },
+          { title: 'مرطب للرقبة واليدين', text: 'الرقبة واليدان يكشفان عمرك قبل وجهك. مددي روتين ترطيب وجهك ليشمل الرقبة (بحذر — للأعلى دائماً)، واستخدمي كريماً غنياً ليديك بعد كل غسل. القفازات الواقية عند استخدام المنظفات تحمي يديك من الجفاف.' },
+          { title: 'قناع العين ليلاً', text: 'منطقة تحت العين رقيقة جداً وتحتاج عناية خاصة. استخدمي كريم عين يحتوي على الكافيين أو الببتيدات مساءً. نامي على وسادة مرفوعة قليلاً لتقليل احتباس السوائل والهالات الصباحية.' },
+          { title: 'تناولي أوميغا 3', text: 'أوميغا 3 (الموجودة في السمك الدهني، بذور الكتان، والجوز) تحافظ على مرونة البشرة وتقلل الالتهابات. تناولي مصدراً طبيعياً مرتين أسبوعياً على الأقل، أو استشيري طبيبك عن مكمل غذائي مناسب.' },
+          { title: 'لا تلمسي وجهك كثيراً', text: 'لمس الوجه ينقل البكتيريا والأوساخ من يديك إلى مسامك، مما يسبب حب الشباب والالتهابات. حاولي تقليل لمس وجهك خلال اليوم، واغسلي يديك قبل تطبيق أي منتج للعناية بالبشرة.' },
+          { title: 'ودّعي المكياج قبل النوم', text: 'النوم بالمكياج يسبب انسداد المسام، حب الشباب، وشيخوخة أسرع للبشرة. مهما كنت متعبة، احرصي على إزالة المكياج باستخدام مزيل لطيف أو زيت تنظيف، ثم اتبعي بغسول. بشرتك ستشكرك في الصباح.' }
+        ],
+        en: [
+          { title: 'Post-Treatment Sunscreen Is Essential', text: 'After any facial treatment or procedure, your skin becomes more sensitive to UV damage. Always apply a broad-spectrum SPF 50 sunscreen before leaving our clinic and continue to reapply every 2 hours when outdoors, even on cloudy days. This simple habit not only protects your skin but also extends the benefits of your treatment.' },
+          { title: 'Deep Hydration Before Bed', text: 'Your skin regenerates more at night than during the day, so take advantage of this golden window by applying a ceramide or hyaluronic acid-rich moisturizer 30 minutes before bed. This helps repair your skin barrier and gives you a softer, more radiant look in the morning. Do not forget to moisturize your neck and hands too.' },
+          { title: 'Gentle Exfoliation Once a Week', text: 'Regular exfoliation removes dead cells and helps skin renewal. Use a gentle exfoliator with natural ingredients like papaya enzymes or lactic acid once a week, and avoid harsh scrubs that may scratch your skin. After exfoliating, moisturize well and use sunscreen in the morning.' },
+          { title: 'Drink Water for Soft Skin', text: 'Soft skin starts from within. Drink 8-10 cups of water daily to keep your skin hydrated from the inside, reducing fine lines and improving skin elasticity. Add lemon or cucumber slices to improve taste, and avoid excessive sodas and caffeine.' },
+          { title: 'Cleanse Twice Daily', text: 'A gentle cleanser twice daily — morning and evening — is essential for healthy skin. Use lukewarm (not hot) water and a cleanser suitable for your skin type, and avoid rubbing your face roughly. At night, make sure to remove makeup thoroughly before bed.' },
+          { title: 'Vitamin C for Glowing Skin', text: 'A vitamin C serum in the morning is one of the best investments for your skin. It protects against free radicals, stimulates collagen production, and evens skin tone. Use a serum with 10-15% concentration, and apply it before moisturizer and sunscreen. Results become visible after 4-6 weeks.' },
+          { title: 'Adequate Sleep Is the Best Treatment', text: 'Getting 7-8 hours of sleep daily is the best free cosmetic treatment. During sleep, the body releases growth hormone that renews skin cells. Lack of sleep causes dark circles, dull skin, and increased wrinkles. Try sleeping on your back to avoid pillow wrinkles.' },
+          { title: 'Avoid Refined Sugar', text: 'Refined sugar causes glycation — a process that stiffens collagen and leads to premature wrinkles. Reduce sweets and sugary drinks and replace them with natural fruits. Excess sugar also worsens acne and skin inflammation.' },
+          { title: 'Weekly Natural Mask', text: 'Set aside weekly time for a natural mask suitable for your skin type. For dry skin: honey + yogurt. For oily skin: green clay + rose water. For sensitive skin: oatmeal + milk. Leave for 15 minutes then rinse with lukewarm water.' },
+          { title: 'Stay Away from Stress', text: 'Chronic stress raises cortisol, which increases oil production, causes acne, and accelerates skin aging. Practice meditation, yoga, or walking for 20 minutes daily, and breathe deeply. Your skin is a mirror of your mental health.' },
+          { title: 'Use Sunscreen Even Indoors', text: 'UV rays penetrate window glass, so even sitting by a sunny window can harm your skin. Apply sunscreen as the last step of your morning routine, even if you stay indoors. Choose SPF 30 at minimum, and reapply when going outside.' },
+          { title: 'Avoid Hot Water on Your Face', text: 'Hot water strips natural oils from your skin and causes dryness and flaking. Use lukewarm water to wash your face, and try to shorten hot showers. After washing, pat your skin dry gently with a soft towel — do not rub.' },
+          { title: 'Niacinamide Serum to Even Skin Tone', text: 'Niacinamide (vitamin B3) is an excellent ingredient for evening skin tone, reducing redness, and minimizing pores. Use it at 5-10% concentration morning or evening. It can be safely combined with vitamin C or hyaluronic acid, but avoid combining with strong acids in the same routine.' },
+          { title: 'Daily Lip Hydration', text: 'Lips have no oil glands, so they dry out quickly. Use a moisturizing lip balm daily, especially before bed. Avoid licking your lips — this worsens dryness. Look for ingredients like shea butter, vitamin E, or glycerin.' },
+          { title: 'Pat Your Face Dry', text: 'After washing your face, do not rub your skin with a towel. Instead, pat gently until dry. Rubbing hard causes skin stretching over time and fine wrinkles. This simple habit makes a big difference long-term.' },
+          { title: 'Moisturize Neck and Hands', text: 'The neck and hands reveal your age before your face. Extend your facial moisturizer to your neck (carefully — upward strokes), and use a rich cream on your hands after every wash. Protective gloves when using detergents protect your hands from dryness.' },
+          { title: 'Night Eye Cream', text: 'The under-eye area is very thin and needs special care. Use an eye cream containing caffeine or peptides at night. Sleep on a slightly elevated pillow to reduce fluid retention and morning puffiness.' },
+          { title: 'Include Omega-3', text: 'Omega-3 (found in fatty fish, flaxseeds, and walnuts) maintains skin elasticity and reduces inflammation. Eat a natural source at least twice a week, or consult your doctor about a suitable supplement.' },
+          { title: 'Do Not Touch Your Face', text: 'Touching your face transfers bacteria and dirt from your hands to your pores, causing acne and inflammation. Try to minimize face touching during the day, and wash your hands before applying any skincare product.' },
+          { title: 'Remove Makeup Before Bed', text: 'Sleeping with makeup causes clogged pores, acne, and faster skin aging. No matter how tired you are, remove makeup using a gentle remover or cleansing oil, then follow with a cleanser. Your skin will thank you in the morning.' }
+        ]
+      };
+
+      var tipIndex = 0;
+      var tipAutoInterval = null;
+      var TIP_AUTO_DELAY = 30000; // 30 ثانية
+
+      function renderTip(index) {
+        var lang = document.documentElement.lang || 'ar';
+        var tips = beautyTips[lang] || beautyTips.ar;
+        if (index < 0) index = tips.length - 1;
+        if (index >= tips.length) index = 0;
+        tipIndex = index;
+
+        var tip = tips[tipIndex];
+        var titleEl = document.querySelector('[data-tip-title]');
+        var textEl = document.querySelector('[data-tip-text]');
+        var counterEl = document.getElementById('tip-counter');
+
+        if (titleEl) titleEl.textContent = tip.title;
+        if (textEl) textEl.textContent = tip.text;
+        if (counterEl) counterEl.textContent = (tipIndex + 1) + ' / ' + tips.length;
+      }
+
+      function startTipAuto() {
+        if (tipAutoInterval) clearInterval(tipAutoInterval);
+        tipAutoInterval = setInterval(function() {
+          var lang = document.documentElement.lang || 'ar';
+          var tips = beautyTips[lang] || beautyTips.ar;
+          var nextIndex;
+          do {
+            nextIndex = Math.floor(Math.random() * tips.length);
+          } while (nextIndex === tipIndex && tips.length > 1);
+          renderTip(nextIndex);
+        }, TIP_AUTO_DELAY);
+      }
+
+      function stopTipAuto() {
+        if (tipAutoInterval) {
+          clearInterval(tipAutoInterval);
+          tipAutoInterval = null;
+        }
+      }
+
+      function getRandomTipIndex() {
+        var lang = document.documentElement.lang || 'ar';
+        var tips = beautyTips[lang] || beautyTips.ar;
+        return Math.floor(Math.random() * tips.length);
+      }
+
+      function initTipSystem() {
+        // اختيار عشوائي عند فتح الصفحة (بدون تذكر من جلسة سابقة)
+        var randomIndex = getRandomTipIndex();
+        tipIndex = randomIndex;
+        renderTip(tipIndex);
+
+        // تشغيل التبديل التلقائي كل 30 ثانية (عشوائي أيضاً)
+        startTipAuto();
+      }
+
+      // إيقاف/استئناف التبديل التلقائي عند إخفاء/إظهار الصفحة
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          stopTipAuto();
+        } else {
+          if (!tipAutoInterval) startTipAuto();
+        }
+      });
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTipSystem);
+      } else {
+        initTipSystem();
+      }
+      setTimeout(initTipSystem, 300);
+
       var langEnBtn = document.getElementById('lang-en');
       var langArBtn = document.getElementById('lang-ar');
       var currentLang = 'ar';
@@ -1705,7 +1687,6 @@ window.addEventListener('load', function() {
           'hero.titleAccent': 'والعروض الحصرية',
           'hero.sub': 'نشارككم أحدث التقنيات الطبية، والعروض الحصرية، والنصائح التجميلية من عيادة الدكتور زيد شاكر — كل يوم.',
           'hero.updated': 'آخر تحديث:',
-          'hero.date': '11 أبريل 2025',
           'offers.badge': 'عروض حصرية',
           'offers.title': 'العروض الخاصة الحالية',
           'offers.sub': 'استفد من عروضنا الموسمية المحدودة على مجموعة مختارة من العلاجات التجميلية.',
@@ -1718,23 +1699,23 @@ window.addEventListener('load', function() {
           'offer1.price': '80,000 د.ع',
           'offer1.discount': 'خصم 20%',
           'offer1.desc': 'جدّدي مظهرك مع علاج البوتوكس المميز من عيادتنا، وتمتعي ببشرة ناعمة وخالية من التجاعيد.',
-          'offer1.validity': '20 أبريل 2025',
+          'offer1.validity': '30 يونيو 2027',
           'offer2.title': 'باقة الهيدرافيشل',
           'offer2.oldPrice': '100,000 د.ع',
           'offer2.price': '80,000 د.ع',
           'offer2.discount': 'خصم 20%',
           'offer2.desc': 'استمتعي بتأثيرات التنظيف العميق والتجديد لبشرة وجهك مع علاج الهيدرافيشل المميز.',
-          'offer2.validity': '18 أبريل 2025',
+          'offer2.validity': '31 مايو 2027',
           'offer3.title': 'إزالة الشعر بالليزر',
           'offer3.oldPrice': '100,000 د.ع',
           'offer3.price': '80,000 د.ع',
           'offer3.discount': 'خصم 20%',
           'offer3.desc': 'إزالة شعر الساقين الكامل بأحدث التقنيات المتقدمة للحصول على نتائج تدوم طويلاً.',
-          'offer3.validity': '12 أبريل 2025',
+          'offer3.validity': '30 أبريل 2027',
           'article.badge': 'آخر تحديث',
           'article.sectionTitle': 'أحدث المقالات',
           'article.tag': 'تقنية جديدة',
-          'article.date': '11 أبريل 2025',
+          'article.date': '8 نوفمبر 2025',
           'article.title': 'نقدم لكم تقنية الميكرونيدلينج الجديدة بالترددات الراديوية (RF)',
           'article.p1': 'يسرنا أن نعلن عن وصول أحدث تقنياتنا: الميكرونيدلينج بالترددات الراديوية (RF). يجمع هذا العلاج الثوري بين الميكرونيدلينج التقليدي وطاقة الترددات الراديوية لتقديم نتائج استثنائية في شد البشرة، وتقليل الندبات، وتجديد الشباب بشكل شامل.',
           'article.p2': 'على عكس الميكرونيدلينج التقليدي، توصل تقنية RF طاقة الترددات الراديوية بعمق في الأدمة. تحفز هذه الطاقة إنتاج الكولاجين والإيلاستين على مستوى أعمق بكثير، مما يؤدي إلى بشرة أكثر تماسكاً ونعومة مع تحسن في الملمس واللون.',
@@ -1743,13 +1724,11 @@ window.addEventListener('load', function() {
           'article.tag2': 'شد البشرة',
           'article.tag3': 'مكافحة الشيخوخة',
           'article.readMore': 'اقرأ المزيد',
-          'article.viewAll': 'قراءة المزيد من المقالات',
+          'article.viewAll': '',
           'tip.badge': 'نصيحة اليوم',
           'tip.sectionTitle': 'نصيحة الجمال اليومية',
-          'tip.title': 'واقي الشمس بعد العلاج ضروري',
-          'tip.text': 'بعد أي علاج أو إجراء للوجه، تصبح بشرتك أكثر حساسية لأضرار الأشعة فوق البنفسجية. احرصي دائماً على تطبيق واقي شمس واسع الطيف بعامل حماية SPF 50 قبل مغادرة العيادة، وأعيدي التطبيق كل ساعتين في الهواء الطلق، حتى في الأيام الغائمة. هذه العادة البسيطة لا تحمي بشرتك فحسب، بل تمدد أيضاً فوائد العلاج. ابحثي عن تركيبات معدنية بأكسيد الزنك أو ثاني أكسيد التيتانيوم لحماية لطيفة وفعالة.',
-          'tip.published': 'نُشر في: 11 أبريل 2025',
-          'tip.viewAll': 'عرض جميع النصائح',
+          'tip.published': 'نُشر في: 8 نوفمبر 2025',
+          'tip.viewAll': '',
           'newsletter.badge': 'ابقَ على اطلاع',
           'newsletter.title': 'اشترك في نشرتنا',
           'newsletter.accent': 'البريدية الشهرية',
@@ -1782,7 +1761,6 @@ window.addEventListener('load', function() {
           'hero.titleAccent': '& Exclusive Offers',
           'hero.sub': 'We share the latest medical technologies, exclusive offers, and beauty tips from Dr. Zaid Shakir Clinic — every day.',
           'hero.updated': 'Last Updated:',
-          'hero.date': 'April 11, 2025',
           'offers.badge': 'Exclusive Offers',
           'offers.title': 'Current Special Offers',
           'offers.sub': 'Take advantage of our limited seasonal offers on a selected range of cosmetic treatments.',
@@ -1795,23 +1773,23 @@ window.addEventListener('load', function() {
           'offer1.price': '80,000 IQD',
           'offer1.discount': '20% OFF',
           'offer1.desc': 'Rejuvenate your appearance with our premium Botox treatment. Smooth away fine lines and wrinkles.',
-          'offer1.validity': 'April 20, 2025',
+          'offer1.validity': 'June 30, 2027',
           'offer2.title': 'Hydrafacial Package',
           'offer2.oldPrice': '100,000 IQD',
           'offer2.price': '80,000 IQD',
           'offer2.discount': '20% OFF',
           'offer2.desc': 'Experience the deep cleansing and rejuvenating effects of our signature Hydrafacial treatment.',
-          'offer2.validity': 'April 18, 2025',
+          'offer2.validity': 'May 31, 2027',
           'offer3.title': 'Laser Hair Removal',
           'offer3.oldPrice': '100,000 IQD',
           'offer3.price': '80,000 IQD',
           'offer3.discount': '20% OFF',
           'offer3.desc': 'Full legs laser hair removal with our new advanced technology for longer-lasting results.',
-          'offer3.validity': 'April 12, 2025',
+          'offer3.validity': 'April 30, 2027',
           'article.badge': 'Latest Update',
           'article.sectionTitle': 'Latest Articles',
           'article.tag': 'New Technology',
-          'article.date': 'April 11, 2025',
+          'article.date': 'November 8, 2025',
           'article.title': 'Introducing Our New RF Microneedling Technology',
           'article.p1': "We're excited to announce the arrival of our newest technology: state-of-the-art RF Microneedling. This revolutionary treatment combines traditional microneedling with radiofrequency energy to deliver exceptional results for skin tightening, scar reduction, and overall skin rejuvenation.",
           'article.p2': 'Unlike traditional microneedling, RF microneedling delivers radiofrequency energy deep into the dermis. This energy stimulates collagen and elastin production at a much more profound level, resulting in firmer, smoother skin with improved texture and tone.',
@@ -1823,9 +1801,7 @@ window.addEventListener('load', function() {
           'article.viewAll': 'Read More Articles',
           'tip.badge': "Today's Tip",
           'tip.sectionTitle': 'Daily Beauty Tip',
-          'tip.title': 'Post-Treatment Sunscreen Is Essential',
-          'tip.text': 'After any facial treatment or procedure, your skin becomes more sensitive to UV damage. Always apply a broad-spectrum SPF 50 sunscreen before leaving our clinic and continue to reapply every 2 hours when outdoors, even on cloudy days. This simple habit not only protects your skin but also extends the benefits of your treatment. Look for mineral-based formulas with zinc oxide or titanium dioxide for gentle yet effective protection.',
-          'tip.published': 'Published: April 11, 2025',
+          'tip.published': 'Published: November 8, 2025',
           'tip.viewAll': 'View All Tips',
           'newsletter.badge': 'Stay Updated',
           'newsletter.title': 'Subscribe to Our',
@@ -1851,7 +1827,7 @@ window.addEventListener('load', function() {
       function applyTranslation(lang) {
         currentLang = lang;
         var t = translations[lang];
-        
+
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
         document.title = t['page.title'];
@@ -1885,71 +1861,69 @@ window.addEventListener('load', function() {
           langArBtn.classList.remove('text-mauve-ink');
           langArBtn.classList.add('text-mauve/60');
         }
+
+        setTimeout(applyOfferStates, 30);
+
+        setTimeout(function() {
+          if (typeof renderTip === 'function') renderTip(tipIndex);
+        }, 50);
       }
 
       langEnBtn.addEventListener('click', function() { applyTranslation('en'); });
       langArBtn.addEventListener('click', function() { applyTranslation('ar'); });
 
+      function parseOfferDate(dateStr) {
+        if (!dateStr) return null;
+        var parts = dateStr.split('-');
+        if (parts.length !== 3) return null;
+        var y = parseInt(parts[0], 10);
+        var m = parseInt(parts[1], 10) - 1;
+        var d = parseInt(parts[2], 10);
+        var date = new Date(y, m, d, 23, 59, 59, 999);
+        return isNaN(date.getTime()) ? null : date;
+      }
 
-      // ============================================================
-      // ============ OFFER EXPIRATION CHECKER (محسّن) =============
-      // ============================================================
-      function checkOfferExpirations() {
-        var offerExpiryDates = {
-          'offer1': '2025-04-20',
-          'offer2': '2025-04-18',
-          'offer3': '2025-04-12'
-        };
+      function applyOfferStates() {
+        var lang = document.documentElement.lang || 'ar';
+        var now = new Date();
 
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
+        document.querySelectorAll('.offer-card').forEach(function(card) {
+          var dateStr = card.getAttribute('data-offer-date');
+          if (!dateStr) return;
 
-        document.querySelectorAll('#offers-section article').forEach(function(card) {
+          var expiryDate = parseOfferDate(dateStr);
+          if (!expiryDate) return;
+
+          var isExpired = now > expiryDate;
+
           var badge = card.querySelector('[data-offer-badge]');
-          if (!badge) return;
+          var bookBtn = card.querySelector('a.glow-btn');
+          var imageWrap = card.querySelector('[data-offer-image]');
+          var validityContainer = card.querySelector('[data-validity]');
+          var validityDateEl = validityContainer ? validityContainer.querySelector('[data-i18n^="offer"]') : null;
+          var validityLabelEl = validityContainer ? validityContainer.querySelector('[data-i18n="offers.valid"]') : null;
 
-          var titleEl = card.querySelector('h3');
-          if (!titleEl) return;
+          if (isExpired) {
+            card.classList.remove('offer-active');
+            card.classList.add('offer-expired');
+            card.style.opacity = '0.85';
 
-          var titleText = titleEl.textContent.trim();
-          var offerKey = null;
-
-          if (titleText.includes('البوتوكس') || titleText.includes('Botox')) offerKey = 'offer1';
-          else if (titleText.includes('الهيدرافيشل') || titleText.includes('Hydrafacial')) offerKey = 'offer2';
-          else if (titleText.includes('الليزر') || titleText.includes('Laser')) offerKey = 'offer3';
-
-          if (!offerKey) return;
-
-          var expiryStr = offerExpiryDates[offerKey];
-          if (!expiryStr) return;
-
-          var expiryDate = new Date(expiryStr + 'T23:59:59');
-
-          if (today > expiryDate) {
-            var lang = document.documentElement.lang || 'ar';
-            
-            badge.classList.add('expired');
-            badge.textContent = lang === 'ar' ? 'منتهي' : 'EXPIRED';
-
-            var validityContainer = null;
-            card.querySelectorAll('div').forEach(function(div) {
-              if (div.textContent.includes('صالح حتى') || div.textContent.includes('Valid until') || 
-                  div.textContent.includes('انتهى العرض') || div.textContent.includes('Expired:')) {
-                if (!validityContainer) validityContainer = div;
-              }
-            });
+            if (badge) {
+              badge.classList.add('expired');
+              badge.textContent = lang === 'ar' ? 'منتهي' : 'EXPIRED';
+            }
 
             if (validityContainer) {
               validityContainer.classList.add('expired-validity');
               var icon = validityContainer.querySelector('svg');
-              if (icon) {
-                icon.outerHTML = '<svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>';
+              if (icon && !icon.dataset.expiredIcon) {
+                icon.dataset.expiredIcon = 'true';
+                icon.outerHTML = '<svg data-expired-icon class="size-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>';
               }
-              var validText = validityContainer.querySelector('[data-i18n="offers.valid"]');
-              if (validText) validText.textContent = lang === 'ar' ? 'انتهى العرض:' : 'Expired:';
+              if (validityLabelEl) validityLabelEl.textContent = lang === 'ar' ? 'انتهى العرض:' : 'Expired:';
+              if (validityDateEl) validityDateEl.style.textDecoration = 'line-through';
             }
 
-            var bookBtn = card.querySelector('a.glow-btn');
             if (bookBtn) {
               bookBtn.style.pointerEvents = 'none';
               bookBtn.style.opacity = '0.55';
@@ -1957,48 +1931,78 @@ window.addEventListener('load', function() {
               bookBtn.style.background = 'linear-gradient(115deg, #d4d4d4, #c0c0c0, #b0b0b0)';
               bookBtn.style.boxShadow = 'none';
               bookBtn.removeAttribute('href');
-              
-              var btnText = bookBtn.querySelector('span[data-i18n]');
-              if (btnText && btnText.getAttribute('data-i18n') === 'offers.bookNow') {
-                btnText.textContent = lang === 'ar' ? 'غير متاح' : 'Unavailable';
-              }
+              bookBtn.setAttribute('aria-disabled', 'true');
+              var btnText = bookBtn.querySelector('[data-i18n="offers.bookNow"]');
+              if (btnText) btnText.textContent = lang === 'ar' ? 'غير متاح' : 'Unavailable';
             }
 
-            var imageWrap = card.querySelector('.relative.-mx-6');
             if (imageWrap) {
               imageWrap.style.filter = 'grayscale(0.7)';
               imageWrap.style.opacity = '0.65';
             }
+          } else {
+            card.classList.add('offer-active');
+            card.classList.remove('offer-expired');
+            card.style.opacity = '';
 
-            card.style.opacity = '0.85';
+            if (badge) {
+              badge.classList.remove('expired');
+              badge.textContent = '20% ' + (lang === 'ar' ? 'خصم' : 'OFF');
+            }
+
+            if (validityContainer) {
+              validityContainer.classList.remove('expired-validity');
+              if (validityLabelEl) validityLabelEl.textContent = lang === 'ar' ? 'صالح حتى:' : 'Valid until:';
+              if (validityDateEl) validityDateEl.style.textDecoration = '';
+            }
+
+            if (bookBtn) {
+              bookBtn.style.pointerEvents = '';
+              bookBtn.style.opacity = '';
+              bookBtn.style.cursor = '';
+              bookBtn.style.background = 'linear-gradient(115deg, #f7d997, #f4c871 55%, #eeb44d)';
+              bookBtn.style.boxShadow = '0 12px 36px -10px rgba(207,157,69,0.65)';
+              bookBtn.removeAttribute('aria-disabled');
+              if (!bookBtn.getAttribute('href')) {
+                bookBtn.setAttribute('href', 'https://drzaidshakir.com/booking');
+              }
+              var btnText = bookBtn.querySelector('[data-i18n="offers.bookNow"]');
+              if (btnText) btnText.textContent = lang === 'ar' ? 'احجز الآن' : 'Book Now';
+            }
+
+            if (imageWrap) {
+              imageWrap.style.filter = '';
+              imageWrap.style.opacity = '';
+            }
           }
         });
       }
 
-      checkOfferExpirations();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyOfferStates);
+      } else {
+        applyOfferStates();
+      }
+      window.addEventListener('load', function() {
+        setTimeout(applyOfferStates, 50);
+      });
+      setInterval(applyOfferStates, 60 * 1000);
 
       var langObserver = new MutationObserver(function(mutations) {
         mutations.forEach(function(m) {
           if (m.attributeName === 'lang') {
-            setTimeout(checkOfferExpirations, 50);
+            setTimeout(applyOfferStates, 30);
           }
         });
       });
       langObserver.observe(document.documentElement, { attributes: true });
 
-      setInterval(checkOfferExpirations, 60 * 60 * 1000);
-
-
-      // ============================================================
-      // ==== AUTO-DETECTED "LAST UPDATED" TIMESTAMP (localStorage) =
-      // ============================================================
       (function initLastUpdatedTracker() {
         const STORAGE_KEY = 'zaidshakir_content_last_updated';
         const CONTENT_HASH_KEY = 'zaidshakir_content_hash';
 
         const dateEl = document.getElementById('last-updated-date');
 
-        // دالة لحساب hash بسيط
         function hashContent(str) {
           let hash = 0;
           for (let i = 0; i < str.length; i++) {
@@ -2009,20 +2013,18 @@ window.addEventListener('load', function() {
           return hash.toString(36);
         }
 
-        // دالة لجلب محتوى الصفحة الذي نتتبعه
         function getTrackedContent() {
           let content = '';
 
-          // 1) محتوى العروض
           document.querySelectorAll('#offers-section article').forEach(card => {
             const title = card.querySelector('h3')?.textContent?.trim() || '';
             const oldPrice = card.querySelector('.line-through')?.textContent?.trim() || '';
             const price = card.querySelector('.text-gradient')?.textContent?.trim() || '';
             const desc = card.querySelector('p.flex-1')?.textContent?.trim() || '';
-            content += `OFFER::${title}::${oldPrice}::${price}::${desc}||`;
+            const dateStr = card.getAttribute('data-offer-date') || '';
+            content += `OFFER::${title}::${oldPrice}::${price}::${desc}::${dateStr}||`;
           });
 
-          // 2) محتوى المقال
           const article = document.querySelector('#article-section article');
           if (article) {
             const articleTitle = article.querySelector('h3')?.textContent?.trim() || '';
@@ -2030,7 +2032,6 @@ window.addEventListener('load', function() {
             content += `ARTICLE::${articleTitle}::${paragraphs}||`;
           }
 
-          // 3) محتوى النصيحة
           const tip = document.querySelector('#tip-section article');
           if (tip) {
             const tipTitle = tip.querySelector('h3')?.textContent?.trim() || '';
@@ -2041,7 +2042,6 @@ window.addEventListener('load', function() {
           return content;
         }
 
-        // تنسيق التاريخ حسب اللغة
         function formatDate(date, lang) {
           const day = date.getDate();
           const monthIndex = date.getMonth();
@@ -2050,12 +2050,11 @@ window.addEventListener('load', function() {
           const monthsAr = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
           const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-          return lang === 'ar' 
+          return lang === 'ar'
             ? `${day} ${monthsAr[monthIndex]} ${year}`
             : `${monthsEn[monthIndex]} ${day}, ${year}`;
         }
 
-        // تحديث العرض
         function updateDisplay(date, isNew = false) {
           if (!dateEl) return;
           const lang = document.documentElement.lang || 'ar';
@@ -2067,7 +2066,6 @@ window.addEventListener('load', function() {
           }
         }
 
-        // إشعار عند التحديث
         function showUpdateNotification(date) {
           const lang = document.documentElement.lang || 'ar';
           const toast = document.createElement('div');
@@ -2096,7 +2094,6 @@ window.addEventListener('load', function() {
           }, 3500);
         }
 
-        // التحقق من التحديثات
         function checkForUpdates() {
           const currentContent = getTrackedContent();
           const currentHash = hashContent(currentContent);
@@ -2105,27 +2102,26 @@ window.addEventListener('load', function() {
 
           if (!storedHash || storedHash !== currentHash) {
             const now = new Date();
+            const initialDate = storedDate ? now : new Date(2025, 10, 8);
             localStorage.setItem(CONTENT_HASH_KEY, currentHash);
-            localStorage.setItem(STORAGE_KEY, now.toISOString());
+            localStorage.setItem(STORAGE_KEY, initialDate.toISOString());
 
             if (storedHash) {
-              console.log('🔄 تم اكتشاف تعديل على المحتوى - تحديث التاريخ تلقائيًا');
+              console.log('تم اكتشاف تعديل على المحتوى - تحديث التاريخ تلقائياً');
               showUpdateNotification(now);
             }
 
-            updateDisplay(now, !!storedHash);
-            return now;
+            updateDisplay(initialDate, !!storedHash);
+            return initialDate;
           }
 
-          const date = storedDate ? new Date(storedDate) : new Date();
+          const date = storedDate ? new Date(storedDate) : new Date(2025, 10, 8);
           updateDisplay(date);
           return date;
         }
 
-        // تشغيل عند التحميل
         checkForUpdates();
 
-        // فحص دوري كل 30 ثانية
         setInterval(() => {
           const currentHash = hashContent(getTrackedContent());
           const storedHash = localStorage.getItem(CONTENT_HASH_KEY);
@@ -2134,7 +2130,6 @@ window.addEventListener('load', function() {
           }
         }, 30000);
 
-        // إعادة حساب عند تبديل اللغة
         const langObserverForDate = new MutationObserver(function(mutations) {
           mutations.forEach(function(m) {
             if (m.attributeName === 'lang') {
@@ -2147,13 +2142,12 @@ window.addEventListener('load', function() {
         });
         langObserverForDate.observe(document.documentElement, { attributes: true });
 
-        // دالة يدوية للتحديث
         window.markContentAsUpdated = function() {
           const now = new Date();
           localStorage.setItem(CONTENT_HASH_KEY, hashContent(getTrackedContent()));
           localStorage.setItem(STORAGE_KEY, now.toISOString());
           updateDisplay(now, true);
-          console.log('✅ تم تحديث تاريخ المحتوى يدويًا');
+          console.log('تم تحديث تاريخ المحتوى يدوياً');
         };
       })();
 
