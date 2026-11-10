@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#faf6f1" />
   <meta name="description" content="تعرف على الدكتور زيد شاكر — أخصائي جراحة تجميل معتمد من البورد العربي للتخصصات الصحية، بخبرة تزيد عن 10 سنوات في التجميل الجراحي وغير الجراحي." />
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
-  
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -101,9 +101,9 @@
       --tilt-rotate-x: 0deg; --tilt-rotate-y: 0deg;
       --tilt-scale: 1; --tilt-lift: 0px;
       --tilt-glow-x: 50%; --tilt-glow-y: 50%; --tilt-glow-opacity: 0;
-      transform: perspective(1200px) 
-                 rotateX(var(--tilt-rotate-x)) 
-                 rotateY(var(--tilt-rotate-y)) 
+      transform: perspective(1200px)
+                 rotateX(var(--tilt-rotate-x))
+                 rotateY(var(--tilt-rotate-y))
                  translateY(var(--tilt-lift))
                  scale(var(--tilt-scale));
       transform-style: preserve-3d;
@@ -306,6 +306,7 @@
       transition: opacity 0.35s ease, visibility 0.35s ease;
     }
     #mobile-menu.open { opacity: 1; visibility: visible; }
+    body.no-scroll { overflow: hidden; }
 
     .nav-pill { position: relative; }
     .nav-pill .pill-bg {
@@ -355,8 +356,12 @@
       50% { box-shadow: 0 12px 34px -8px rgba(207,157,69,0.7), 0 0 0 12px rgba(244,200,113,0); }
     }
 
+    /* Live status pill — fixed display logic */
+    #live-status-pill { display: none; }
+    @media (min-width: 640px) { #live-status-pill { display: inline-flex; } }
+
     .status-pill {
-      display: inline-flex; align-items: center; gap: 6px;
+      align-items: center; gap: 6px;
       padding: 4px 10px; border-radius: 99px;
       font-size: 10px; font-weight: 800; letter-spacing: 0.05em;
       transition: all 0.3s ease;
@@ -796,30 +801,23 @@
       }
     }
 
-/* حل شامل لجميع مشاكل الجوال */
-@media (max-width: 768px) {
-    html, body {
+    /* Mobile overflow fix */
+    @media (max-width: 768px) {
+      html, body {
         overflow-x: hidden !important;
         width: 100% !important;
-    }
-    
-    /* إجبار الشبكات على أن تكون عمودية */
-    .grid {
+      }
+      .grid {
         grid-template-columns: 1fr !important;
-    }
-    
-    /* إصلاح أي عنصر يخرج عن الشاشة */
-    * {
+      }
+      * {
         max-width: 100% !important;
         box-sizing: border-box !important;
-    }
-    
-    /* إخفاء العناصر الزخرفية التي قد تسبب مشاكل */
-    .animate-orb, .glow-orb {
+      }
+      .animate-orb, .glow-orb {
         display: none !important;
+      }
     }
-}
-    
   </style>
 </head>
 <body>
@@ -829,7 +827,7 @@
     <div class="loading-logo animate-wiggle-entrance">
       <img src="logo.png" alt="Logo" />
     </div>
-    <div class="loading-text">Dr. Zaid Shakir CARE</div>
+    <div class="loading-text">Dr. Zaid Shakir clinic</div>
     <div class="loading-bar">
       <div class="loading-bar-inner"></div>
     </div>
@@ -863,7 +861,7 @@
   <!-- HEADER -->
   <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-500" style="transform: translateY(-80px); opacity: 0;">
     <div id="header-inner" class="mx-auto flex items-center justify-between gap-4 px-5 transition-all duration-500 lg:px-10 max-w-7xl bg-transparent py-5">
-      
+
       <a href="index.html" class="group flex items-center gap-3 shrink-0 magnetic" aria-label="logo" data-cursor-label="Home">
         <span class="animate-wiggle-soft relative flex size-11 items-center justify-center overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-110" style="background: linear-gradient(135deg, #6c5862, #4e3d47); box-shadow: 0 10px 24px -8px rgba(78,61,71,0.5);">
           <img src="logo.png" alt="Logo" class="size-7 object-contain" />
@@ -871,7 +869,7 @@
         </span>
         <span class="leading-tight hidden sm:block">
           <span class="block text-[15px] font-bold text-mauve-ink" data-i18n="brand.name">د. زيد شاكر</span>
-          <span class="block text-[9px] font-semibold tracking-[0.22em] text-gold-deep">Dr. Zaid Shakir CARE</span>
+          <span class="block text-[9px] font-semibold tracking-[0.22em] text-gold-deep">Dr. Zaid Shakir clinic</span>
         </span>
       </a>
 
@@ -903,8 +901,8 @@
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-        
-        <div id="live-status-pill" class="status-pill closed hidden sm:inline-flex" aria-live="polite">
+
+        <div id="live-status-pill" class="status-pill closed" aria-live="polite">
           <span class="status-dot"></span>
           <span id="live-status-text">...</span>
         </div>
@@ -1003,9 +1001,9 @@
     <!-- ABOUT SECTION -->
     <section class="relative z-10 py-12 sm:py-16">
       <div class="mx-auto max-w-7xl px-5 lg:px-10">
-        
+
         <div class="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
-          
+
           <!-- Doctor Main Image -->
           <div class="anim-slide-left relative lg:sticky lg:top-24" data-delay="0.1">
             <div class="absolute -inset-8 rounded-full" style="background: rgba(244,200,113,0.16); filter: blur(90px);" aria-hidden="true"></div>
@@ -1014,7 +1012,7 @@
               <div class="tilt-inner-deep relative overflow-hidden rounded-[calc(1.8rem-1px)]">
                 <img src="zaid.png" alt="Dr. Zaid Shakir" class="tilt-image h-[400px] w-full object-cover object-top sm:h-[520px]" loading="lazy" />
                 <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(55,41,49,0.5), transparent 40%);"></div>
-                
+
                 <span class="absolute top-3 start-3 size-6 rounded-ss-xl border-t-2 border-s-2 border-gold/90"></span>
                 <span class="absolute top-3 end-3 size-6 rounded-se-xl border-t-2 border-e-2 border-gold/90"></span>
                 <span class="absolute bottom-3 start-3 size-6 rounded-es-xl border-b-2 border-s-2 border-gold/90"></span>
@@ -1037,7 +1035,7 @@
 
           <!-- Text + Images -->
           <div class="anim-slide-right space-y-6" data-delay="0.15">
-            
+
             <div>
               <h2 class="text-2xl font-bold leading-[1.3] text-mauve-ink sm:text-3xl lg:text-[2.2rem] lg:leading-[1.2]">
                 <span data-i18n="about.title">رسالتي هي</span>
@@ -1054,7 +1052,7 @@
               <div class="relative h-64 sm:h-72 overflow-hidden">
                 <img src="dr2.png" alt="Doctor at work" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
                 <div class="absolute inset-0 bg-gradient-to-t from-mauve-ink/85 via-mauve-ink/20 to-transparent"></div>
-                
+
                 <div class="absolute top-4 end-4 flex size-11 items-center justify-center rounded-2xl border border-gold/40 bg-white/15 backdrop-blur-md text-gold">
                   <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
                 </div>
@@ -1078,7 +1076,7 @@
               <div class="relative h-64 sm:h-72 overflow-hidden">
                 <img src="dr1.png" alt="Doctor at conference" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
                 <div class="absolute inset-0 bg-gradient-to-t from-mauve-ink/85 via-mauve-ink/20 to-transparent"></div>
-                
+
                 <div class="absolute top-4 end-4 flex size-11 items-center justify-center rounded-2xl border border-gold/40 bg-white/15 backdrop-blur-md text-gold">
                   <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
@@ -1102,7 +1100,7 @@
               <div class="relative h-64 sm:h-72 overflow-hidden">
                 <img src="dr3.png" alt="Doctor portrait" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
                 <div class="absolute inset-0 bg-gradient-to-t from-mauve-ink/85 via-mauve-ink/20 to-transparent"></div>
-                
+
                 <div class="absolute top-4 end-4 flex size-11 items-center justify-center rounded-2xl border border-gold/40 bg-white/15 backdrop-blur-md text-gold">
                   <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                 </div>
@@ -1175,7 +1173,7 @@
         </div>
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
-          
+
           <div class="anim-fade-up" data-delay="0.1">
             <article class="tilt-3d group relative h-full overflow-hidden rounded-[1.5rem] border border-mauve/12 bg-white/85 p-6 shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-cursor-label="Milestone">
               <span class="tilt-inner pointer-events-none absolute -top-2 end-4 text-[4.5rem] font-black leading-none text-mauve/[0.05] transition-colors duration-500 group-hover:text-gold-deep/[0.12]" dir="ltr">01</span>
@@ -1223,9 +1221,9 @@
 
     <!-- CONFERENCES TIMELINE -->
     <section id="conferences" class="relative z-10 scroll-mt-24 py-16 sm:py-20">
-      
+
       <div class="absolute start-1/2 top-24 size-[28rem] -translate-x-1/2 rounded-full" style="background: rgba(244,200,113,0.14); filter: blur(120px);" aria-hidden="true"></div>
-      
+
       <div class="relative mx-auto max-w-7xl px-5 lg:px-10">
         <div class="anim-fade-up text-center" data-delay="0">
           <div class="inline-flex items-center gap-2.5 rounded-full border border-gold-deep/35 bg-gold/[0.22] px-4 py-1.5 text-xs font-semibold tracking-wider text-mauve-deep mx-auto">
@@ -1389,7 +1387,7 @@
     <div id="conf-modal" class="conf-modal" role="dialog" aria-modal="true">
       <div class="conf-modal-backdrop" data-close-conf></div>
       <div class="conf-modal-frame">
-        
+
         <button type="button" class="conf-modal-close" data-close-conf aria-label="Close">
           <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
@@ -1408,7 +1406,7 @@
         <div class="conf-modal-body">
           <h4 class="conf-modal-subtitle" data-i18n="conf.detailTitle">عن المشاركة</h4>
           <p id="conf-modal-desc" class="conf-modal-desc"></p>
-          
+
           <div class="conf-modal-stats">
             <div class="conf-modal-stat">
               <span class="conf-modal-stat-value" id="conf-modal-attendees">+500</span>
@@ -1448,7 +1446,7 @@
         </div>
 
         <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          
+
           <div class="tilt-3d anim-fade-up group rounded-2xl border border-mauve/12 bg-white/85 p-6 text-center shadow-[0_20px_50px_-35px_rgba(78,61,71,0.35)]" data-delay="0.1" data-cursor-label="Value">
             <div class="tilt-inner-deep mx-auto flex size-14 items-center justify-center rounded-2xl border border-gold-deep/30 bg-gold/25 text-gold-deep transition-all duration-500 group-hover:scale-110 group-hover:bg-gold/40">
               <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
@@ -1537,7 +1535,7 @@
 
     <div class="relative mx-auto max-w-7xl px-5 lg:px-10 py-12">
       <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-        
+
         <div>
           <a href="index.html" class="flex items-center gap-3 magnetic" data-cursor-label="Home">
             <span class="animate-wiggle-soft flex size-11 items-center justify-center rounded-xl bg-gold/[0.14] ring-1 ring-gold/35 overflow-hidden">
@@ -1545,21 +1543,32 @@
             </span>
             <span class="leading-tight">
               <span class="block text-sm font-bold text-white" data-i18n="misc.doctorName">د. زيد شاكر</span>
-              <span class="block text-[8px] font-semibold tracking-[0.2em] text-gold/90">Dr. Zaid Shakir CARE</span>
+              <span class="block text-[8px] font-semibold tracking-[0.2em] text-gold/90">Dr. Zaid Shakir clinic</span>
             </span>
           </a>
           <p class="mt-4 max-w-sm text-xs leading-[1.8] text-lilac/80" data-i18n="footer.about">
             عيادة الدكتور زيد شاكر لجراحة التجميل والترميم والرعاية الطبية المتقدمة.
           </p>
-          <div class="mt-4 flex gap-2">
-            <a href="https://www.facebook.com/dr.zaidclinicadr.zaidclinica" target="_blank" rel="noopener" aria-label="Facebook" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic">
+          <div class="mt-4 flex flex-wrap gap-2">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/dr.zaidclinicadr.zaidclinica" target="_blank" rel="noopener" aria-label="Facebook" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="فيسبوك">
               <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
-            <a href="https://www.instagram.com/dr.zaidclinica/dr.zaidclinica/" target="_blank" rel="noopener" aria-label="Instagram" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/dr.zaidclinica/dr.zaidclinica/" target="_blank" rel="noopener" aria-label="Instagram" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="انستغرام">
               <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             </a>
-            <a href="https://wa.me/9647800006964" target="_blank" rel="noopener" aria-label="WhatsApp" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/9647800006964" target="_blank" rel="noopener" aria-label="WhatsApp" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="واتساب">
               <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@DrZaidShakir" target="_blank" rel="noopener" aria-label="YouTube" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="يوتيوب">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@dr.zaidclinica" target="_blank" rel="noopener" aria-label="TikTok" class="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-lilac transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/[0.14] hover:text-gold magnetic" data-cursor-label="تيك توك">
+              <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
             </a>
           </div>
         </div>
@@ -1590,7 +1599,7 @@
             </li>
             <li class="flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2.5">
               <span class="text-lilac/85" data-i18n="hours.sun">الأحد</span>
-              <span class="font-bold text-rose-300/90" data-i18n="hours.off">10:00 AM — 9:00 PM</span>
+              <span class="font-bold text-gold" dir="ltr">10AM — 9PM</span>
             </li>
             <li class="flex items-center justify-between gap-2 rounded-xl border border-gold/30 bg-gold/[0.1] px-3 py-2.5">
               <span class="text-white" data-i18n="hours.online">الحجز الإلكتروني</span>
@@ -1634,12 +1643,12 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    var BOOKING_URL = 'https://example.com/booking';
-    
+    var BOOKING_URL = 'https://drzaidshakir.com/booking';
+
     function openBooking() {
       window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
     }
-   
+
     (function() {
       'use strict';
 
@@ -1659,30 +1668,30 @@
           'nav.testimonials': 'آراء المرضى',
           'nav.contact': 'تواصل معنا',
           'nav.book': 'احجز موعدك',
-          
+
           'hero.badge': 'من نحن',
           'hero.title': 'تعرّف على',
           'hero.titleAccent': 'الدكتور زيد شاكر',
           'hero.sub': 'أخصائي جراحة تجميل معتمد من البورد العربي للتخصصات الصحية، بخبرة تزيد عن 10 سنوات في مجال التجميل الجراحي وغير الجراحي.',
-          
+
           'about.title': 'رسالتي هي ',
           'about.titleAccent': 'مساعدتك على التألق',
           'about.p1': 'بدأت رحلتي المهنية في كلية الطب بجامعة بابل، ثم طورت مهاراتي من خلال تدريب مكثف في مستشفى الواسطي التعليمي لجراحة التجميل والترميم، ومركز التخصصات للحروق في مدينة الطب. رسالتي بسيطة ولكنها عميقة: مساعدتك على الشعور بالثقة، والتألق، والوصول إلى أفضل نسخة من نفسك. أعمل مع كل مريض بشكل شخصي لتقديم رعاية مخصصة تتماشى مع أهدافه وتطلعاته.',
           'about.p2': 'أدمج أحدث التقنيات مع لمسة فنية لضمان نتائج طبيعية ومتناغمة تعكس جمالك الحقيقي دون المبالغة. أدرك أن اختيار جراح التجميل قرار شخصي ومهم للغاية، ولهذا ألتزم بتوفير بيئة آمنة تشعر فيها بالراحة والثقة لاتخاذ هذه الخطوة بثبات.',
           'about.p3': 'بدءًا من الاستشارة الأولى وحتى تحقيق النتائج النهائية، تبقى سلامتك ورضاك وثقتك على رأس أولوياتي.',
-          
+
           'img1.tag': 'في العيادة', 'img1.title': 'دقة في كل تفصيل',
           'img2.tag': 'في المؤتمر', 'img2.title': 'حضور مؤثر',
           'img3.tag': 'خبرة وشغف', 'img3.title': 'شغف لا ينتهي',
-          
+
           'quote.text': '«معًا، يمكننا إعادة تعريف الجمال، واستعادة الشباب، وابتكار نسخة من نفسك تحبها أكثر.»',
           'quote.author': 'د. زيد شاكر',
           'quote.role': 'أخصائي جراحة التجميل الجراحي وغير الجراحي',
-          
+
           'stat.years': 'سنوات خبرة',
           'stat.patients': 'مريض سعيد',
           'stat.rating': 'تقييم المرضى',
-          
+
           'journey.badge': 'المسيرة المهنية',
           'journey.title': 'المحطات ',
           'journey.titleAccent': 'العلمية والمهنية',
@@ -1693,7 +1702,7 @@
           'journey.card2.desc': 'تدريب متخصص في جراحة التجميل والترميم على يد نخبة من الاستشاريين.',
           'journey.card3.title': 'مركز التخصصات للحروق', 'journey.card3.place': 'مدينة الطب',
           'journey.card3.desc': 'خبرة متخصصة في علاج الحروق والترميم التجميلي للحالات الحرجة.',
-          
+
           'conf.badge': 'المؤتمرات والندوات',
           'conf.title': 'رحلتي في ',
           'conf.titleAccent': 'المحافل العلمية',
@@ -1703,27 +1712,27 @@
           'conf.attendees': 'مشارك',
           'conf.days': 'أيام',
           'conf.sessions': 'جلسة',
-          
+
           'conf1.title': 'مؤتمر دبي ديرما الدولي',
           'conf1.location': 'دبي، الإمارات',
           'conf1.desc': 'مشاركة في مؤتمر دبي ديرما (Dubai Derma Congress) — أحد أكبر المؤتمرات العالمية المتخصصة في الأمراض الجلدية والتجميل. شاركت في الجلسات العلمية المتقدمة حول أحدث تقنيات الحقن والتجديد الجلدي، مع حضور ورش العمل التطبيقية على أحدث الأجهزة والتقنيات العالمية.',
-          
+
           'conf2.title': 'مؤتمر EPSC دبي لجراحة التجميل',
           'conf2.location': 'دبي، الإمارات',
           'conf2.desc': 'مشاركة في مؤتمر EPSC Dubai — الملتقى الإقليمي المتخصص في جراحات التجميل الترميمية. ناقشت خلاله أحدث بروتوكولات الأمان في عمليات جراحة الثدي وشد الوجه، وتبادلت الخبرات مع نخبة من الجراحين الدوليين حول أفضل الممارسات في التجميل الجراحي.',
-          
+
           'conf3.title': 'ندوة LAHA لجراحة التجميل بالليزر',
           'conf3.location': 'سولوفينيا',
           'conf3.desc': 'حضور ومشاركة فعّالة في ندوة LAHA Symposium المتخصصة في تقنيات الليزر والعلاجات غير الجراحية. شاركت في ورشة عمل حول أحدث أجهزة الليزر لإزالة الشعر وتجديد البشرة، مع تجارب عملية على حالات متنوعة.',
-          
+
           'conf4.title': 'المؤتمر الدولي لجراحة التجميل ICOPLAST',
           'conf4.location': 'دبي، الإمارات',
           'conf4.desc': 'مشاركة في مؤتمر ICOPLAST 2023 — المؤتمر الدولي المعتمد من الجمعية الدولية لجراحي التجميل. قدمت ورقة بحثية حول تقنيات تجميل الأنف الوظيفي، وشاركت في الجلسات العلمية التي استضافت نخبة من الجراحين العالميين.',
-          
+
           'conf5.title': 'ورشة ICOPLAST العملية',
           'conf5.location': 'دبي، الإمارات',
           'conf5.desc': 'مشاركة في ورش العمل العملية المصاحبة لمؤتمر ICOPLAST. تدريب مباشر على أحدث تقنيات الحقن والتجديد، مع التركيز على النتائج الطبيعية التي تحافظ على ملامح الوجه الأصلية.',
-          
+
           'values.badge': 'فلسفتنا',
           'values.title': 'القيم التي ',
           'values.titleAccent': 'نؤمن بها',
@@ -1731,14 +1740,14 @@
           'values.v2.title': 'رعاية شخصية', 'values.v2.desc': 'تعامل فردي مع كل مريض حسب احتياجاته.',
           'values.v3.title': 'نتائج طبيعية', 'values.v3.desc': 'جمال متناسق يعكس ملامحك الحقيقية.',
           'values.v4.title': 'خبرة موثوقة', 'values.v4.desc': 'أكثر من 10 سنوات من الممارسة المعتمدة.',
-          
+
           'cta.badge': 'الحجز متاح الآن',
           'cta.title': 'لنبدأ رحلتك ',
           'cta.titleAccent': 'نحو التألق!',
           'cta.sub': 'احجز استشارتك اليوم واكتشف كيف يمكننا معًا تحقيق أفضل نسخة من نفسك.',
           'cta.bookBtn': 'احجز استشارتك',
           'cta.whatsapp': 'تواصل واتساب',
-          
+
           'footer.about': 'عيادة الدكتور زيد شاكر لجراحة التجميل والترميم والرعاية الطبية المتقدمة.',
           'footer.quickLinks': 'روابط سريعة',
           'footer.hours': 'أوقات العمل',
@@ -1746,16 +1755,16 @@
           'footer.rights': 'جميع الحقوق محفوظة © 2025 عيادة الدكتور زيد شاكر.',
           'footer.privacy': 'سياسة الخصوصية',
           'footer.terms': 'الشروط والأحكام',
-          
+
           'hours.satThu': 'السبت، الاثنين — الخميس',
           'hours.fri': 'الجمعة',
           'hours.sun': 'الأحد',
-          'hours.off': '10:00 AM — 9:00 PM',
+          'hours.off': 'مغلق',
           'hours.online': 'الحجز الإلكتروني',
-          
+
           'status.open': 'مفتوح الآن',
           'status.closed': 'مغلق حالياً',
-          
+
           'misc.doctorName': 'د. زيد شاكر',
           'misc.doctorTitle': 'أخصائي جراحة تجميل معتمد'
         },
@@ -1768,30 +1777,30 @@
           'nav.testimonials': 'Testimonials',
           'nav.contact': 'Contact Us',
           'nav.book': 'Book Appointment',
-          
+
           'hero.badge': 'About Us',
           'hero.title': 'Meet ',
           'hero.titleAccent': 'Dr. Zaid Shakir',
           'hero.sub': 'Board-certified plastic surgeon with over 10 years of experience in surgical and non-surgical cosmetic medicine.',
-          
+
           'about.title': 'My Mission Is ',
           'about.titleAccent': 'Helping You Shine',
           'about.p1': 'I began my professional journey at the College of Medicine, University of Babylon, and further developed my skills through intensive training at Al-Wasiti Teaching Hospital for Plastic & Reconstructive Surgery, and the Specialized Burns Center in Medical City. My mission is simple yet profound: to help you feel confident, radiant, and reach the best version of yourself. I work personally with each patient to provide tailored care that aligns with their goals and aspirations.',
           'about.p2': 'I combine the latest technologies with an artistic touch to ensure natural, harmonious results that reflect your true beauty without exaggeration. I understand that choosing a plastic surgeon is a very personal and important decision, so I am committed to providing a safe, comfortable, and trustworthy environment to take this step with confidence.',
           'about.p3': 'From the first consultation to achieving the final results, your safety, satisfaction, and trust remain my top priorities.',
-          
+
           'img1.tag': 'At the Clinic', 'img1.title': 'Precision in Every Detail',
           'img2.tag': 'At the Conference', 'img2.title': 'Impactful Presence',
           'img3.tag': 'Experience & Passion', 'img3.title': 'Endless Passion',
-          
+
           'quote.text': '"Together, we can redefine beauty, restore youth, and create a version of yourself you love even more."',
           'quote.author': 'Dr. Zaid Shakir',
           'quote.role': 'Specialist in Surgical & Non-Surgical Cosmetic Surgery',
-          
+
           'stat.years': 'Years of Experience',
           'stat.patients': 'Happy Patients',
           'stat.rating': 'Patient Rating',
-          
+
           'journey.badge': 'Career Journey',
           'journey.title': 'Scientific & ',
           'journey.titleAccent': 'Professional Milestones',
@@ -1802,7 +1811,7 @@
           'journey.card2.desc': 'Specialized training in plastic and reconstructive surgery under elite consultants.',
           'journey.card3.title': 'Burns Specialized Center', 'journey.card3.place': 'Medical City',
           'journey.card3.desc': 'Specialized expertise in burn treatment and reconstructive cosmetic surgery for critical cases.',
-          
+
           'conf.badge': 'Conferences & Symposia',
           'conf.title': 'My Journey in ',
           'conf.titleAccent': 'Scientific Forums',
@@ -1812,42 +1821,42 @@
           'conf.attendees': 'Attendees',
           'conf.days': 'Days',
           'conf.sessions': 'Sessions',
-          
+
           'conf1.title': 'Dubai Derma International Congress',
           'conf1.location': 'Dubai, UAE',
           'conf1.desc': 'Participation in the Dubai Derma Congress — one of the largest global conferences specialized in dermatology and aesthetics. I attended advanced scientific sessions on the latest injection and skin rejuvenation techniques, along with hands-on workshops on the most advanced devices and technologies.',
-          
+
           'conf2.title': 'EPSC Dubai Conference for Plastic Surgery',
           'conf2.location': 'Dubai, UAE',
           'conf2.desc': 'Participation in the EPSC Dubai Conference — a regional forum specialized in reconstructive plastic surgeries. I discussed the latest safety protocols in breast surgery and facelift procedures, and exchanged expertise with elite international surgeons on best practices in aesthetic surgery.',
-          
+
           'conf3.title': 'LAHA Symposium for Laser Cosmetic Surgery',
           'conf3.location': 'Slovenia',
           'conf3.desc': 'Active attendance and participation in the LAHA Symposium specialized in laser techniques and non-surgical treatments. I participated in a workshop on the latest laser devices for hair removal and skin rejuvenation, with hands-on practical experience on various cases.',
-          
+
           'conf4.title': 'International Conference for Plastic Surgery ICOPLAST',
           'conf4.location': 'Dubai, UAE',
           'conf4.desc': 'Participation in the ICOPLAST 2023 conference — the international conference accredited by the International Confederation of Plastic Surgery Societies. I presented a research paper on functional rhinoplasty techniques, and participated in scientific sessions hosting elite international surgeons.',
-          
+
           'conf5.title': 'ICOPLAST Hands-On Workshop',
           'conf5.location': 'Dubai, UAE',
           'conf5.desc': 'Participation in hands-on workshops accompanying the ICOPLAST conference. Direct training on the latest injection and rejuvenation techniques, focusing on natural results that preserve the original facial features.',
-          
+
           'values.badge': 'Our Philosophy',
           'values.title': 'The Values ',
           'values.titleAccent': 'We Believe In',
           'values.v1.title': 'Safety First', 'values.v1.desc': 'Highest safety and sterilization standards in every procedure.',
-          'values.v2.title': 'Personal Care', 'values.v2.desc': 'Individualized care tailored to each patient\'s needs.',
+          'values.v2.title': 'Personal Care', 'values.v2.desc': "Individualized care tailored to each patient's needs.",
           'values.v3.title': 'Natural Results', 'values.v3.desc': 'Harmonious beauty that reflects your true features.',
           'values.v4.title': 'Proven Experience', 'values.v4.desc': 'More than 10 years of certified practice.',
-          
+
           'cta.badge': 'Booking Available Now',
           'cta.title': "Let's Begin Your Journey ",
           'cta.titleAccent': 'Toward Radiance!',
           'cta.sub': 'Book your consultation today and discover how together we can achieve the best version of yourself.',
           'cta.bookBtn': 'Book Your Consultation',
           'cta.whatsapp': 'Contact via WhatsApp',
-          
+
           'footer.about': 'Dr. Zaid Shakir Clinic for Plastic & Reconstructive Surgery and Advanced Medical Care.',
           'footer.quickLinks': 'Quick Links',
           'footer.hours': 'Working Hours',
@@ -1855,46 +1864,43 @@
           'footer.rights': 'All rights reserved © 2025 Dr. Zaid Shakir Clinic.',
           'footer.privacy': 'Privacy Policy',
           'footer.terms': 'Terms & Conditions',
-          
+
           'hours.satThu': 'Saturday, Mon — Thu',
           'hours.fri': 'Friday',
           'hours.sun': 'Sunday',
           'hours.off': 'Closed',
           'hours.online': 'Online Booking',
-          
+
           'status.open': 'Open Now',
           'status.closed': 'Closed',
-          
+
           'misc.doctorName': 'Dr. Zaid Shakir',
           'misc.doctorTitle': 'Board-Certified Plastic Surgeon'
         }
       };
 
       let currentLang = 'ar';
+      let currentOpenConfId = null;
 
       function applyTranslation(lang) {
         currentLang = lang;
         const t = translations[lang];
-        
-        // Update HTML lang and dir
+
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        
-        // Update document title
-        document.title = lang === 'ar' 
+
+        document.title = lang === 'ar'
           ? 'عيادة د. زيد شاكر | جراحة التجميل والترميم'
           : 'Dr. Zaid Shakir Clinic | Plastic Surgery';
 
-        // Update all elements with data-i18n
         document.querySelectorAll('[data-i18n]').forEach(function(el) {
           const key = el.getAttribute('data-i18n');
           if (t[key]) el.textContent = t[key];
         });
 
-        // Update language buttons
         const langEnBtn = document.getElementById('lang-en');
         const langArBtn = document.getElementById('lang-ar');
-        
+
         if (lang === 'ar') {
           langArBtn.style.background = 'linear-gradient(90deg, #f4c871, #eeb44d)';
           langArBtn.style.boxShadow = '0 4px 14px -4px rgba(207,157,69,0.7)';
@@ -1914,21 +1920,26 @@
           langArBtn.classList.remove('text-mauve-ink');
           langArBtn.classList.add('text-mauve/60');
         }
-        
-        // Refresh live status with new language
+
         updateLiveStatus();
+
+        // Rebuild the modal if it's open
+        if (currentOpenConfId) {
+          setTimeout(function() {
+            openConfModal(currentOpenConfId);
+          }, 50);
+        }
       }
 
-      // Bind language buttons
       const langEnBtnEl = document.getElementById('lang-en');
       const langArBtnEl = document.getElementById('lang-ar');
-      
+
       if (langEnBtnEl) {
         langEnBtnEl.addEventListener('click', function() {
           applyTranslation('en');
         });
       }
-      
+
       if (langArBtnEl) {
         langArBtnEl.addEventListener('click', function() {
           applyTranslation('ar');
@@ -1941,15 +1952,16 @@
         const day = now.getDay();
         const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-        if (day === 0) return { isOpen: false };
-        if (day === 5) {
-          const openMin = 10 * 60;
-          const closeMin = 20 * 60 + 30;
-          return { isOpen: currentMinutes >= openMin && currentMinutes < closeMin };
+        // Sunday: 10:00 — 21:00
+        if (day === 0) {
+          return { isOpen: currentMinutes >= 600 && currentMinutes < 1260 };
         }
-        const openMin = 15 * 60;
-        const closeMin = 20 * 60 + 30;
-        return { isOpen: currentMinutes >= openMin && currentMinutes < closeMin };
+        // Friday: 10:00 — 20:30
+        if (day === 5) {
+          return { isOpen: currentMinutes >= 600 && currentMinutes < 1230 };
+        }
+        // Saturday, Monday — Thursday: 15:00 — 20:30
+        return { isOpen: currentMinutes >= 900 && currentMinutes < 1230 };
       }
 
       function updateLiveStatus() {
@@ -1970,18 +1982,32 @@
 
       // ============ LOADING ============
       window.addEventListener('load', function() {
-        setTimeout(function() {
+        const loadingLogo = document.querySelector('.loading-logo');
+        const revealSite = function() {
           const loadingScreen = document.getElementById('loading-screen');
           if (loadingScreen) loadingScreen.classList.add('hidden');
+
           var header = document.getElementById('main-header');
           if (header) {
             header.style.transition = 'transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.9s ease';
             header.style.transform = 'translateY(0)';
             header.style.opacity = '1';
           }
+
+          setTimeout(function() {
+            if (loadingScreen) loadingScreen.style.display = 'none';
+          }, 1000);
+
           setTimeout(triggerVisibleAnimations, 100);
           updateLiveStatus();
-        }, 1000);
+        };
+
+        if (loadingLogo && !prefersReducedMotion) {
+          loadingLogo.addEventListener('animationend', revealSite, { once: true });
+          setTimeout(revealSite, 3000);
+        } else {
+          setTimeout(revealSite, 500);
+        }
       });
 
       setInterval(updateLiveStatus, 60000);
@@ -1991,7 +2017,7 @@
         document.querySelectorAll('.tilt-3d').forEach(function(card) {
           if (card.dataset.tiltInit === 'true') return;
           card.dataset.tiltInit = 'true';
-          
+
           const state = {
             el: card, rect: null,
             targetRotX: 0, targetRotY: 0, currentRotX: 0, currentRotY: 0,
@@ -1999,7 +2025,7 @@
             targetGlow: 0, currentGlow: 0, glowX: 50, glowY: 50,
             targetGlowX: 50, targetGlowY: 50, hovered: false, rafId: null
           };
-          
+
           card.addEventListener('mouseenter', function() {
             state.hovered = true;
             state.rect = card.getBoundingClientRect();
@@ -2009,7 +2035,7 @@
             card.classList.add('tilting');
             if (!state.rafId) animateCard(state);
           });
-          
+
           card.addEventListener('mousemove', function(e) {
             if (!state.rect) state.rect = card.getBoundingClientRect();
             const x = e.clientX - state.rect.left;
@@ -2021,7 +2047,7 @@
             state.targetGlowX = (x / state.rect.width) * 100;
             state.targetGlowY = (y / state.rect.height) * 100;
           });
-          
+
           card.addEventListener('mouseleave', function() {
             state.hovered = false;
             state.targetRotX = 0; state.targetRotY = 0;
@@ -2031,7 +2057,7 @@
           });
         });
       }
-      
+
       function animateCard(state) {
         const lerp = 0.12, glowLerp = 0.15;
         state.currentRotX += (state.targetRotX - state.currentRotX) * lerp;
@@ -2041,7 +2067,7 @@
         state.currentGlow += (state.targetGlow - state.currentGlow) * glowLerp;
         state.glowX += (state.targetGlowX - state.glowX) * glowLerp;
         state.glowY += (state.targetGlowY - state.glowY) * glowLerp;
-        
+
         state.el.style.setProperty('--tilt-rotate-x', state.currentRotX.toFixed(2) + 'deg');
         state.el.style.setProperty('--tilt-rotate-y', state.currentRotY.toFixed(2) + 'deg');
         state.el.style.setProperty('--tilt-lift', state.currentLift.toFixed(2) + 'px');
@@ -2049,13 +2075,13 @@
         state.el.style.setProperty('--tilt-glow-x', state.glowX.toFixed(1) + '%');
         state.el.style.setProperty('--tilt-glow-y', state.glowY.toFixed(1) + '%');
         state.el.style.setProperty('--tilt-glow-opacity', state.currentGlow.toFixed(2));
-        
+
         const rotXDone = Math.abs(state.targetRotX - state.currentRotX) < 0.1;
         const rotYDone = Math.abs(state.targetRotY - state.currentRotY) < 0.1;
         const liftDone = Math.abs(state.targetLift - state.currentLift) < 0.1;
         const scaleDone = Math.abs(state.targetScale - state.currentScale) < 0.001;
         const glowDone = Math.abs(state.targetGlow - state.currentGlow) < 0.01;
-        
+
         if (state.hovered || !rotXDone || !rotYDone || !liftDone || !scaleDone || !glowDone) {
           state.rafId = requestAnimationFrame(function() { animateCard(state); });
         } else {
@@ -2063,14 +2089,14 @@
           state.el.classList.remove('tilting');
         }
       }
-      
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initTiltCards);
       } else {
         initTiltCards();
       }
       setTimeout(initTiltCards, 500);
-      
+
       document.addEventListener('mousemove', function(e) {
         document.querySelectorAll('.glow-btn').forEach(function(el) {
           const rect = el.getBoundingClientRect();
@@ -2085,7 +2111,7 @@
         const cursorRing = document.getElementById('cursor-ring');
         const glowOrb = document.getElementById('glow-orb');
         const hoverLabel = document.getElementById('hover-label');
-        
+
         let mouseX = -100, mouseY = -100;
         let dotX = -100, dotY = -100;
         let ringX = -100, ringY = -100;
@@ -2140,7 +2166,7 @@
         animateCursor();
 
         const interactiveSelector = 'button, a, input, textarea, [data-cursor-label], .magnetic, .conf-tl-card';
-        
+
         document.addEventListener('mouseover', function(e) {
           const target = e.target.closest(interactiveSelector);
           if (target) {
@@ -2174,20 +2200,20 @@
             const distance = 40 + Math.random() * 40;
             const dx = Math.cos(angle) * distance;
             const dy = Math.sin(angle) * distance;
-            
+
             particle.style.left = e.clientX + 'px';
             particle.style.top = e.clientY + 'px';
             particle.style.opacity = '1';
             particle.style.transition = 'transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.6s ease';
             particle.style.transform = 'translate(-50%, -50%) scale(1)';
-            
+
             document.body.appendChild(particle);
-            
+
             requestAnimationFrame(() => {
               particle.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0)`;
               particle.style.opacity = '0';
             });
-            
+
             setTimeout(() => particle.remove(), 700);
           }
         });
@@ -2199,14 +2225,14 @@
           let rafId = null;
           let targetX = 0, targetY = 0;
           let currentX = 0, currentY = 0;
-          
+
           el.addEventListener('mousemove', function(e) {
             const rect = el.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
             targetX = (e.clientX - centerX) * 0.25;
             targetY = (e.clientY - centerY) * 0.25;
-            
+
             if (!rafId) {
               const animate = () => {
                 currentX += (targetX - currentX) * 0.2;
@@ -2221,7 +2247,7 @@
               rafId = requestAnimationFrame(animate);
             }
           });
-          
+
           el.addEventListener('mouseleave', function() {
             targetX = 0;
             targetY = 0;
@@ -2419,11 +2445,11 @@
         }
         raf = requestAnimationFrame(tickCanvas);
       }
-      
+
       document.addEventListener('click', function(e) {
         canvasClicks.push({ x: e.clientX, y: e.clientY, radius: 0, alpha: 0.8 });
       });
-      
+
       window.addEventListener('pointermove', function(e) {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
@@ -2443,14 +2469,14 @@
       var headerBookBtn = document.getElementById('header-book-btn');
       var mobileBookBtn = document.getElementById('mobile-book-btn');
       var fabBook = document.getElementById('fab-book');
-      
+
       if (headerBookBtn) headerBookBtn.addEventListener('click', openBooking);
-      if (mobileBookBtn) mobileBookBtn.addEventListener('click', function() { 
-        closeMobileMenu(); 
-        openBooking(); 
+      if (mobileBookBtn) mobileBookBtn.addEventListener('click', function() {
+        closeMobileMenu();
+        openBooking();
       });
       if (fabBook) fabBook.addEventListener('click', openBooking);
-      
+
       document.querySelectorAll('.cta-book-btn').forEach(function(btn) {
         btn.addEventListener('click', openBooking);
       });
@@ -2459,7 +2485,7 @@
       // ============ CONFERENCE MODAL =============================
       // ============================================================
       const confModal = document.getElementById('conf-modal');
-      
+
       const confImages = {
         1: 'derma.png',
         2: 'nos.jpg',
@@ -2479,12 +2505,18 @@
 
       function openConfModal(confId) {
         if (!confModal) return;
+        currentOpenConfId = confId;
         const t = translations[currentLang];
         const key = 'conf' + confId;
-        
+
+        const cardEl = document.querySelector('[data-conf="' + confId + '"]');
+        const itemEl = cardEl ? cardEl.closest('.conf-tl-item') : null;
+        const catEl = itemEl ? itemEl.querySelector('.conf-tl-category') : null;
+        const category = catEl ? catEl.textContent.trim() : '';
+
         const data = {
           year: confId <= 2 ? '2024' : '2023',
-          category: document.querySelector('[data-conf="' + confId + '"]').closest('.conf-tl-item').querySelector('.conf-tl-category').textContent,
+          category: category,
           title: t[key + '.title'] || '',
           location: t[key + '.location'] || '',
           desc: t[key + '.desc'] || ''
@@ -2495,7 +2527,7 @@
         document.getElementById('conf-modal-year').textContent = data.year;
         document.getElementById('conf-modal-category').textContent = data.category;
         document.getElementById('conf-modal-title').textContent = data.title;
-        document.getElementById('conf-modal-location').innerHTML = 
+        document.getElementById('conf-modal-location').innerHTML =
           '<svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>' + data.location;
         document.getElementById('conf-modal-desc').textContent = data.desc;
         document.getElementById('conf-modal-attendees').textContent = confId == 1 ? '+1500' : confId == 2 ? '+800' : confId == 3 ? '+300' : confId == 4 ? '+700' : '+150';
@@ -2509,7 +2541,7 @@
           4: ['تجميل الأنف', 'جراحة وظيفية', 'بحث علمي', 'ICOPLAST'],
           5: ['تدريب عملي', 'حقن', 'فيلر', 'بوتوكس']
         };
-        
+
         const tagsEn = {
           1: ['Dermatology', 'Aesthetics', 'Injectables', 'Modern Tech'],
           2: ['Plastic Surgery', 'Breast Surgery', 'Facelift', 'Safe Protocols'],
@@ -2532,6 +2564,7 @@
         if (!confModal) return;
         confModal.classList.remove('open');
         document.body.style.overflow = '';
+        currentOpenConfId = null;
       }
 
       document.querySelectorAll('[data-close-conf]').forEach(function(el) {
