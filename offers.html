@@ -338,6 +338,34 @@
       box-shadow: 0 0 14px rgba(207,157,69,0.55);
       transform-origin: 0% 50%; transform: scaleX(0); transition: transform 0.1s linear;
     }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 99px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+    }
+    .status-pill.open {
+      background: rgba(34,197,94,0.15); color: #16a34a;
+      border: 1px solid rgba(34,197,94,0.3);
+    }
+    .status-pill.closed {
+      background: rgba(239,68,68,0.12); color: #dc2626;
+      border: 1px solid rgba(239,68,68,0.25);
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; position: relative;
+    }
+    .status-pill.open .status-dot::after {
+      content: ""; position: absolute; inset: -3px;
+      border-radius: 50%; background: currentColor;
+      opacity: 0.4; animation: statusPulse 1.8s ease-out infinite;
+    }
+    @keyframes statusPulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
     html[dir="rtl"] #scroll-progress { transform-origin: 100% 50%; }
     #mobile-menu {
       position: fixed; inset: 0; z-index: 80;
@@ -564,6 +592,14 @@
           <span class="relative" data-i18n="nav.contact">تواصل معنا</span>
         </a>
       </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div id="live-status-pill" class="status-pill closed hidden sm:inline-flex" aria-live="polite">
+          <span class="status-dot"></span>
+          <span id="live-status-text">جاري التحقق...</span>
+        </div>
+
+        <div class="flex items-center rounded-full border border-mauve/15 bg-white/70 p-1 text-[11px] font-bold backdrop-blur-md sm:text-xs" data-cursor-label="اللغة">
 
       <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <div class="flex items-center rounded-full border border-mauve/15 bg-white/70 p-1 text-[11px] font-bold backdrop-blur-md sm:text-xs" data-cursor-label="اللغة">
@@ -1050,18 +1086,91 @@
       const isFinePointer = window.matchMedia('(pointer: fine)').matches;
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      function updateLiveStatus() {
+      // ============================================================
+      // ============ IRAQ TIME + WORK SCHEDULE (UTC+3) ============
+      // ============================================================
+      function getIraqTime() {
         const now = new Date();
-        const day = now.getDay();
-        const hour = now.getHours();
-        let isOpen = false;
-        if (day !== 5) {
-          isOpen = hour >= 9 && hour < 20;
+        const iraq = new Date(now.getTime() + (3 * 60 + now.getTimezoneOffset()) * 60000);
+        return {
+          day: iraq.getDay(), // 0=الأحد ... 5=الجمعة, 6=السبت
+          minutes: iraq.getHours() * 60 + iraq.getMinutes()
+        };
+      }
+
+      function getWorkSchedule() {
+        const { day, minutes } = getIraqTime();
+        const CLOSE = 21 * 60; // 9:00 م بتوقيت العراق
+
+        // الأحد عطلة رسمية
+        if (day === 0) {
+          return {
+            isOpen: false,
+            text: 'مغلق حالياً',
+            schedule: 'الأحد: عطلة',
+            nextOpen: 'يفتح الاثنين 3:00 مساءً'
+          };
         }
-        document.querySelectorAll('[data-live-status]').forEach(function(el) {
-          el.textContent = isOpen ? 'مفتوح الآن' : 'مغلق';
-          el.style.color = isOpen ? '#10b981' : '#fca5a5';
-        });
+
+        // الجمعة: 10:00 ص — 9:00 م
+        if (day === 5) {
+          const openMin = 10 * 60;
+          const isOpen = minutes >= openMin && minutes < CLOSE;
+          return {
+            isOpen: isOpen,
+            text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
+            schedule: 'الجمعة: 10:00 ص — 9:00 م',
+            nextOpen: isOpen ? null : (
+              minutes < openMin
+                ? 'يفتح اليوم 10:00 صباحاً'
+                : 'يفتح السبت 3:00 مساءً'
+            )
+          };
+        }
+
+        // السبت + الاثنين → الخميس: 3:00 م — 9:00 م
+        const openMin = 15 * 60;
+        const isOpen = minutes >= openMin && minutes < CLOSE;
+
+        let nextOpen = null;
+        if (!isOpen) {
+          if (minutes < openMin) {
+            nextOpen = 'يفتح اليوم 3:00 مساءً';
+          } else if (day === 4) {
+            nextOpen = 'يفتح الجمعة 10:00 صباحاً';
+          } else if (day === 6) {
+            nextOpen = 'يفتح الاثنين 3:00 مساءً';
+          } else {
+            nextOpen = 'يفتح غداً 3:00 مساءً';
+          }
+        }
+
+        return {
+          isOpen: isOpen,
+          text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
+          schedule: '3:00 م — 9:00 م',
+          nextOpen: nextOpen
+        };
+      }
+
+      function updateLiveStatus() {
+        const pill = document.getElementById('live-status-pill');
+        const textEl = document.getElementById('live-status-text');
+        if (!pill || !textEl) return;
+
+        const status = getWorkSchedule();
+        const lang = (document.documentElement.lang === 'en') ? 'en' : 'ar';
+        pill.classList.remove('open', 'closed');
+
+        if (status.isOpen) {
+          pill.classList.add('open');
+          textEl.textContent = lang === 'ar' ? 'مفتوح الآن' : 'Open Now';
+          pill.setAttribute('title', status.schedule || '');
+        } else {
+          pill.classList.add('closed');
+          textEl.textContent = lang === 'ar' ? 'مغلق حالياً' : 'Closed';
+          pill.setAttribute('title', status.nextOpen || status.schedule || '');
+        }
       }
 
       window.addEventListener('load', function() {
@@ -1083,6 +1192,12 @@
           setTimeout(triggerVisibleAnimations, 100);
           updateLiveStatus();
         }, 3000);
+      });
+
+      // تحديث الحالة كل دقيقة + عند رجوع الزائر للصفحة
+      setInterval(updateLiveStatus, 60000);
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) updateLiveStatus();
       });
 
       const tiltCards = [];
@@ -1863,10 +1978,10 @@
         }
 
         setTimeout(applyOfferStates, 30);
-
         setTimeout(function() {
           if (typeof renderTip === 'function') renderTip(tipIndex);
         }, 50);
+setTimeout(updateLiveStatus, 60);
       }
 
       langEnBtn.addEventListener('click', function() { applyTranslation('en'); });
