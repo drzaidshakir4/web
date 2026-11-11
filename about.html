@@ -1946,37 +1946,90 @@
         });
       }
 
-      // ============ WORKING HOURS ============
-      function getWorkSchedule() {
+      // ============================================================
+      // ============ IRAQ TIME + WORK SCHEDULE (UTC+3) ============
+      // ============================================================
+      function getIraqTime() {
         const now = new Date();
-        const day = now.getDay();
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const iraq = new Date(now.getTime() + (3 * 60 + now.getTimezoneOffset()) * 60000);
+        return {
+          day: iraq.getDay(), // 0=الأحد ... 5=الجمعة, 6=السبت
+          minutes: iraq.getHours() * 60 + iraq.getMinutes()
+        };
+      }
 
-        // Sunday: 10:00 — 21:00
+      function getWorkSchedule() {
+        const { day, minutes } = getIraqTime();
+        const CLOSE = 21 * 60; // 9:00 م بتوقيت العراق
+
+        // الأحد عطلة رسمية
         if (day === 0) {
-          return { isOpen: currentMinutes >= 600 && currentMinutes < 1260 };
+          return {
+            isOpen: false,
+            text: 'مغلق حالياً',
+            schedule: 'الأحد: عطلة',
+            nextOpen: 'يفتح الاثنين 3:00 مساءً'
+          };
         }
-        // Friday: 10:00 — 20:30
+
+        // الجمعة: 10:00 ص — 9:00 م
         if (day === 5) {
-          return { isOpen: currentMinutes >= 600 && currentMinutes < 1230 };
+          const openMin = 10 * 60;
+          const isOpen = minutes >= openMin && minutes < CLOSE;
+          return {
+            isOpen: isOpen,
+            text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
+            schedule: 'الجمعة: 10:00 ص — 9:00 م',
+            nextOpen: isOpen ? null : (
+              minutes < openMin
+                ? 'يفتح اليوم 10:00 صباحاً'
+                : 'يفتح السبت 3:00 مساءً'
+            )
+          };
         }
-        // Saturday, Monday — Thursday: 15:00 — 20:30
-        return { isOpen: currentMinutes >= 900 && currentMinutes < 1230 };
+
+        // السبت + الاثنين → الخميس: 3:00 م — 9:00 م
+        const openMin = 15 * 60;
+        const isOpen = minutes >= openMin && minutes < CLOSE;
+
+        let nextOpen = null;
+        if (!isOpen) {
+          if (minutes < openMin) {
+            nextOpen = 'يفتح اليوم 3:00 مساءً';
+          } else if (day === 4) {
+            nextOpen = 'يفتح الجمعة 10:00 صباحاً';
+          } else if (day === 6) {
+            nextOpen = 'يفتح الاثنين 3:00 مساءً';
+          } else {
+            nextOpen = 'يفتح غداً 3:00 مساءً';
+          }
+        }
+
+        return {
+          isOpen: isOpen,
+          text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
+          schedule: '3:00 م — 9:00 م',
+          nextOpen: nextOpen
+        };
       }
 
       function updateLiveStatus() {
         const pill = document.getElementById('live-status-pill');
         const textEl = document.getElementById('live-status-text');
         if (!pill || !textEl) return;
+
         const status = getWorkSchedule();
         const t = translations[currentLang];
         pill.classList.remove('open', 'closed');
+
         if (status.isOpen) {
           pill.classList.add('open');
           textEl.textContent = t['status.open'];
+          pill.setAttribute('title', status.schedule || '');
         } else {
           pill.classList.add('closed');
           textEl.textContent = t['status.closed'];
+          pill.setAttribute('title', status.nextOpen || status.schedule || '');
         }
       }
 
@@ -2012,6 +2065,9 @@
 
       setInterval(updateLiveStatus, 60000);
 
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) updateLiveStatus();
+      });
       // ============ TILT CARDS ============
       function initTiltCards() {
         document.querySelectorAll('.tilt-3d').forEach(function(card) {
