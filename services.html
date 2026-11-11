@@ -653,6 +653,34 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 99px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+    }
+    .status-pill.open {
+      background: rgba(34,197,94,0.15); color: #16a34a;
+      border: 1px solid rgba(34,197,94,0.3);
+    }
+    .status-pill.closed {
+      background: rgba(239,68,68,0.12); color: #dc2626;
+      border: 1px solid rgba(239,68,68,0.25);
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; position: relative;
+    }
+    .status-pill.open .status-dot::after {
+      content: ""; position: absolute; inset: -3px;
+      border-radius: 50%; background: currentColor;
+      opacity: 0.4; animation: statusPulse 1.8s ease-out infinite;
+    }
+    @keyframes statusPulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
     .hidden-item { display: none !important; }
   </style>
 </head>
@@ -731,6 +759,14 @@
           <span class="relative" data-nav="contact">تواصل معنا</span>
         </a>
       </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div id="live-status-pill" class="status-pill closed hidden sm:inline-flex" aria-live="polite">
+          <span class="status-dot"></span>
+          <span id="live-status-text">جاري التحقق...</span>
+        </div>
+
+        <div class="flex items-center rounded-full border border-mauve/15 bg-white/70 p-1 text-[11px] font-bold backdrop-blur-md sm:text-xs" data-cursor-label="اللغة">
 
       <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <div class="flex items-center rounded-full border border-mauve/15 bg-white/70 p-1 text-[11px] font-bold backdrop-blur-md sm:text-xs" data-cursor-label="اللغة">
@@ -1381,20 +1417,99 @@
       const isFinePointer = window.matchMedia('(pointer: fine)').matches;
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // ============ LIVE STATUS ============
-      function updateLiveStatus() {
+      // ============================================================
+      // ============ IRAQ TIME + WORK SCHEDULE (UTC+3) ============
+      // ============================================================
+      function getIraqTime() {
         const now = new Date();
-        const day = now.getDay();       // 0=Sun ... 6=Sat
-        const hour = now.getHours();
-        let isOpen = false;
-        if (day === 5) {               // Friday
-          isOpen = hour >= 10 && hour < 21;
-        } else {
-          isOpen = hour >= 10 && hour < 20;
+        const iraq = new Date(now.getTime() + (3 * 60 + now.getTimezoneOffset()) * 60000);
+        return {
+          day: iraq.getDay(), // 0=الأحد ... 5=الجمعة, 6=السبت
+          minutes: iraq.getHours() * 60 + iraq.getMinutes()
+        };
+      }
+
+      function getWorkSchedule() {
+        const { day, minutes } = getIraqTime();
+        const CLOSE = 21 * 60; // 9:00 م بتوقيت العراق
+
+        // الأحد عطلة رسمية
+        if (day === 0) {
+          return {
+            isOpen: false,
+            text: 'مغلق حالياً',
+            schedule: 'الأحد: عطلة',
+            nextOpen: 'يفتح الاثنين 3:00 مساءً'
+          };
         }
+
+        // الجمعة: 10:00 ص — 9:00 م
+        if (day === 5) {
+          const openMin = 10 * 60;
+          const isOpen = minutes >= openMin && minutes < CLOSE;
+          return {
+            isOpen: isOpen,
+            text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
+            schedule: 'الجمعة: 10:00 ص — 9:00 م',
+            nextOpen: isOpen ? null : (
+              minutes < openMin ? 'يفتح اليوم 10:00 صباحاً' : 'يفتح السبت 3:00 مساءً'
+            )
+          };
+        }
+
+        // السبت + الاثنين → الخميس: 3:00 م — 9:00 م
+        const openMin = 15 * 60;
+        const isOpen = minutes >= openMin && minutes < CLOSE;
+
+        let nextOpen = null;
+        if (!isOpen) {
+          if (minutes < openMin) {
+            nextOpen = 'يفتح اليوم 3:00 مساءً';
+          } else if (day === 4) {
+            nextOpen = 'يفتح الجمعة 10:00 صباحاً';
+          } else if (day === 6) {
+            nextOpen = 'يفتح الاثنين 3:00 مساءً';
+          } else {
+            nextOpen = 'يفتح غداً 3:00 مساءً';
+          }
+        }
+
+        return {
+          isOpen: isOpen,
+          text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
+          schedule: '3:00 م — 9:00 م',
+          nextOpen: nextOpen
+        };
+      }
+
+      function updateLiveStatus() {
+        // 1) زر الحالة في الهيدر (إن وُجد)
+        const pill = document.getElementById('live-status-pill');
+        const textEl = document.getElementById('live-status-text');
+        const status = getWorkSchedule();
+        const lang = (document.documentElement.lang === 'en') ? 'en' : 'ar';
+
+        if (pill && textEl) {
+          pill.classList.remove('open', 'closed');
+          if (status.isOpen) {
+            pill.classList.add('open');
+            textEl.textContent = lang === 'ar' ? 'مفتوح الآن' : 'Open Now';
+            pill.setAttribute('title', status.schedule || '');
+          } else {
+            pill.classList.add('closed');
+            textEl.textContent = lang === 'ar' ? 'مغلق حالياً' : 'Closed';
+            pill.setAttribute('title', status.nextOpen || status.schedule || '');
+          }
+        }
+
+        // 2) عناصر data-live-status القديمة (الفوتر)
+        // كان يعرض "24/7" ويستبدلها بـ"مغلق"، وهو خطأ.
+        // الآن نترك 24/7 كما هي لأنها تعني "الحجز الإلكتروني 24/7" وليس "مفتوح/مغلق".
         document.querySelectorAll('[data-live-status]').forEach(function(el) {
-          el.textContent = isOpen ? '24/7' : 'مغلق';
-          el.style.color = isOpen ? '#f4c871' : '#fca5a5';
+          if (el.textContent.trim() !== '24/7' && lang === 'ar') {
+            el.textContent = '24/7';
+          }
+          el.style.color = '';
         });
       }
 
@@ -1430,6 +1545,12 @@
           updateLiveStatus();
           initServiceImages();
         }, 3000);
+      });
+
+      // تحديث الحالة كل دقيقة + عند رجوع الزائر للصفحة
+      setInterval(updateLiveStatus, 60000);
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) updateLiveStatus();
       });
 
       // ============ UNIFIED 3D TILT CARD ENGINE ============
@@ -2146,6 +2267,8 @@
 
         var brandName = document.getElementById('brand-name');
         if (brandName) brandName.textContent = t['brand.name'];
+
+             setTimeout(updateLiveStatus, 60);
 
         if (lang === 'ar') {
           langArBtn.style.background = 'linear-gradient(90deg, #f4c871, #eeb44d)';
