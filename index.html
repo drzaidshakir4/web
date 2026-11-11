@@ -2577,65 +2577,70 @@ console.log('Scroll button script loaded:', document.getElementById('scroll-top-
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // ============================================================
-      // ============ WORKING HOURS LOGIC ==========================
+      // ============ WORKING HOURS LOGIC (IRAQ TIME UTC+3) ========
       // ============================================================
-      // الأوقات:
-      // - الجمعة: 10:00 → 20:30
-      // - الأحد: 10:00 AM — 9:00 PM
-      // - السبت + الاثنين → الخميس: 15:00 → 20:30
-      function getWorkSchedule() {
+      // الأوقات (بتوقيت العراق):
+      // - الأحد: عطلة رسمية
+      // - الجمعة: 10:00 ص → 9:00 م
+      // - السبت + الاثنين → الخميس: 3:00 م → 9:00 م
+            // ============================================================
+      // ============ IRAQ TIME HELPER (UTC+3) ======================
+      // ============================================================
+      function getIraqTime() {
         const now = new Date();
-        const day = now.getDay(); // 0=الأحد, 1=الاثنين, ..., 5=الجمعة, 6=السبت
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const iraq = new Date(now.getTime() + (3 * 60 + now.getTimezoneOffset()) * 60000);
+        return {
+          day: iraq.getDay(), // 0=الأحد ... 5=الجمعة, 6=السبت
+          minutes: iraq.getHours() * 60 + iraq.getMinutes()
+        };
+      }
 
-        // الأحد = 10:00 AM — 9:00 PM
+      function getWorkSchedule() {
+        const { day, minutes } = getIraqTime();
+        const CLOSE = 21 * 60; // 9:00 م بتوقيت العراق
+
+        // الأحد عطلة رسمية
         if (day === 0) {
           return {
             isOpen: false,
-            text: 'الأحد: 10:00 AM — 9:00 PM',
+            text: 'مغلق حالياً',
             reason: 'closed-sunday',
-            nextOpen: 'غداً من 3:00 مساءً'
+            schedule: 'الأحد: عطلة',
+            nextOpen: 'يفتح الاثنين 3:00 مساءً'
           };
         }
 
-        // الجمعة
+        // الجمعة: 10:00 ص — 9:00 م
         if (day === 5) {
-          const openMin = 10 * 60;       // 10:00
-          const closeMin = 20 * 60 + 30; // 20:30
-          const isOpen = currentMinutes >= openMin && currentMinutes < closeMin;
+          const openMin = 10 * 60;
+          const isOpen = minutes >= openMin && minutes < CLOSE;
           return {
             isOpen: isOpen,
             text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
             reason: isOpen ? 'open-friday' : 'closed-friday',
-            schedule: 'الجمعة: 10:00 ص — 8:30 م',
+            schedule: 'الجمعة: 10:00 ص — 9:00 م',
             nextOpen: isOpen ? null : (
-              currentMinutes < openMin 
-                ? 'يفتح اليوم 10:00 صباحاً' 
+              minutes < openMin
+                ? 'يفتح اليوم 10:00 صباحاً'
                 : 'يفتح السبت 3:00 مساءً'
             )
           };
         }
 
-        // السبت (6) والاثنين → الخميس (1 → 4)
-        const openMin = 15 * 60;       // 15:00
-        const closeMin = 20 * 60 + 30; // 20:30
-        const isOpen = currentMinutes >= openMin && currentMinutes < closeMin;
-        
+        // السبت + الاثنين → الخميس: 3:00 م — 9:00 م
+        const openMin = 15 * 60;
+        const isOpen = minutes >= openMin && minutes < CLOSE;
+
         let nextOpen = null;
         if (!isOpen) {
-          if (currentMinutes < openMin) {
+          if (minutes < openMin) {
             nextOpen = 'يفتح اليوم 3:00 مساءً';
+          } else if (day === 4) { // الخميس بعد الإغلاق → الجمعة
+            nextOpen = 'يفتح الجمعة 10:00 صباحاً';
+          } else if (day === 6) { // السبت بعد الإغلاق → الأحد عطلة → الاثنين
+            nextOpen = 'يفتح الاثنين 3:00 مساءً';
           } else {
-            // بعد الإغلاق
-            if (day === 4) { // الخميس → الجمعة
-              nextOpen = 'يفتح الجمعة 10:00 صباحاً';
-            } else if (day === 6) { // السبت → الأحد 10:00 AM — 9:00 PM → الاثنين
-              nextOpen = 'يفتح الاثنين 3:00 مساءً';
-            } else if (day === 3) { // الأربعاء → الخميس
-              nextOpen = 'يفتح غداً 3:00 مساءً';
-            } else {
-              nextOpen = 'يفتح غداً 3:00 مساءً';
-            }
+            nextOpen = 'يفتح غداً 3:00 مساءً';
           }
         }
 
@@ -2643,7 +2648,7 @@ console.log('Scroll button script loaded:', document.getElementById('scroll-top-
           isOpen: isOpen,
           text: isOpen ? 'مفتوح الآن' : 'مغلق حالياً',
           reason: isOpen ? 'open' : 'closed',
-          schedule: '3:00 م — 8:30 م',
+          schedule: '3:00 م — 9:00 م',
           nextOpen: nextOpen
         };
       }
@@ -2656,7 +2661,7 @@ console.log('Scroll button script loaded:', document.getElementById('scroll-top-
         const status = getWorkSchedule();
         const lang = (typeof currentLang !== 'undefined') ? currentLang : 'ar';
         pill.classList.remove('open', 'closed');
-        
+
         if (status.isOpen) {
           pill.classList.add('open');
           textEl.textContent = lang === 'ar' ? 'مفتوح الآن' : 'Open Now';
@@ -2664,7 +2669,7 @@ console.log('Scroll button script loaded:', document.getElementById('scroll-top-
         } else {
           pill.classList.add('closed');
           textEl.textContent = lang === 'ar' ? 'مغلق حالياً' : 'Closed';
-          pill.setAttribute('title', status.nextOpen || status.reason || '');
+          pill.setAttribute('title', status.nextOpen || status.schedule || '');
         }
       }
 
@@ -2692,8 +2697,10 @@ window.addEventListener('load', function() {
   }, 3000); // ← 3 ثواني (مدة الاهتزاز)
 });
 
-      // تحديث حالة العمل كل دقيقة
-      setInterval(updateLiveStatus, 60000);
+      // تحديث الحالة فوراً عند رجوع الزائر للصفحة
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) updateLiveStatus();
+      });
 
       // ============================================================
       // ============ UNIFIED 3D TILT CARD ENGINE ==================
