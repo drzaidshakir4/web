@@ -1,0 +1,27 @@
+{
+  "background_color": "#ffffff",
+  "description": "عيادة الدكتور زيد شاكر لجراحة التجميل والترميم — ندمج بين أحدث التقنيات الطبية والخبرة الأكاديمية الطويلة لتجربة علاجية متكاملة.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "drzaidshakir",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "drzaidshakir",
+  "start_url": "/",
+  "theme_color": "#faf6f1",
+  "icons": [
+    {
+      "src": "https://drzaidshakir.com/logo.png",
+      "type": "image/png",
+      "isSquare": false,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 0,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "drzaidshakir"
+}
